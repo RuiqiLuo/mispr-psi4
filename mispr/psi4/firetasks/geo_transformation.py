@@ -1,0 +1,80 @@
+"""Define psi4-flavored geometry transformation firetasks.
+
+The bond-breaking/fragmentation logic in
+``mispr.gaussian.firetasks.geo_transformation.BreakMolecule`` (charge assignment,
+finding unique fragments, ring opening, etc.) has nothing to do with which quantum
+chemistry engine is used downstream -- only the dynamically generated per-fragment
+optimization/frequency Fireworks are engine-specific. This module therefore subclasses
+the Gaussian ``BreakMolecule`` and overrides only the one method
+(``_workflow``) that decides which Fireworks to build for each fragment, pointing it
+at the psi4 ``common_fw`` instead of the Gaussian one.
+"""
+
+import logging
+
+from fireworks import Workflow
+from fireworks.utilities.fw_utilities import explicit_serialize
+
+from mispr.gaussian.utilities.metadata import get_mol_formula
+from mispr.gaussian.firetasks.geo_transformation import (
+    BreakMolecule as GaussianBreakMolecule,
+)
+
+__author__ = "Ruiqi"
+__status__ = "Development"
+
+logger = logging.getLogger(__name__)
+
+
+@explicit_serialize
+class BreakMolecule(GaussianBreakMolecule):
+    """
+    psi4 counterpart of ``mispr.gaussian.firetasks.geo_transformation.BreakMolecule``;
+    identical fragmentation logic, but generates psi4 optimization/frequency
+    Fireworks for each fragment instead of Gaussian ones.
+    """
+
+    @staticmethod
+    def _workflow(
+        mol,
+        gout_key,
+        working_dir,
+        db,
+        opt_gaussian_inputs,
+        freq_gaussian_inputs,
+        cart_coords,
+        oxidation_states,
+        save_to_db,
+        save_to_file,
+        fmt,
+        update_duplicates,
+        **kwargs,
+    ):
+        from mispr.psi4.workflows.base.core import common_fw, WORKFLOW_KWARGS
+
+        dir_structure = ["charge_{}".format(str(mol.charge))]
+        mol_formula = get_mol_formula(mol)
+
+        if len(mol) == 1:
+            skips = ["opt"]
+        else:
+            skips = None
+
+        job_name = "opt_freq"
+        _, _, frag_fws = common_fw(
+            mol=mol,
+            working_dir=working_dir,
+            dir_structure=dir_structure,
+            db=db,
+            opt_gaussian_inputs=opt_gaussian_inputs,
+            freq_gaussian_inputs=freq_gaussian_inputs,
+            mol_name=mol_formula,
+            skips=skips,
+            gout_key=gout_key,
+            **{i: j for i, j in kwargs.items() if i in WORKFLOW_KWARGS or i == "tag"},
+        )
+        return Workflow(
+            frag_fws,
+            name="{}_{}".format(mol_formula, job_name),
+            **{i: j for i, j in kwargs.items() if i in WORKFLOW_KWARGS},
+        )

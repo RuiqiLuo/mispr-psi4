@@ -32,7 +32,7 @@ def get_db(input_db=None):
         if not os.path.isfile(input_db):
             raise FileNotFoundError("Please provide the database configurations")
     if isinstance(input_db, dict):
-        db = GaussianCalcDb(**input_db)
+        db = GaussianCalcDb.from_dict(input_db)
     else:
         db = GaussianCalcDb.from_db_file(input_db)
 

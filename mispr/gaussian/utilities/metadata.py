@@ -44,8 +44,10 @@ def get_chem_schema(mol):
             "chemsys": comp.chemical_system,
             "nsites": mol.num_sites,
             "nelements": len(comp.chemical_system.replace("-", " ").split(" ")),
-            "is_ordered": mol.is_ordered,
-            "is_valid": mol.is_valid(),
+            # cast from numpy.bool_ to a native bool; numpy.bool_ is not
+            # BSON/JSON-serializable and breaks MongoDB inserts
+            "is_ordered": bool(mol.is_ordered),
+            "is_valid": bool(mol.is_valid()),
         }
     )
     return mol_dict

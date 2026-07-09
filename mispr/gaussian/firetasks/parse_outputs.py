@@ -1018,22 +1018,34 @@ class BDEtoDB(FiretaskBase):
             charge=gout_dict[principle_mol_key]["input"]["charge"],
         )
         phase = gout_dict[principle_mol_key]["phase"]
+        # a fragment calculation may have failed (e.g. an unphysical/non-convergent
+        # species produced by breaking a bond), in which case pass_gout_dict returns
+        # None for its key; skip those here so a single failed fragment doesn't take
+        # down the whole BDE analysis, per this Firetask's documented behavior
+        valid_gout_dict = {i: j for i, j in gout_dict.items() if j is not None}
+        if principle_mol_key not in valid_gout_dict:
+            raise ValueError(
+                "Calculation for the principle molecule failed; cannot compute BDEs"
+            )
+        for failed_key in gout_dict.keys() - valid_gout_dict.keys():
+            logger.warning(f"Calculation failed for fragment {failed_key}; skipping it")
         final_energies = {
-            i: j["output"]["output"]["final_energy"] for i, j in gout_dict.items()
+            i: j["output"]["output"]["final_energy"]
+            for i, j in valid_gout_dict.items()
         }
         enthalpy_corrections = {
             i: j["output"]["output"]["corrections"]["Enthalpy"]
-            for i, j in gout_dict.items()
+            for i, j in valid_gout_dict.items()
         }
         enthalpies = {
             key: final_energies[key] + enthalpy_corrections[key]
-            for key in gout_dict.keys()
+            for key in valid_gout_dict.keys()
         }
 
         run_time = sum([gout.get("wall_time (s)", 0) for gout in full_gout_dict])
 
         fragments = {}
-        for gout_key, gout in gout_dict.items():
+        for gout_key, gout in valid_gout_dict.items():
             if gout_key != principle_mol_key:
                 frag = process_mol(
                     "get_from_run_dict", gout, charge=gout["input"]["charge"]
