@@ -22,7 +22,9 @@ from timeit import default_timer as timer
 import numpy as np
 import psi4
 
-from pymatgen.core.structure import Molecule
+from copy import deepcopy
+
+from pymatgen.core.structure import Molecule, IMolecule
 
 from fireworks.core.firework import FWAction, FiretaskBase
 from fireworks.utilities.fw_utilities import explicit_serialize
@@ -32,8 +34,10 @@ from mispr.gaussian.utilities.misc import recursive_signature_remove
 from mispr.gaussian.utilities.metadata import get_chem_schema
 from mispr.gaussian.utilities.db_utilities import get_db
 
-__author__ = "Ruiqi"
+__author__ = "Ruiqi Luo"
 __status__ = "Development"
+__date__ = "2026_7_8"
+__version__ = "0.0.5"
 
 logger = logging.getLogger(__name__)
 
@@ -120,11 +124,47 @@ def _atomic_thermo_corrections(mass_amu, multiplicity, t=STANDARD_T, p=STANDARD_
     }
 
 
-def _mol_to_psi4_geometry(mol, charge, multiplicity):
+def _mol_to_zmatrix_block(mol):
+    """
+    Build a psi4-compatible Z-matrix block (atoms + internal coordinates, numeric
+    values inlined) from a pymatgen Molecule.
+
+    pymatgen's GaussianInput.get_zmatrix() already does the cartesian -> internal
+    coordinate conversion, but emits Gaussian's "named variable" style (e.g.
+    "H 1 B1" with "B1=0.957776" defined separately below); psi4's Z-matrix parser
+    expects the numeric values inline instead, so the two are merged here.
+    """
+    # local import to avoid a module-level dependency for the (default) cartesian
+    # path, which is the common case
+    from pymatgen.io.gaussian import GaussianInput
+
+    zmatrix_text = GaussianInput(mol, charge=0, spin_multiplicity=1).get_zmatrix()
+    coord_lines, _, variable_lines = zmatrix_text.partition("\n\n")
+
+    variables = {}
+    for line in variable_lines.strip().splitlines():
+        name, value = line.split("=")
+        variables[name.strip()] = value.strip()
+
+    resolved_lines = []
+    for line in coord_lines.strip().splitlines():
+        tokens = line.split()
+        resolved_lines.append(
+            " ".join(variables.get(tok, tok) for tok in tokens)
+        )
+    return resolved_lines
+
+
+def _mol_to_psi4_geometry(mol, charge, multiplicity, cart_coords=True):
     """Build a psi4.core.Molecule from a pymatgen Molecule."""
     lines = [f"{charge} {multiplicity}"]
-    for site in mol:
-        lines.append(f"{site.specie.symbol} {site.x:.10f} {site.y:.10f} {site.z:.10f}")
+    if cart_coords:
+        for site in mol:
+            lines.append(
+                f"{site.specie.symbol} {site.x:.10f} {site.y:.10f} {site.z:.10f}"
+            )
+    else:
+        lines += _mol_to_zmatrix_block(mol)
     lines.append("units angstrom")
     lines.append("symmetry c1")
     lines.append("no_reorient")
@@ -132,13 +172,26 @@ def _mol_to_psi4_geometry(mol, charge, multiplicity):
     return psi4.geometry("\n".join(lines))
 
 
-def _psi4_geometry_to_mol(psi4_mol):
-    """Convert an (already updated) psi4.core.Molecule back to a pymatgen Molecule."""
+def _psi4_geometry_to_mol(psi4_mol, charge, multiplicity):
+    """
+    Convert an (already updated) psi4.core.Molecule back to a pymatgen Molecule.
+
+    charge/multiplicity must be passed explicitly and set via set_charge_and_spin:
+    a plain Molecule(species, coords) call defaults to charge 0, with a
+    multiplicity guessed from the (charge-0) electron count -- silently wrong for
+    anything but a neutral species, and this molecule is what downstream steps
+    (e.g. a chained frequency calculation reading it back via prev_calc_key) use to
+    determine what charge/multiplicity to run at.
+    """
     psi4_mol.update_geometry()
     bohr_to_angstrom = 0.52917721067
     coords = psi4_mol.geometry().np * bohr_to_angstrom
-    species = [psi4_mol.symbol(i) for i in range(psi4_mol.natom())]
-    return Molecule(species, coords)
+    # psi4 returns element symbols in all caps for multi-letter elements (e.g. "LI"
+    # instead of "Li"); pymatgen requires standard capitalization to recognize them
+    species = [psi4_mol.symbol(i).capitalize() for i in range(psi4_mol.natom())]
+    result = Molecule(species, coords)
+    result.set_charge_and_spin(charge, multiplicity)
+    return result
 
 
 @explicit_serialize
@@ -190,6 +243,8 @@ class RunPsi4(FiretaskBase):
         "prev_calc_key",
         "charge",
         "multiplicity",
+        "oxidation_states",
+        "cart_coords",
         "functional",
         "basis_set",
         "route_parameters",
@@ -203,6 +258,18 @@ class RunPsi4(FiretaskBase):
         "gout_key",
         "tag",
     ]
+
+    def _charge_from_oxidation_states(self, mol):
+        """
+        Calculate the charge of a molecule/cluster from the oxidation state of its
+        individual elements (e.g. {"Li": 1, "O": -2}); mirrors
+        mispr.gaussian.firetasks.write_inputs.WriteInput._update_charge, since this
+        is plain pymatgen bookkeeping with no dependency on the QM engine used.
+        """
+        mol_copy = deepcopy(mol)
+        mol_copy.add_oxidation_state_by_element(self["oxidation_states"])
+        mol_copy.set_charge_and_spin(super(IMolecule, mol_copy).charge)
+        return int(mol_copy.charge)
 
     def _get_molecule(self, fw_spec):
         mol = self.get("molecule")
@@ -221,6 +288,14 @@ class RunPsi4(FiretaskBase):
                 )
             return Molecule.from_dict(gout_dict["output"]["output"]["molecule"])
 
+        # set by mispr.gaussian.firetasks.geo_transformation.ProcessMoleculeInput
+        # (e.g. when it ran with operation_type="link_molecules" to combine two
+        # previously-computed molecules into one, ahead of this Firetask in the
+        # same Firework); reused unmodified since it's plain molecule bookkeeping,
+        # not tied to any QM engine
+        if fw_spec.get("prev_calc_molecule"):
+            return fw_spec["prev_calc_molecule"]
+
         raise KeyError(
             "No molecule present; provide 'molecule' or 'prev_calc_key', or check "
             "fw_spec"
@@ -230,7 +305,10 @@ class RunPsi4(FiretaskBase):
         working_dir = os.getcwd()
         mol = self._get_molecule(fw_spec)
 
-        charge = self.get("charge", getattr(mol, "charge", 0) or 0)
+        if self.get("oxidation_states"):
+            charge = self._charge_from_oxidation_states(mol)
+        else:
+            charge = self.get("charge", getattr(mol, "charge", 0) or 0)
         multiplicity = self.get(
             "multiplicity", getattr(mol, "spin_multiplicity", 1) or 1
         )
@@ -253,7 +331,9 @@ class RunPsi4(FiretaskBase):
             os.path.join(working_dir, "psi4_output.dat"), False
         )
 
-        psi4_mol = _mol_to_psi4_geometry(mol, charge, multiplicity)
+        psi4_mol = _mol_to_psi4_geometry(
+            mol, charge, multiplicity, cart_coords=self.get("cart_coords", True)
+        )
 
         # psi4 does not auto-select an open-shell reference from the molecule's
         # multiplicity; radicals/odd-electron fragments (the norm after breaking a
@@ -285,14 +365,14 @@ class RunPsi4(FiretaskBase):
         try:
             if "opt" in job_types:
                 energy, wfn = psi4.optimize(method, molecule=psi4_mol, return_wfn=True)
-                final_mol = _psi4_geometry_to_mol(wfn.molecule())
+                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity)
             elif "freq" in job_types and mol.num_sites == 1:
                 # a single atom has no vibrational degrees of freedom; psi4's
                 # Hessian/frequency driver is not safe to call on 1-atom systems
                 # (has been observed to segfault), so compute the analytic
                 # ideal-gas atomic thermochemistry instead
                 energy, wfn = psi4.energy(method, molecule=psi4_mol, return_wfn=True)
-                final_mol = _psi4_geometry_to_mol(wfn.molecule())
+                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity)
                 corrections.update(
                     _atomic_thermo_corrections(mol.species[0].atomic_mass, multiplicity)
                 )
@@ -300,7 +380,7 @@ class RunPsi4(FiretaskBase):
                 energy, wfn = psi4.frequencies(
                     method, molecule=psi4_mol, return_wfn=True
                 )
-                final_mol = _psi4_geometry_to_mol(wfn.molecule())
+                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity)
                 # ZPVE is reported by psi4 as a correction on its own, while
                 # ENTHALPY/GIBBS FREE ENERGY are reported as totals (electronic
                 # energy + correction); mispr expects the correction alone in all
@@ -315,7 +395,7 @@ class RunPsi4(FiretaskBase):
                     corrections[label] = float(total) - float(energy)
             else:
                 energy, wfn = psi4.energy(method, molecule=psi4_mol, return_wfn=True)
-                final_mol = _psi4_geometry_to_mol(wfn.molecule())
+                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity)
 
             dipole = None
             try:

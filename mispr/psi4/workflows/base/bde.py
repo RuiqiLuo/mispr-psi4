@@ -17,9 +17,10 @@ from mispr.gaussian.firetasks.parse_outputs import BDEtoDB
 from mispr.psi4.fireworks.break_mol import BreakMolFW
 from mispr.psi4.workflows.base.core import common_fw, WORKFLOW_KWARGS
 
-__author__ = "Ruiqi"
+__author__ = "Ruiqi Luo"
 __status__ = "Development"
-
+__date__ = "2026_7_8"
+__version__ = "0.0.5"
 
 def get_bde(
     mol_operation_type,

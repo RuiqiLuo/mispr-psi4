@@ -9,3 +9,6 @@
 **/__pycache__
 **/.DS_Store
 docs/build/
+examples/run_output/
+psi4_output.dat
+timer.dat

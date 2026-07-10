@@ -20,8 +20,10 @@ from mispr.gaussian.firetasks.geo_transformation import (
     BreakMolecule as GaussianBreakMolecule,
 )
 
-__author__ = "Ruiqi"
+__author__ = "Ruiqi Luo"
 __status__ = "Development"
+__date__ = "2026_7_8"
+__version__ = "0.0.5"
 
 logger = logging.getLogger(__name__)
 

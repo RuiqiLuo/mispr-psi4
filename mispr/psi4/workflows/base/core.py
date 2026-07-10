@@ -7,8 +7,10 @@ from fireworks import Workflow
 
 from mispr.psi4.fireworks.core import Psi4FW
 
-__author__ = "Ruiqi"
+__author__ = "Ruiqi Luo"
 __status__ = "Development"
+__date__ = "2026_7_8"
+__version__ = "0.0.5"
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +29,9 @@ def common_fw(
     dir_structure=None,
     skips=None,
     tag="unknown",
+    cart_coords=True,
+    oxidation_states=None,
+    solvent=None,
     **kwargs,
 ):
     """
