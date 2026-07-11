@@ -614,6 +614,12 @@ class BindingEnergytoDB(FiretaskBase):
             "last_updated": datetime.datetime.utcnow(),
         }
 
+        # optional: a counterpoise (BSSE) correction, if a prior Firetask (e.g.
+        # mispr.psi4.firetasks.parse_outputs.CounterpoiseToDB) computed one and
+        # left it in fw_spec; absent for workflows that don't request it
+        if fw_spec.get("be_eV_cp_corrected") is not None:
+            be_dict["be_eV_cp_corrected"] = fw_spec["be_eV_cp_corrected"]
+
         if phase == "solution":
             solvent_gaussian_inputs = self.get("solvent_gaussian_inputs")
             solvent_properties = self.get("solvent_properties", {})

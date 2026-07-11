@@ -82,6 +82,9 @@ def common_fw(
             working_dir=os.path.join(working_dir, "Optimization"),
             gout_key=gout_key + "_opt",
             tag=tag,
+            cart_coords=cart_coords,
+            oxidation_states=oxidation_states,
+            solvent=solvent,
         )
         fws.append(opt_fw)
 
@@ -94,6 +97,8 @@ def common_fw(
             working_dir=os.path.join(working_dir, "Frequency"),
             gout_key=gout_key,
             tag=tag,
+            cart_coords=cart_coords,
+            solvent=solvent,
         )
         fws.append(freq_fw)
 
@@ -106,6 +111,9 @@ def common_fw(
             working_dir=os.path.join(working_dir, "Frequency"),
             gout_key=gout_key,
             tag=tag,
+            cart_coords=cart_coords,
+            oxidation_states=oxidation_states,
+            solvent=solvent,
         )
         fws.append(freq_fw)
 
@@ -118,6 +126,9 @@ def common_fw(
             working_dir=os.path.join(working_dir, "Optimization"),
             gout_key=gout_key + "_opt",
             tag=tag,
+            cart_coords=cart_coords,
+            oxidation_states=oxidation_states,
+            solvent=solvent,
         )
         fws.append(opt_fw)
 

@@ -155,14 +155,26 @@ def _mol_to_zmatrix_block(mol):
     return resolved_lines
 
 
-def _mol_to_psi4_geometry(mol, charge, multiplicity, cart_coords=True):
-    """Build a psi4.core.Molecule from a pymatgen Molecule."""
+def _mol_to_psi4_geometry(mol, charge, multiplicity, cart_coords=True, ghost_indices=None):
+    """
+    Build a psi4.core.Molecule from a pymatgen Molecule.
+
+    ghost_indices (set of int, optional): site indices to write as ghost atoms
+        (prefixed "Gh(...)" -- basis functions present, but no nucleus/electrons),
+        used for counterpoise (BSSE) correction; only supported with cart_coords,
+        since ghost atoms in an internal-coordinate Z-matrix are not a common/
+        well-defined combination.
+    """
+    ghost_indices = ghost_indices or set()
+    if ghost_indices and not cart_coords:
+        raise ValueError("ghost_indices is only supported with cart_coords=True")
     lines = [f"{charge} {multiplicity}"]
     if cart_coords:
-        for site in mol:
-            lines.append(
-                f"{site.specie.symbol} {site.x:.10f} {site.y:.10f} {site.z:.10f}"
-            )
+        for i, site in enumerate(mol):
+            symbol = site.specie.symbol
+            if i in ghost_indices:
+                symbol = f"Gh({symbol})"
+            lines.append(f"{symbol} {site.x:.10f} {site.y:.10f} {site.z:.10f}")
     else:
         lines += _mol_to_zmatrix_block(mol)
     lines.append("units angstrom")
@@ -172,7 +184,7 @@ def _mol_to_psi4_geometry(mol, charge, multiplicity, cart_coords=True):
     return psi4.geometry("\n".join(lines))
 
 
-def _psi4_geometry_to_mol(psi4_mol, charge, multiplicity):
+def _psi4_geometry_to_mol(psi4_mol, charge, multiplicity, has_ghost=False):
     """
     Convert an (already updated) psi4.core.Molecule back to a pymatgen Molecule.
 
@@ -182,6 +194,15 @@ def _psi4_geometry_to_mol(psi4_mol, charge, multiplicity):
     anything but a neutral species, and this molecule is what downstream steps
     (e.g. a chained frequency calculation reading it back via prev_calc_key) use to
     determine what charge/multiplicity to run at.
+
+    has_ghost (bool, optional): if True, skip set_charge_and_spin's electron-count
+        consistency check -- pymatgen's Molecule has no concept of "ghost" atoms
+        (basis functions only, no real nucleus/electrons), so it would count a
+        ghost atom's full atomic number towards the electron total and (correctly,
+        from its point of view, but wrongly for this case) reject the requested
+        charge/multiplicity as inconsistent. The resulting molecule is only used
+        for bookkeeping in a counterpoise-correction calculation, not further
+        chemistry, so an unchecked charge/multiplicity is fine here.
     """
     psi4_mol.update_geometry()
     bohr_to_angstrom = 0.52917721067
@@ -190,7 +211,11 @@ def _psi4_geometry_to_mol(psi4_mol, charge, multiplicity):
     # instead of "Li"); pymatgen requires standard capitalization to recognize them
     species = [psi4_mol.symbol(i).capitalize() for i in range(psi4_mol.natom())]
     result = Molecule(species, coords)
-    result.set_charge_and_spin(charge, multiplicity)
+    if has_ghost:
+        result._charge = charge
+        result._spin_multiplicity = multiplicity
+    else:
+        result.set_charge_and_spin(charge, multiplicity)
     return result
 
 
@@ -245,6 +270,7 @@ class RunPsi4(FiretaskBase):
         "multiplicity",
         "oxidation_states",
         "cart_coords",
+        "ghost_indices",
         "functional",
         "basis_set",
         "route_parameters",
@@ -309,9 +335,19 @@ class RunPsi4(FiretaskBase):
             charge = self._charge_from_oxidation_states(mol)
         else:
             charge = self.get("charge", getattr(mol, "charge", 0) or 0)
-        multiplicity = self.get(
-            "multiplicity", getattr(mol, "spin_multiplicity", 1) or 1
-        )
+
+        if self.get("multiplicity") is not None:
+            multiplicity = self.get("multiplicity")
+        else:
+            # the default multiplicity must be recomputed for whatever "charge"
+            # ends up being (e.g. when it comes from oxidation_states, which can
+            # differ from mol's own charge) -- mol's own spin_multiplicity
+            # attribute reflects mol's original charge, not this one, and using
+            # it here would silently pair a charge with an inconsistent
+            # multiplicity (caught downstream by psi4 as a validation error)
+            mol_for_mult = deepcopy(mol)
+            mol_for_mult.set_charge_and_spin(charge)
+            multiplicity = mol_for_mult.spin_multiplicity
 
         functional = self.get("functional", DEFAULT_FUNCTIONAL)
         basis_set = self.get("basis_set", DEFAULT_BASIS_SET)
@@ -331,8 +367,13 @@ class RunPsi4(FiretaskBase):
             os.path.join(working_dir, "psi4_output.dat"), False
         )
 
+        ghost_indices = self.get("ghost_indices")
         psi4_mol = _mol_to_psi4_geometry(
-            mol, charge, multiplicity, cart_coords=self.get("cart_coords", True)
+            mol,
+            charge,
+            multiplicity,
+            cart_coords=self.get("cart_coords", True),
+            ghost_indices=set(ghost_indices) if ghost_indices else None,
         )
 
         # psi4 does not auto-select an open-shell reference from the molecule's
@@ -365,14 +406,14 @@ class RunPsi4(FiretaskBase):
         try:
             if "opt" in job_types:
                 energy, wfn = psi4.optimize(method, molecule=psi4_mol, return_wfn=True)
-                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity)
+                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity, has_ghost=bool(ghost_indices))
             elif "freq" in job_types and mol.num_sites == 1:
                 # a single atom has no vibrational degrees of freedom; psi4's
                 # Hessian/frequency driver is not safe to call on 1-atom systems
                 # (has been observed to segfault), so compute the analytic
                 # ideal-gas atomic thermochemistry instead
                 energy, wfn = psi4.energy(method, molecule=psi4_mol, return_wfn=True)
-                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity)
+                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity, has_ghost=bool(ghost_indices))
                 corrections.update(
                     _atomic_thermo_corrections(mol.species[0].atomic_mass, multiplicity)
                 )
@@ -380,7 +421,7 @@ class RunPsi4(FiretaskBase):
                 energy, wfn = psi4.frequencies(
                     method, molecule=psi4_mol, return_wfn=True
                 )
-                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity)
+                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity, has_ghost=bool(ghost_indices))
                 # ZPVE is reported by psi4 as a correction on its own, while
                 # ENTHALPY/GIBBS FREE ENERGY are reported as totals (electronic
                 # energy + correction); mispr expects the correction alone in all
@@ -395,7 +436,7 @@ class RunPsi4(FiretaskBase):
                     corrections[label] = float(total) - float(energy)
             else:
                 energy, wfn = psi4.energy(method, molecule=psi4_mol, return_wfn=True)
-                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity)
+                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity, has_ghost=bool(ghost_indices))
 
             dipole = None
             try:
@@ -441,7 +482,13 @@ class RunPsi4(FiretaskBase):
             "basis": basis_set,
             "phase": "solution" if is_pcm else "gas",
             "type": ";".join(job_types),
-            **get_chem_schema(final_mol),
+            # get_chem_schema builds a SMILES/InChI/formula schema by treating every
+            # site as a real atom; that's meaningless (and errors out on the
+            # charge/electron-count check) for a ghost-atom counterpoise-correction
+            # calculation, where some "atoms" contribute basis functions only, no
+            # real nucleus/electrons -- skip it in that case, since only the energy
+            # is actually needed downstream
+            **(get_chem_schema(final_mol) if not ghost_indices else {}),
             "gauss_version": f"psi4-{psi4.__version__}",
         }
         gout_dict = {
