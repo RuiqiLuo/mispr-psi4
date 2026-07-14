@@ -139,7 +139,7 @@ def get_binding_energies(
     )
     opt_gaussian_inputs = gaussian_inputs["opt"]
     freq_gaussian_inputs = gaussian_inputs["freq"]
-# start  here
+    
     if skips is None:
         skips = [None, None]
     check_result = []

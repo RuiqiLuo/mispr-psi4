@@ -21,6 +21,7 @@ from timeit import default_timer as timer
 
 import numpy as np
 import psi4
+import resp
 
 from copy import deepcopy
 
@@ -529,3 +530,144 @@ class RunPsi4(FiretaskBase):
         if run_list:
             mod_dict.update({"_push": run_list})
         return FWAction(mod_spec=mod_dict, propagate=True)
+    
+@explicit_serialize
+class ESP(FiretaskBase):
+
+    optional_params = [
+        "molecule", "prev_calc_key",
+        "charge", "multiplicity", "oxidation_states",
+        "cart_coords",
+        "method_esp", "basis_esp",
+        "resp_options",
+        "memory", "num_threads",
+        "db", "save_to_db", "save_to_file", "filename",
+        "gout_key", "tag",
+    ]
+
+    def run_task(self, fw_spec):
+        working_dir = os.getcwd()
+        mol = self.get("molecule")
+        if mol is not None:
+            pass
+        elif self.get("prev_calc_key"):
+            prev_calc_key = self.get("prev_calc_key")
+            mol = Molecule.from_dict(
+                fw_spec.get("gaussian_output", {}).get(prev_calc_key)["output"]["output"]["molecule"]
+            )
+        else:
+            raise KeyError("Don't have 'molecule' and 'prev_calc_key' ")
+
+        charge = self.get("charge", getattr(mol, "charge", 0) or 0)
+        multiplicity = self.get(
+            "multiplicity", getattr(mol, "spin_multiplicity", 1) or 1
+        )
+
+        psi4.core.clean()
+        psi4.set_memory(self.get("memory", DEFAULT_MEMORY))
+        psi4.set_num_threads(self.get("num_threads", DEFAULT_NUM_THREADS))
+        psi4.core.set_output_file(
+            os.path.join(working_dir, "psi4_output.dat"), False
+        )
+
+        psi4_mol = _mol_to_psi4_geometry(
+            mol, charge, multiplicity, cart_coords=self.get("cart_coords", True)
+        )
+
+        method_esp = self.get("method_esp", "scf")
+        basis_esp = self.get("basis_esp", "6-31g*")
+
+        default_resp_options = {
+            "VDW_SCALE_FACTORS": [1.4, 1.6, 1.8, 2.0],
+            "VDW_POINT_DENSITY": 1.0,
+            "RESP_A": 0.0005,
+            "RESP_B": 0.1,
+            "METHOD_ESP": method_esp,
+            "BASIS_ESP": basis_esp,
+        }
+        # ** means inserting a list into another list
+        # if there don't have any input files, it will use the default_resp_options
+        resp_options = {**default_resp_options, **self.get("resp_options", {})}
+
+        has_completed = True
+        error_msg = None
+        try:
+            energy = psi4.energy(
+                name=f"{method_esp}/{basis_esp}", molecule=psi4_mol, return_wfn=False
+            )  # return_wfn = False means only return one value
+            resp_charges = resp.resp([psi4_mol], resp_options)
+        except Exception as e:
+            has_completed = False
+            error_msg = str(e)
+            energy = None
+            resp_charges = None
+
+        output_block = {
+            "final_energy": energy,
+            "molecule": mol.as_dict(),
+        }
+        if resp_charges is not None:
+            output_block["ESP_charges"] = resp_charges[0].tolist()
+            output_block["RESP_charges"] = resp_charges[1].tolist()
+        if error_msg:
+            output_block["error_message"] = error_msg
+
+        gout_dict = {
+            "input": {
+                "functional": method_esp,
+                "basis_set": basis_esp,
+                "charge": charge,
+                "spin_multiplicity": multiplicity,
+                "molecule": mol.as_dict(),
+            },
+            "output": {
+                "output": output_block,
+                "has_gaussian_completed": has_completed,
+                "is_pcm": False,
+            },
+            "functional": method_esp,
+            "basis": basis_esp,
+            "phase": "gas",
+            "type": "esp",
+            **get_chem_schema(mol),
+            "gauss_version": f"psi4-{psi4.__version__}",
+        }
+        gout_dict = {
+            i: j
+            for i, j in gout_dict.items()
+            if i not in ["sites", "@module", "@class", "charge", "spin_multiplicity"]
+        }
+        if "tag" in fw_spec:
+            gout_dict["tag"] = fw_spec["tag"]
+        gout_dict = json.loads(json.dumps(gout_dict, default=_json_default))
+        gout_dict = recursive_signature_remove(gout_dict)
+
+        if not has_completed:
+            raise ValueError(f"psi4 ESP calculation did not complete normally: {error_msg}")
+
+        run_list = {}
+        db = self.get("db")
+        if self.get("save_to_db"):
+            runs_db = get_db(db)
+            run_id = runs_db.insert_run(gout_dict)
+            run_list["run_id_list"] = run_id
+            logger.info("Saved parsed psi4 ESP output to db")
+
+        if self.get("save_to_file"):
+            filename = self.get("filename", "run")
+            file_path = os.path.join(os.getcwd(), f"{filename}.json")
+            with open(file_path, "w") as f:
+                f.write(json.dumps(gout_dict, default=str))
+            run_list["run_loc_list"] = file_path
+            logger.info("Saved parsed psi4 ESP output to json file")
+
+        uid = self.get("gout_key")
+        set_dict = {f"gaussian_output->{DEFAULT_KEY}": gout_dict}
+        if uid:
+            set_dict[f"gaussian_output->{uid}"] = gout_dict
+        mod_dict = {"_set": set_dict}
+        if run_list:
+            mod_dict.update({"_push": run_list})
+        return FWAction(mod_spec=mod_dict, propagate=True)
+
+        

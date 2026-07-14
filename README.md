@@ -33,6 +33,20 @@ MISPR provides several pre-defined workflows:
 - **BE**: Binding energy calculations
 - **IP_EA**: Redox potential calculations; methods supported include HOMO/LUMO, vertical IP/EA, adiabatic IP/EA, and sequential PCET; electron transfer calculations can be performed via single-step or multi-step pathways
 
+### DFT ([Psi4][psi4]) Workflows (experimental)
+
+The DFT workflows above depend on Gaussian, which is commercial, closed-source software with per-site licensing costs — a significant barrier for reproducing and scaling these workflows. To remove this dependency, this fork adds a `mispr.psi4` module that reimplements a subset of the DFT workflows on top of the free, open-source [Psi4][psi4] package. Since Psi4 is driven through its Python API (no input/output files to write and parse), each calculation runs as a single Firetask (`RunPsi4`) that executes the job and stores its results under the same `fw_spec` key and with the same document schema used by the Gaussian workflows. This makes the Psi4 runs drop-in compatible: downstream analysis Firetasks written for Gaussian (e.g. `ESPtoDB`, `BDEtoDB`, `BindingEnergytoDB`) consume Psi4 results unmodified.
+
+Currently implemented workflows:
+
+- **ESP**: Geometry optimization → frequency analysis → ESP/RESP atomic partial charge fitting. Unlike Gaussian, Psi4 has no built-in Merz-Kollman charge fitting, so charges are fitted with the [resp][resp] plugin (both unrestrained ESP charges, matching Gaussian's `pop=MK` convention, and two-stage restrained RESP charges are stored)
+- **BDE**: Bond dissociation energy calculations, including analytic ideal-gas thermochemistry corrections for single-atom fragments
+- **BE**: Binding energy calculations, with optional counterpoise (BSSE) correction via ghost atoms
+
+Supported features include implicit solvation (PCM/CPCM), open-shell (UHF/UKS) references for radicals, and oxidation-state-based charge assignment, mirroring the options of the corresponding Gaussian workflows.
+
+Not yet ported: **NMR** and **IP_EA**. In particular, the NMR workflow relies on GIAO chemical shielding calculations, which Psi4 does not currently provide, so porting it will require a different open-source engine or plugin for the shielding step.
+
 ### MD ([LAMMPS][lammps]) Workflows
 
 A standard workflow for performing classical MD simulations of liquid solutions and subsequently deriving various structural and dynamical properties. The default operations run as follows:
@@ -112,6 +126,8 @@ MISPR is a free, open-source software package (distributed under the [MIT licens
 [pymatgen]: https://pymatgen.org
 [custodian]: https://materialsproject.github.io/custodian/
 [gaussian]: https://gaussian.com
+[psi4]: https://psicode.org
+[resp]: https://github.com/cdsgroup/resp
 [lammps]: https://www.lammps.org/#gsc.tab=0
 [install-docs]: https://molmd.github.io/mispr/html/installation/index.html
 [mispr-website]: https://molmd.github.io/mispr/
