@@ -133,10 +133,15 @@ def get_esp_charges(
     )
 
     # Firework 3: Run an ESP calculation
+    # spec must carry "tag" itself -- unlike the opt/freq Fireworks built by
+    # common_fw (which get it via Psi4FW's spec.update({"tag": tag, ...})), a plain
+    # Firework doesn't inherit spec from its parents, so ESPtoDB would otherwise
+    # KeyError on fw_spec["tag"] downstream
     esp_fw = Firework(
         tasks=[ESP(prev_calc_key="mol", gout_key="mol_esp", db=db)],
         parents=fws[:],
         name=f"{label}_esp",
+        spec={"tag": tag},
     )
     fws.append(esp_fw)
 
@@ -153,6 +158,7 @@ def get_esp_charges(
         ),
         parents=fws[:],
         name=f"{label}_esp_analysis",
+        spec={"tag": tag},
     )
     fws.append(fw_analysis)
 
