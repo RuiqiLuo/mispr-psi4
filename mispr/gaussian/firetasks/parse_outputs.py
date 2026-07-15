@@ -1083,9 +1083,18 @@ class BDEtoDB(FiretaskBase):
                     fragment_energies_sum = sum(
                         [enthalpies[frag] for frag in frag_tuple]
                     )
+                    # label with each fragment's formula and charge (rather than the
+                    # raw frag_ind/charge_ind_map bookkeeping indices) so the stored
+                    # key is readable directly from the database, without needing to
+                    # replay _find_molecule_indices' index arithmetic by hand
+                    frag_label = "+".join(
+                        f"{fragments[frag]['formula_alphabetical']}"
+                        f"(q={gout_dict[frag]['input']['charge']})"
+                        for frag in frag_tuple
+                    )
                     frag_pairs.update(
                         {
-                            str(frag_ind): (
+                            frag_label: (
                                 fragment_energies_sum - enthalpies[principle_mol_key]
                             )
                             * HARTREE_TO_EV
