@@ -413,11 +413,29 @@ class RunPsi4(FiretaskBase):
                 # Hessian/frequency driver is not safe to call on 1-atom systems
                 # (has been observed to segfault), so compute the analytic
                 # ideal-gas atomic thermochemistry instead
-                energy, wfn = psi4.energy(method, molecule=psi4_mol, return_wfn=True)
-                final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity, has_ghost=bool(ghost_indices))
-                corrections.update(
-                    _atomic_thermo_corrections(mol.species[0].atomic_mass, multiplicity)
-                )
+                n_electrons = mol.species[0].Z - charge
+                if n_electrons <= 0:
+                    # a bare nucleus (e.g. H+, which BDE's charge-state enumeration
+                    # assigns to a single-atom fragment when it gives that fragment
+                    # both bonding electrons) has no electronic structure for psi4 to
+                    # solve; RHF/UHF divide by the electron count internally and
+                    # crash with "float division by zero" if asked to try, so skip
+                    # psi4 entirely -- there is no electronic energy to compute
+                    energy = 0.0
+                    final_mol = mol
+                    corrections.update(
+                        {
+                            "Zero-point correction": 0.0,
+                            "Enthalpy": 0.0,
+                            "Gibbs Free Energy": 0.0,
+                        }
+                    )
+                else:
+                    energy, wfn = psi4.energy(method, molecule=psi4_mol, return_wfn=True)
+                    final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity, has_ghost=bool(ghost_indices))
+                    corrections.update(
+                        _atomic_thermo_corrections(mol.species[0].atomic_mass, multiplicity)
+                    )
             elif "freq" in job_types:
                 energy, wfn = psi4.frequencies(
                     method, molecule=psi4_mol, return_wfn=True
