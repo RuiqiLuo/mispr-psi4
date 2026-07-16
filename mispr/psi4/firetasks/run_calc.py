@@ -51,6 +51,8 @@ DEFAULT_MEMORY = "4 GB"
 DEFAULT_NUM_THREADS = 4
 
 def _json_default(o):
+    """``json.dumps`` fallback for numpy scalars/arrays left over in a gout_dict
+    (e.g. from psi4 return values); anything else is stringified."""
     if isinstance(o, np.bool_):
         return bool(o)
     if isinstance(o, np.integer):
@@ -160,7 +162,14 @@ def _mol_to_psi4_geometry(mol, charge, multiplicity, cart_coords=True, ghost_ind
     """
     Build a psi4.core.Molecule from a pymatgen Molecule.
 
-    ghost_indices (set of int, optional): site indices to write as ghost atoms
+    Args:
+        mol (Molecule): pymatgen Molecule to convert.
+        charge (int): Charge line written into the psi4 geometry string.
+        multiplicity (int): Spin multiplicity written into the psi4 geometry
+            string.
+        cart_coords (bool, optional): Write cartesian coordinates (``True``)
+            or a z-matrix; defaults to ``True``.
+        ghost_indices (set of int, optional): site indices to write as ghost atoms
         (prefixed "Gh(...)" -- basis functions present, but no nucleus/electrons),
         used for counterpoise (BSSE) correction; only supported with cart_coords,
         since ghost atoms in an internal-coordinate Z-matrix are not a common/
@@ -299,6 +308,10 @@ class RunPsi4(FiretaskBase):
         return int(mol_copy.charge)
 
     def _get_molecule(self, fw_spec):
+        """Resolve the input molecule from (in priority order) the explicit
+        "molecule" param, a previous run's optimized geometry via
+        "prev_calc_key", or a linked molecule left in fw_spec by an earlier
+        Firetask in the same Firework; raises KeyError if none is found."""
         mol = self.get("molecule")
         if mol is not None:
             if not isinstance(mol, Molecule):
@@ -329,6 +342,9 @@ class RunPsi4(FiretaskBase):
         )
 
     def run_task(self, fw_spec):
+        """Run the requested job (opt/freq/sp, per "route_parameters") and store
+        the result under fw_spec["gaussian_output"] for downstream Firetasks
+        (e.g. ``mispr.gaussian.firetasks.parse_outputs.BDEtoDB``) to consume."""
         working_dir = os.getcwd()
         mol = self._get_molecule(fw_spec)
 
@@ -565,6 +581,46 @@ class RunPsi4(FiretaskBase):
     
 @explicit_serialize
 class ESP(FiretaskBase):
+    """
+    Compute RESP (Restrained ElectroStatic Potential) atomic partial charges for a
+    molecule via psi4's ``resp`` package. Unlike ``RunPsi4``, this always runs a
+    single-point calculation (no opt/freq job types) -- callers are expected to
+    have already optimized the molecule (e.g. via a preceding ``RunPsi4`` Firework)
+    and pass it in through ``prev_calc_key``.
+
+    Args:
+        molecule (Molecule, optional): pymatgen Molecule to run the ESP
+            calculation on directly; mutually exclusive with ``prev_calc_key``
+            (one of the two must be provided).
+        prev_calc_key (str, optional): Key into fw_spec["gaussian_output"] whose
+            optimized geometry should be used as the input structure.
+        charge (int, optional): Charge on the molecule; defaults to the molecule's
+            own charge (or 0).
+        multiplicity (int, optional): Spin multiplicity; defaults to the
+            molecule's own value (or 1).
+        oxidation_states (dict, optional): Oxidation states used to derive the
+            charge (e.g. {"Li": 1, "O": -2}); see ``RunPsi4`` for the same option.
+        cart_coords (bool, optional): Whether to build the psi4 geometry from
+            cartesian coordinates (``True``) or a z-matrix; defaults to ``True``.
+        method_esp (str, optional): Method for the ESP single-point calculation;
+            defaults to "scf".
+        basis_esp (str, optional): Basis set for the ESP calculation; defaults to
+            "6-31g*".
+        resp_options (dict, optional): Options passed to ``resp.resp()`` (e.g.
+            VDW_SCALE_FACTORS, RESP_A, RESP_B); merged over the module's default
+            RESP settings, with any keys given here taking precedence.
+        memory (str, optional): Memory for psi4; defaults to "4 GB".
+        num_threads (int, optional): Number of threads for psi4; defaults to 4.
+        db (str or dict, optional): Database credentials; path to db.json or a dict.
+        save_to_db (bool, optional): Whether to insert the run into the runs
+            collection.
+        save_to_file (bool, optional): Whether to save the run to a json file.
+        filename (str, optional): Name of the json file to save the run to.
+        gout_key (str, optional): Key to store this run under in
+            fw_spec["gaussian_output"]; the run is always additionally stored
+            under the default key "gout_key" (as with Gaussian runs).
+        tag (str, optional): Tag stored in the db documents for easy retrieval.
+    """
 
     optional_params = [
         "molecule", "prev_calc_key",
@@ -578,6 +634,9 @@ class ESP(FiretaskBase):
     ]
 
     def run_task(self, fw_spec):
+        """Run the ESP single-point calculation and RESP charge fit, then store
+        the result under fw_spec["gaussian_output"] for a downstream
+        ``mispr.gaussian.firetasks.parse_outputs.ESPtoDB`` to consume."""
         working_dir = os.getcwd()
         mol = self.get("molecule")
         if mol is not None:

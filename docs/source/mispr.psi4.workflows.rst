@@ -1,5 +1,5 @@
-mispr package
-=============
+mispr.psi4.workflows package
+============================
 
 Subpackages
 -----------
@@ -7,16 +7,12 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   mispr.common
-   mispr.gaussian
-   mispr.hybrid
-   mispr.lammps
-   mispr.psi4
+   mispr.psi4.workflows.base
 
 Module contents
 ---------------
 
-.. automodule:: mispr
+.. automodule:: mispr.psi4.workflows
    :members:
    :undoc-members:
    :show-inheritance:

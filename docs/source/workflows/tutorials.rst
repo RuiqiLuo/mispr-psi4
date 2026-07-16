@@ -4,6 +4,63 @@ Workflow Tutorials
 
 This page is under construction.
 
+Using the Psi4 backend
+------------------------------
+As of version 0.0.5, the ``bde``, ``binding_energy``, and ``esp`` workflows
+are also available with a `Psi4 <https://psicode.org>`_ backend
+(``mispr.psi4.workflows.base``), as a free/open-source alternative to
+Gaussian. The workflow functions have the same names and (mostly) the same
+arguments as their Gaussian counterparts -- only the import path changes:
+
+.. code-block:: python
+    :linenos:
+
+    import os
+    from pymatgen.core.structure import Molecule
+    from fireworks import LaunchPad
+    from fireworks.core.rocket_launcher import rapidfire
+    from mispr.psi4.workflows.base.esp import get_esp_charges
+
+    # FW_CONFIG_FILE must be set before importing fireworks/mispr, since
+    # fireworks reads it once, at import time
+    os.environ["FW_CONFIG_FILE"] = "/path/to/config/FW_config.yaml"
+
+    mol = Molecule(
+        ["O", "H", "H"],
+        [
+            [0.000000, 0.000000, 0.117300],
+            [0.000000, 0.757200, -0.469200],
+            [0.000000, -0.757200, -0.469200],
+        ],
+    )
+
+    wf = get_esp_charges(
+        mol_operation_type="get_from_mol",
+        mol=mol,
+        working_dir="/path/to/run_output",
+        opt_gaussian_inputs={
+            "functional": "hf", "basis_set": "sto-3g",
+            "route_parameters": {"Opt": None},
+        },
+        freq_gaussian_inputs={
+            "functional": "hf", "basis_set": "sto-3g",
+            "route_parameters": {"Freq": None},
+        },
+        save_to_db=True,
+        tag="my_first_psi4_esp_run",
+    )
+
+    lp = LaunchPad.from_file("/path/to/config/my_launchpad.yaml")
+    lp.add_wf(wf)
+    rapidfire(lp, m_dir="/path/to/run_output")
+
+.. note::
+   ``rapidfire`` runs every ready Firework and then polls forever for new
+   ones -- it does not exit on its own once the workflow finishes. Check
+   ``lpad get_wflows`` for the workflow's state and interrupt/stop the
+   process once it shows ``COMPLETED`` (or a ``FIZZLED`` step that can't
+   make further progress).
+
 Running an ESP workflow
 ------------------------------
 The ESP workflow calculates the partial charges on atoms of a molecule. The charges are

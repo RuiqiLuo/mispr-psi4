@@ -67,8 +67,12 @@ def get_binding_energies(
 ):
     """
     Define a workflow for calculating the binding energy between two molecules
-    using psi4. See ``mispr.gaussian.workflows.base.binding_energy.get_binding_energies``
-    for the full description of arguments; this is a psi4-backed counterpart.
+    using psi4: optimize + frequency each of the two molecules separately, link
+    them together at the given atom indices and optimize the resulting complex,
+    run its frequency, then compute the binding energy (optionally with a
+    counterpoise/BSSE correction). Mirrors
+    ``mispr.gaussian.workflows.base.binding_energy.get_binding_energies``, which
+    has the same overall structure and arguments.
 
     ``opt_gaussian_inputs``/``freq_gaussian_inputs`` use the same keys as the
     Gaussian workflow (e.g. {"functional": "B3LYP", "basis_set": "6-31G(d)",
@@ -78,11 +82,48 @@ def get_binding_energies(
     workflow); they are translated internally into the ``solvent`` dict RunPsi4
     expects to actually drive the PCM calculation.
 
-    counterpoise_correction (bool, optional): If ``True``, additionally compute
-        a Boys-Bernardi counterpoise (BSSE) correction (two extra single-point
-        calculations) and save it as "be_eV_cp_corrected" alongside the regular
-        "be_eV"; see the module docstring for what the two numbers mean.
-        Defaults to ``False`` (skip it, keeping the original, cheaper workflow).
+    Args:
+        mol_operation_type (list): Two-element list of molecule operation
+            types, one per molecule; see ``process_mol`` in
+            ``mispr/gaussian/utilities/mol.py`` for supported operations.
+        mol (list): Two-element list with the source of each molecule; each
+            entry should match the corresponding ``mol_operation_type``.
+        index (list): Two-element list of atom indices, one per molecule, at
+            which the two molecules are expected to bind (i.e. the atoms
+            brought into contact when linking them into the complex).
+        bond_order (int, optional): Bond order to assume between the two
+            linked atoms when building the complex; defaults to 1.
+        db (str or dict, optional): Database credentials; path to db.json or a
+            dict; if ``None``, read from the configuration files.
+        name (str, optional): Name of the workflow; defaults to
+            "binding_energy_calculation".
+        working_dir (str, optional): Working directory for input/output files;
+            defaults to the current working directory.
+        opt_gaussian_inputs (dict, optional): Parameters for the optimization
+            steps; defaults to B3LYP/6-31G(d).
+        freq_gaussian_inputs (dict, optional): Parameters for the frequency
+            steps; defaults to B3LYP/6-31G(d).
+        solvent_gaussian_inputs (str, optional): Gaussian-style implicit
+            solvent string (e.g. "(Solvent=Water)"); translated internally into
+            the psi4 PCM options, and also recorded as-is in the final db
+            document for consistency with the Gaussian workflow's metadata.
+        solvent_properties (dict, optional): Additional solvent properties
+            recorded in the final db document (e.g. {"EPS": 12}).
+        cart_coords (bool, optional): Whether to use cartesian coordinates
+            (``True``) or a z-matrix; defaults to ``True``.
+        oxidation_states (dict, optional): Oxidation states used to derive
+            molecule charges (e.g. {"Li": 1, "O": -2}).
+        skips (list, optional): Two-element list of jobs to skip per molecule
+            (e.g. ``[["opt"], None]``); defaults to ``[None, None]`` (skip
+            nothing).
+        counterpoise_correction (bool, optional): If ``True``, additionally
+            compute a Boys-Bernardi counterpoise (BSSE) correction (two extra
+            single-point calculations) and save it as "be_eV_cp_corrected"
+            alongside the regular "be_eV"; see the module docstring for what
+            the two numbers mean. Defaults to ``False`` (skip it, keeping the
+            original, cheaper workflow).
+        kwargs (keyword arguments): Additional kwargs passed to
+            ``BindingEnergytoDB``/``Workflow`` (e.g. ``tag``).
 
     Returns:
         Workflow

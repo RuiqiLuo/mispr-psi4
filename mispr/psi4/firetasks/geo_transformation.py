@@ -52,6 +52,18 @@ class BreakMolecule(GaussianBreakMolecule):
         update_duplicates,
         **kwargs,
     ):
+        """
+        Build the psi4 opt/freq Fireworks for one already-charged/spin-set
+        fragment molecule. All arguments match the base class's abstract
+        ``_workflow`` signature (see
+        ``mispr.gaussian.firetasks.geo_transformation.BreakMolecule`` for what
+        each one means) -- only the body differs here, building psi4 Fireworks
+        via ``common_fw`` instead of Gaussian ones. Single-atom fragments have
+        their "opt" job skipped (a lone atom has no geometry to optimize).
+
+        Returns:
+            Workflow
+        """
         from mispr.psi4.workflows.base.core import common_fw, WORKFLOW_KWARGS
 
         dir_structure = ["charge_{}".format(str(mol.charge))]

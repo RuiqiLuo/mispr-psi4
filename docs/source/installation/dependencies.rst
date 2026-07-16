@@ -64,6 +64,10 @@ At the backend, MISPR uses:
      - Commercial
      - Perform DFT calculations
      - License required
+   * - `Psi4 <https://psicode.org>`_
+     - Open Source
+     - Perform DFT calculations (alternative to Gaussian)
+     - ``conda install -c conda-forge psi4``
    * - `AmberTools24 <https://ambermd.org/AmberTools.php>`_
      - Open Source
      - Generate GAFF parameters
@@ -85,6 +89,40 @@ Ensure that you have access to the executables of these software
 before using MISPR. If Gaussian, AmberTools, Schrödinger and LAMMPS are already installed on HPC
 machines, the user typically needs to load their corresponding modules
 before their use.
+
+Psi4 backend (alternative to Gaussian)
+=======================================
+As of version 0.0.5, MISPR also supports running DFT calculations through
+`Psi4 <https://psicode.org>`_ instead of Gaussian. Unlike Gaussian, Psi4 is
+free/open source and is driven entirely through its Python API (no separate
+executable, license, or input/output file handling required) -- so instead of
+loading a module, you install it directly into your conda environment::
+
+    conda install -c conda-forge psi4 dftd3-python
+
+MISPR's ESP workflow additionally needs the ``resp`` package (RESP charge
+fitting), which is not published on PyPI/conda-forge under that name and must
+be installed from its GitHub source::
+
+    pip install git+https://github.com/cdsgroup/resp.git
+
+.. important::
+   Do **not** ``pip install resp`` on its own -- PyPI has an unrelated,
+   unofficial package also named ``resp``; installing it silently gives you
+   the wrong package (no ``resp.resp()`` function), and code depending on it
+   will fail with ``AttributeError: module 'resp' has no attribute 'resp'``.
+
+.. warning::
+   Installing Psi4 into an existing conda environment that already has
+   ``numpy``, ``scipy``, or ``pandas`` installed via ``pip`` (rather than
+   conda) can trigger binary/ABI incompatibilities (errors like
+   ``numpy.dtype size changed, may indicate binary incompatibility`` or
+   ``ValueError: All ufuncs must have type numpy.ufunc``), since pip wheels
+   and conda-forge builds of these packages are not always binary-compatible
+   with each other. If you hit this, reinstall the affected packages through
+   conda-forge instead of pip (e.g. ``conda install -c conda-forge numpy
+   pandas --force-reinstall``), or start from a fresh environment where every
+   package is installed via conda-forge from the beginning.
 
 .. _py-package-deps:
 

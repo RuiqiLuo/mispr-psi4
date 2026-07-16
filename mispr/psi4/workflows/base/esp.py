@@ -1,3 +1,11 @@
+"""Define the electrostatic partial charge (ESP/RESP) workflow, using psi4
+instead of Gaussian.
+
+Mirrors ``mispr.gaussian.workflows.base.esp.get_esp_charges``: optimize +
+frequency the molecule, run an ESP single-point + RESP charge fit on the
+optimized geometry, then save the result.
+"""
+
 import os
 
 

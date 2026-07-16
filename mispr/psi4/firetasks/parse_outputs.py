@@ -56,6 +56,8 @@ class CounterpoiseToDB(FiretaskBase):
     optional_params = []
 
     def run_task(self, fw_spec):
+        """Compute be_eV_cp_corrected from the three referenced runs and pass it
+        forward via update_spec for BindingEnergytoDB to pick up."""
         complex_gout = pass_gout_dict(fw_spec, self["mol_linked_key"])
         mono1_ghost_gout = pass_gout_dict(fw_spec, self["mono1_ghost_key"])
         mono2_ghost_gout = pass_gout_dict(fw_spec, self["mono2_ghost_key"])

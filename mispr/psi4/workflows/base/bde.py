@@ -39,17 +39,52 @@ def get_bde(
     **kwargs,
 ):
     """
-    Define a dynamic workflow for calculating the bond dissociation energy using psi4.
-
-    See ``mispr.gaussian.workflows.base.bde.get_bde`` for the full description of
-    arguments and behavior; this is a psi4-backed counterpart with the same overall
-    structure (optimize + freq the principle molecule, break it into fragments,
-    optimize + freq each fragment, then compute BDEs).
+    Define a dynamic workflow for calculating the bond dissociation energy using psi4:
+    optimize + frequency the principle molecule, break it into fragments (trying
+    several charge splits per bond), optimize + frequency each fragment, then
+    compute the BDE for every bond/charge-split combination. Mirrors
+    ``mispr.gaussian.workflows.base.bde.get_bde``, which has the same overall
+    structure and arguments; see that function's docstring for more background on
+    the fragment charge-enumeration behavior.
 
     ``opt_gaussian_inputs``/``freq_gaussian_inputs`` use the same keys as the Gaussian
     workflow (e.g. {"functional": "B3LYP", "basis_set": "6-31G(d)",
     "route_parameters": {"Opt": None}}); Gaussian-only keys such as
     "link0_parameters" are accepted but ignored.
+
+    Args:
+        mol_operation_type (str): Type of molecule operation; see ``process_mol``
+            in ``mispr/gaussian/utilities/mol.py`` for supported operations.
+        mol (Molecule, GaussianOutput, str, dict): Source of the principle
+            molecule to be processed; should match ``mol_operation_type``.
+        ref_charge (int, optional): Charge on the principle molecule; defaults
+            to 0.
+        fragment_charges (list, optional): Additional charges to try for each
+            fragment, beyond the defaults derived from ``ref_charge`` (0, +1,
+            -1 for a neutral principle molecule); see
+            ``mispr.gaussian.firetasks.geo_transformation.BreakMolecule`` for
+            the full charge-enumeration rules. Defaults to ``None``.
+        bonds (list, optional): List of bonds (as atom index pairs) to break;
+            if ``None``, every bond found in the molecule is broken in turn.
+        open_rings (bool, optional): Whether to open rings instead of skipping
+            ring bonds that can't be simply split; defaults to ``False``.
+        db (str or dict, optional): Database credentials; path to db.json or a
+            dict; if ``None``, read from the configuration files.
+        name (str, optional): Name of the workflow; defaults to
+            "bde_calculation_psi4".
+        working_dir (str, optional): Working directory for input/output files;
+            defaults to the current working directory.
+        opt_gaussian_inputs (dict, optional): Parameters for the optimization
+            step; defaults to B3LYP/6-31G(d).
+        freq_gaussian_inputs (dict, optional): Parameters for the frequency
+            step; defaults to B3LYP/6-31G(d).
+        skips (bool or list, optional): If ``True``, skips both "opt" and "freq"
+            for the principle molecule; can also be a list like ``["opt"]`` to
+            skip only specific jobs. Defaults to ``False`` (skip nothing).
+        visualize (bool, optional): Whether ``BDEtoDB`` should generate a
+            visualization of the computed BDEs; defaults to ``True``.
+        kwargs (keyword arguments): Additional kwargs passed to
+            ``BreakMolFW``/``BDEtoDB``/``Workflow`` (e.g. ``tag``).
 
     Returns:
         Workflow
