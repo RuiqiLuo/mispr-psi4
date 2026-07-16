@@ -405,7 +405,21 @@ class RunPsi4(FiretaskBase):
         has_completed = True
         error_msg = None
         try:
-            if "opt" in job_types:
+            if "opt" in job_types and mol.num_sites == 1:
+                # a single atom has no internal coordinates to optimize (no
+                # bond/angle for OPTKING to vary), and psi4.optimize() crashes
+                # trying anyway ("not enough values to unpack") -- it's already
+                # at its one and only possible geometry, so just take the
+                # energy there (same bare-nucleus check as the single-atom
+                # "freq" branch below, since a monomer here could equally be one)
+                n_electrons = mol.species[0].Z - charge
+                if n_electrons <= 0:
+                    energy = 0.0
+                    final_mol = mol
+                else:
+                    energy, wfn = psi4.energy(method, molecule=psi4_mol, return_wfn=True)
+                    final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity, has_ghost=bool(ghost_indices))
+            elif "opt" in job_types:
                 energy, wfn = psi4.optimize(method, molecule=psi4_mol, return_wfn=True)
                 final_mol = _psi4_geometry_to_mol(wfn.molecule(), charge, multiplicity, has_ghost=bool(ghost_indices))
             elif "freq" in job_types and mol.num_sites == 1:
