@@ -354,7 +354,6 @@ class ESPtoDB(FiretaskBase):
             "chemsys": mol_schema["chemsys"],
             "energy": gout_dict[-1]["output"]["output"]["final_energy"],
             "esp": gout_dict[-1]["output"]["output"]["ESP_charges"],
-            "dipole_moment": gout_dict[-1]["output"]["output"]["dipole_moment"],
             "functional": gout_dict[-1]["functional"],
             "basis": gout_dict[-1]["basis"],
             "phase": phase,
@@ -372,6 +371,14 @@ class ESPtoDB(FiretaskBase):
             esp_dict = add_solvent_to_prop_dict(
                 esp_dict, solvent_gaussian_inputs, solvent_properties
             )
+
+        # dipole moment comes from the frequency calc (gout_dict[-2], "mol"); the
+        # ESP calc itself (gout_dict[-1], "mol_esp") never computes one -- ESP.
+        # run_task's output_block has no dipole moment logic at all
+        if "dipole_moment" in gout_dict[-2]["output"]["output"]:
+            esp_dict["dipole_moment"] = gout_dict[-2]["output"]["output"][
+                "dipole_moment"
+            ]
 
         # check if polarizability is available (from freq calc of esp workflow)
         if "polarizability" in gout_dict[-2]["output"]["output"]:
