@@ -362,6 +362,16 @@ class ESPtoDB(FiretaskBase):
             "chemsys": mol_schema["chemsys"],
             "energy": esp_gout["output"]["output"]["final_energy"],
             "esp": esp_gout["output"]["output"]["ESP_charges"],
+            # same charges as "esp" above, but labeled by element+atom-index (e.g.
+            # "O0", "H1", "H2") instead of bare list position, so results are
+            # readable directly from the database without cross-referencing
+            # "molecule" to figure out which atom each entry belongs to
+            "esp_by_atom": {
+                f"{site.specie.symbol}{i}": charge
+                for i, (site, charge) in enumerate(
+                    zip(molecule, esp_gout["output"]["output"]["ESP_charges"])
+                )
+            },
             "functional": esp_gout["functional"],
             "basis": esp_gout["basis"],
             "phase": phase,
