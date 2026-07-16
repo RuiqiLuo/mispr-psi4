@@ -336,12 +336,20 @@ class ESPtoDB(FiretaskBase):
         # include opt fireworks in the list of gout_dict to calculate run time
         full_gout_dict = gout_dict + [pass_gout_dict(fw_spec, i + "_opt") for i in keys]
         full_gout_dict = [i for i in full_gout_dict if i is not None]
+
+        # look up each step's gout_dict by its actual key ("mol", "mol_esp", ...)
+        # rather than by position in the list -- keeps this working correctly even
+        # if a caller ever changes the order/length of "keys"
+        gout_by_key = dict(zip(keys, gout_dict))
+        esp_gout = gout_by_key["mol_esp"]
+        freq_gout = gout_by_key["mol"]
+
         molecule = process_mol(
-            "get_from_run_dict", gout_dict[-1], charge=gout_dict[-1]["input"]["charge"]
+            "get_from_run_dict", esp_gout, charge=esp_gout["input"]["charge"]
         )
 
         mol_schema = get_chem_schema(molecule)
-        phase = gout_dict[-1]["phase"]
+        phase = esp_gout["phase"]
 
         # if one calculation is skipped, wall time is considered zero
         run_time = sum([gout.get("wall_time (s)", 0) for gout in full_gout_dict])
@@ -352,16 +360,16 @@ class ESPtoDB(FiretaskBase):
             "inchi": mol_schema["inchi"],
             "formula_alphabetical": mol_schema["formula_alphabetical"],
             "chemsys": mol_schema["chemsys"],
-            "energy": gout_dict[-1]["output"]["output"]["final_energy"],
-            "esp": gout_dict[-1]["output"]["output"]["ESP_charges"],
-            "functional": gout_dict[-1]["functional"],
-            "basis": gout_dict[-1]["basis"],
+            "energy": esp_gout["output"]["output"]["final_energy"],
+            "esp": esp_gout["output"]["output"]["ESP_charges"],
+            "functional": esp_gout["functional"],
+            "basis": esp_gout["basis"],
             "phase": phase,
-            "tag": gout_dict[-1]["tag"],
+            "tag": esp_gout["tag"],
             "state": "successful",
             "wall_time (s)": run_time,
             "version": mispr_version,
-            "gauss_version": gout_dict[-1]["gauss_version"],
+            "gauss_version": esp_gout["gauss_version"],
             "last_updated": datetime.datetime.utcnow(),
         }
 
@@ -372,17 +380,14 @@ class ESPtoDB(FiretaskBase):
                 esp_dict, solvent_gaussian_inputs, solvent_properties
             )
 
-        # dipole moment comes from the frequency calc (gout_dict[-2], "mol"); the
-        # ESP calc itself (gout_dict[-1], "mol_esp") never computes one -- ESP.
-        # run_task's output_block has no dipole moment logic at all
-        if "dipole_moment" in gout_dict[-2]["output"]["output"]:
-            esp_dict["dipole_moment"] = gout_dict[-2]["output"]["output"][
-                "dipole_moment"
-            ]
+        # dipole moment comes from the frequency calc; the ESP calc itself never
+        # computes one -- ESP.run_task's output_block has no dipole moment logic
+        if "dipole_moment" in freq_gout["output"]["output"]:
+            esp_dict["dipole_moment"] = freq_gout["output"]["output"]["dipole_moment"]
 
         # check if polarizability is available (from freq calc of esp workflow)
-        if "polarizability" in gout_dict[-2]["output"]["output"]:
-            esp_dict["polarizability"] = gout_dict[-2]["output"]["output"][
+        if "polarizability" in freq_gout["output"]["output"]:
+            esp_dict["polarizability"] = freq_gout["output"]["output"][
                 "polarizability"
             ]
 
