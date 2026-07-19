@@ -5,6 +5,7 @@ import logging
 
 from fireworks import Firework
 
+from mispr.gaussian.firetasks.geo_transformation import ProcessMoleculeInput
 from mispr.orca.firetasks.run_calc import RunOrca
 
 __author__ = "Ruiqi Luo"
@@ -88,6 +89,105 @@ class OrcaFW(Firework):
         spec.update({"tag": tag, "_launch_dir": working_dir})
         super(OrcaFW, self).__init__(
             [task],
+            parents=parents,
+            name=name,
+            spec=spec,
+            **{i: j for i, j in kwargs.items() if i in FIREWORK_KWARGS},
+        )
+
+
+class LinkedMolOrcaFW(Firework):
+    """
+    Combine two previously-computed molecules into one (forming a bond at given
+    sites) and immediately optimize the resulting complex with ORCA.
+
+    ``ProcessMoleculeInput`` (reused unmodified from the Gaussian firetasks -- it
+    is plain geometry bookkeeping, not tied to any QM engine) does the linking,
+    using the ``mol_operation_type="link_molecules"`` mode of
+    ``mispr.gaussian.utilities.mol.process_mol``: it reads the two molecules'
+    optimized geometries from ``fw_spec["gaussian_output"]`` (set by the two
+    prior optimization/frequency Fireworks) and joins them at ``index`` with a
+    bond of order ``bond_order``. The resulting molecule is picked up by
+    ``RunOrca`` via ``fw_spec["prev_calc_molecule"]`` -- which is also why
+    linking and optimizing must live in the same Firework: that key does not
+    survive a Firework boundary.
+    """
+
+    def __init__(
+        self,
+        gout_keys,
+        index,
+        bond_order=1,
+        db=None,
+        name="link_and_optimize",
+        parents=None,
+        working_dir=None,
+        gaussian_input_params=None,
+        tag="unknown",
+        gout_key=None,
+        filename=None,
+        **kwargs,
+    ):
+        """
+        Args:
+            gout_keys (list): The two keys in fw_spec["gaussian_output"] (from
+                the two molecules' own optimization/frequency Fireworks) to
+                link.
+            index (list): Site indices in each molecule at which to form the
+                bond.
+            bond_order (int, optional): Bond order for the new bond; defaults
+                to 1.
+            db (str or dict, optional): Database credentials.
+            name (str, optional): Name of the Firework.
+            parents (Firework or [Firework], optional): Parent FWs this FW
+                depends on.
+            working_dir (str, optional): Working directory for the calculation.
+            gaussian_input_params (dict, optional): Optimization parameters
+                (see ``OrcaFW``).
+            tag (str, optional): Tag stored in the db documents.
+            gout_key (str, optional): Key to store the optimized complex under
+                in fw_spec["gaussian_output"].
+            filename (str, optional): Name to save the linked molecule under,
+                if ``save_to_file``/``save_to_db`` is requested.
+            kwargs: other kwargs passed to Firework.__init__ and RunOrca (e.g.
+                ``orca_cmd``, ``num_cores``, ``memory``).
+        """
+        working_dir = working_dir or os.getcwd()
+        if not os.path.exists(working_dir):
+            os.makedirs(working_dir)
+
+        link_task = ProcessMoleculeInput(
+            mol={
+                "operation_type": ["get_from_run_dict", "get_from_run_dict"],
+                "mol": gout_keys,
+                "index": index,
+                "bond_order": bond_order,
+            },
+            operation_type="link_molecules",
+            from_fw_spec=True,
+            db=db,
+            filename=filename,
+            **{
+                i: j
+                for i, j in kwargs.items()
+                if i
+                in ProcessMoleculeInput.required_params
+                + ProcessMoleculeInput.optional_params
+            },
+        )
+
+        gaussian_input_params = gaussian_input_params or {}
+        task_kwargs = {
+            i: j
+            for i, j in {**gaussian_input_params, **kwargs}.items()
+            if i in RunOrca.optional_params
+        }
+        opt_task = RunOrca(gout_key=gout_key, db=db, **task_kwargs)
+
+        spec = kwargs.pop("spec", {})
+        spec.update({"tag": tag, "_launch_dir": working_dir})
+        super(LinkedMolOrcaFW, self).__init__(
+            [link_task, opt_task],
             parents=parents,
             name=name,
             spec=spec,
