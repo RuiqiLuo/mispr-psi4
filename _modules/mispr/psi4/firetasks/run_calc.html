@@ -1,0 +1,1496 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>mispr.psi4.firetasks.run_calc - Materials informatics for structure-property relationships</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.30b2b08b91b832a08.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/css/rtd_sphinx_search.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/style.css" />
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../index.html" title="Materials informatics for structure-property relationships" class="md-header__button md-logo" aria-label="Materials informatics for structure-property relationships" data-md-component="logo">
+      <img src="../../../../_static/logo.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Materials informatics for structure-property relationships
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              mispr.psi4.firetasks.run_calc
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../index.html" title="Materials informatics for structure-property relationships" class="md-nav__button md-logo" aria-label="Materials informatics for structure-property relationships" data-md-component="logo">
+      <img src="../../../../_static/logo.png" alt="logo">
+    </a>
+    Materials informatics for structure-property relationships
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../overview.html" class="md-nav__link">
+        <span class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../keywords.html" class="md-nav__link">
+        <span class="md-ellipsis">Keywords</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">Installation 🔧</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Installation 🔧" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Installation 🔧</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../installation/index.html" class="md-nav__link">
+        <span class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../installation/dependencies.html" class="md-nav__link">
+        <span class="md-ellipsis">Prerequisites</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../installation/configuration.html" class="md-nav__link">
+        <span class="md-ellipsis">Configuration Files</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../installation/test.html" class="md-nav__link">
+        <span class="md-ellipsis">Running a Test Workflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Workflows 🔀</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Workflows 🔀" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Workflows 🔀</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../workflows/basics.html" class="md-nav__link">
+        <span class="md-ellipsis">Workflow Basics</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../workflows/supported.html" class="md-nav__link">
+        <span class="md-ellipsis">Supported Workflows</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../workflows/tutorials.html" class="md-nav__link">
+        <span class="md-ellipsis">Workflow Tutorials</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../workflows/custom.html" class="md-nav__link">
+        <span class="md-ellipsis">Creating Custom Workflows</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          <span class="md-ellipsis">Resources 🖇️</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Resources 🖇️" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Resources 🖇️</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../resources/faq.html" class="md-nav__link">
+        <span class="md-ellipsis">FAQ</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../resources/resources.html" class="md-nav__link">
+        <span class="md-ellipsis">Helpful Links</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          <span class="md-ellipsis">Code Documentation 📚</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code Documentation 📚" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Code Documentation 📚</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../mispr.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          <span class="md-ellipsis">Development 💻</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Development 💻" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Development 💻</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../changelog.html" class="md-nav__link">
+        <span class="md-ellipsis">Changelog</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../citing.html" class="md-nav__link">
+        <span class="md-ellipsis">Citing MISPR</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../license.html" class="md-nav__link">
+        <span class="md-ellipsis">License</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1>Source code for mispr.psi4.firetasks.run_calc</h1><div class="highlight"><pre>
+<span></span><code><span class="sd">&quot;&quot;&quot;Define firetasks for running psi4 calculations.</span>
+
+<span class="sd">Unlike Gaussian, which runs as an external process and requires a separate</span>
+<span class="sd">&quot;write input file&quot; / &quot;run program&quot; / &quot;parse output file&quot; split (mispr.gaussian.</span>
+<span class="sd">firetasks.write_inputs.WriteInput, run_calc.RunGaussianCustodian,</span>
+<span class="sd">parse_outputs.ProcessRun), psi4 is driven entirely through its Python API and keeps</span>
+<span class="sd">its results in memory. This module therefore combines all three steps into a single</span>
+<span class="sd">Firetask, RunPsi4, which runs the calculation and immediately builds a result</span>
+<span class="sd">dictionary with the same schema as mispr.gaussian.utilities.gout.process_run (see</span>
+<span class="sd">mispr.gaussian.utilities.dbdoc._cleanup_gout for the reference schema) and stores it</span>
+<span class="sd">under fw_spec[&quot;gaussian_output&quot;], the same fw_spec key used by the Gaussian firetasks.</span>
+<span class="sd">This lets any downstream Firetask written for Gaussian runs (e.g. BDEtoDB, ESPtoDB,</span>
+<span class="sd">IPEAtoDB, BindingEnergytoDB) consume psi4 results unmodified.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">default_timer</span> <span class="k">as</span> <span class="n">timer</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">psi4</span>
+<span class="kn">import</span> <span class="nn">resp</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">IMolecule</span>
+
+<span class="kn">from</span> <span class="nn">fireworks.core.firework</span> <span class="kn">import</span> <span class="n">FWAction</span><span class="p">,</span> <span class="n">FiretaskBase</span>
+<span class="kn">from</span> <span class="nn">fireworks.utilities.fw_utilities</span> <span class="kn">import</span> <span class="n">explicit_serialize</span>
+
+<span class="kn">from</span> <span class="nn">mispr.gaussian.defaults</span> <span class="kn">import</span> <span class="n">JOB_TYPES</span>
+<span class="kn">from</span> <span class="nn">mispr.gaussian.utilities.misc</span> <span class="kn">import</span> <span class="n">recursive_signature_remove</span>
+<span class="kn">from</span> <span class="nn">mispr.gaussian.utilities.metadata</span> <span class="kn">import</span> <span class="n">get_chem_schema</span>
+<span class="kn">from</span> <span class="nn">mispr.gaussian.utilities.db_utilities</span> <span class="kn">import</span> <span class="n">get_db</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Ruiqi Luo&quot;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Development&quot;</span>
+<span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;2026_7_8&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.0.5&quot;</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">DEFAULT_KEY</span> <span class="o">=</span> <span class="s2">&quot;gout_key&quot;</span>
+
+<span class="c1"># default psi4 job parameters used if not specified by the caller</span>
+<span class="n">DEFAULT_FUNCTIONAL</span> <span class="o">=</span> <span class="s2">&quot;b3lyp&quot;</span>
+<span class="n">DEFAULT_BASIS_SET</span> <span class="o">=</span> <span class="s2">&quot;6-31g(d)&quot;</span>
+<span class="n">DEFAULT_MEMORY</span> <span class="o">=</span> <span class="s2">&quot;4 GB&quot;</span>
+<span class="n">DEFAULT_NUM_THREADS</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="k">def</span> <span class="nf">_json_default</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;``json.dumps`` fallback for numpy scalars/arrays left over in a gout_dict</span>
+<span class="sd">    (e.g. from psi4 return values); anything else is stringified.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">o</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+
+
+<span class="c1"># default PCM block used when a solvent is requested but no explicit pcm_string</span>
+<span class="c1"># is provided</span>
+<span class="n">DEFAULT_PCM_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Units = Angstrom</span>
+<span class="s2">    Medium {{</span>
+<span class="s2">    SolverType = CPCM</span>
+<span class="s2">    Solvent = </span><span class="si">{solvent}</span>
+<span class="s2">    }}</span>
+<span class="s2">    Cavity {{</span>
+<span class="s2">    RadiiSet = bondi</span>
+<span class="s2">    Type = GePol</span>
+<span class="s2">    Scaling = True</span>
+<span class="s2">    Area = 0.3</span>
+<span class="s2">    Mode = Implicit</span>
+<span class="s2">    }}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="n">GAS_CONSTANT</span> <span class="o">=</span> <span class="mf">8.314462618</span>  <span class="c1"># J/(mol K)</span>
+<span class="n">AVOGADRO</span> <span class="o">=</span> <span class="mf">6.02214076e23</span>
+<span class="n">BOLTZMANN</span> <span class="o">=</span> <span class="mf">1.380649e-23</span>  <span class="c1"># J/K</span>
+<span class="n">PLANCK</span> <span class="o">=</span> <span class="mf">6.62607015e-34</span>  <span class="c1"># J s</span>
+<span class="n">AMU_TO_KG</span> <span class="o">=</span> <span class="mf">1.66053906660e-27</span>
+<span class="n">HARTREE_TO_J</span> <span class="o">=</span> <span class="mf">4.3597447222071e-18</span>
+<span class="n">STANDARD_T</span> <span class="o">=</span> <span class="mf">298.15</span>  <span class="c1"># K</span>
+<span class="n">STANDARD_P</span> <span class="o">=</span> <span class="mf">101325.0</span>  <span class="c1"># Pa</span>
+
+
+<span class="k">def</span> <span class="nf">_atomic_thermo_corrections</span><span class="p">(</span><span class="n">mass_amu</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">STANDARD_T</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">STANDARD_P</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analytic ideal-gas thermochemistry corrections for a single free atom.</span>
+
+<span class="sd">    psi4&#39;s frequency/Hessian driver is not well-behaved for one-atom systems (no</span>
+<span class="sd">    vibrational degrees of freedom), so single-atom fragments -- which are common in</span>
+<span class="sd">    BDE calculations, since breaking any X-H bond produces a lone H atom -- are</span>
+<span class="sd">    handled by computing the (purely translational + electronic) corrections</span>
+<span class="sd">    analytically instead of calling psi4.frequencies().</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: &quot;Zero-point correction&quot;, &quot;Enthalpy&quot;, and &quot;Gibbs Free Energy&quot;</span>
+<span class="sd">            corrections, in Hartree, using the same additive convention as</span>
+<span class="sd">            mispr.gaussian (i.e. to be added to the raw electronic energy).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mass_kg</span> <span class="o">=</span> <span class="n">mass_amu</span> <span class="o">*</span> <span class="n">AMU_TO_KG</span>
+    <span class="n">q_trans</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">mass_kg</span> <span class="o">*</span> <span class="n">BOLTZMANN</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">PLANCK</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="n">BOLTZMANN</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">p</span>
+    <span class="p">)</span>
+    <span class="n">s_trans</span> <span class="o">=</span> <span class="n">GAS_CONSTANT</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">q_trans</span><span class="p">)</span> <span class="o">+</span> <span class="mf">2.5</span><span class="p">)</span>  <span class="c1"># J/(mol K)</span>
+    <span class="n">s_elec</span> <span class="o">=</span> <span class="n">GAS_CONSTANT</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">multiplicity</span><span class="p">)</span>  <span class="c1"># J/(mol K)</span>
+    <span class="n">u_corr</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">GAS_CONSTANT</span> <span class="o">*</span> <span class="n">t</span>  <span class="c1"># J/mol; no ZPE, no rotational dof</span>
+    <span class="n">h_corr</span> <span class="o">=</span> <span class="n">u_corr</span> <span class="o">+</span> <span class="n">GAS_CONSTANT</span> <span class="o">*</span> <span class="n">t</span>  <span class="c1"># J/mol</span>
+    <span class="n">g_corr</span> <span class="o">=</span> <span class="n">h_corr</span> <span class="o">-</span> <span class="n">t</span> <span class="o">*</span> <span class="p">(</span><span class="n">s_trans</span> <span class="o">+</span> <span class="n">s_elec</span><span class="p">)</span>  <span class="c1"># J/mol</span>
+
+    <span class="k">def</span> <span class="nf">to_hartree</span><span class="p">(</span><span class="n">x_per_mol</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x_per_mol</span> <span class="o">/</span> <span class="n">AVOGADRO</span> <span class="o">/</span> <span class="n">HARTREE_TO_J</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;Zero-point correction&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">&quot;Enthalpy&quot;</span><span class="p">:</span> <span class="n">to_hartree</span><span class="p">(</span><span class="n">h_corr</span><span class="p">),</span>
+        <span class="s2">&quot;Gibbs Free Energy&quot;</span><span class="p">:</span> <span class="n">to_hartree</span><span class="p">(</span><span class="n">g_corr</span><span class="p">),</span>
+    <span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">_mol_to_zmatrix_block</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build a psi4-compatible Z-matrix block (atoms + internal coordinates, numeric</span>
+<span class="sd">    values inlined) from a pymatgen Molecule.</span>
+
+<span class="sd">    pymatgen&#39;s GaussianInput.get_zmatrix() already does the cartesian -&gt; internal</span>
+<span class="sd">    coordinate conversion, but emits Gaussian&#39;s &quot;named variable&quot; style (e.g.</span>
+<span class="sd">    &quot;H 1 B1&quot; with &quot;B1=0.957776&quot; defined separately below); psi4&#39;s Z-matrix parser</span>
+<span class="sd">    expects the numeric values inline instead, so the two are merged here.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># local import to avoid a module-level dependency for the (default) cartesian</span>
+    <span class="c1"># path, which is the common case</span>
+    <span class="kn">from</span> <span class="nn">pymatgen.io.gaussian</span> <span class="kn">import</span> <span class="n">GaussianInput</span>
+
+    <span class="n">zmatrix_text</span> <span class="o">=</span> <span class="n">GaussianInput</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spin_multiplicity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">get_zmatrix</span><span class="p">()</span>
+    <span class="n">coord_lines</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">variable_lines</span> <span class="o">=</span> <span class="n">zmatrix_text</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">variable_lines</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+        <span class="n">variables</span><span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="n">resolved_lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">coord_lines</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">resolved_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tok</span><span class="p">,</span> <span class="n">tok</span><span class="p">)</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">resolved_lines</span>
+
+
+<span class="k">def</span> <span class="nf">_mol_to_psi4_geometry</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">cart_coords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ghost_indices</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build a psi4.core.Molecule from a pymatgen Molecule.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol (Molecule): pymatgen Molecule to convert.</span>
+<span class="sd">        charge (int): Charge line written into the psi4 geometry string.</span>
+<span class="sd">        multiplicity (int): Spin multiplicity written into the psi4 geometry</span>
+<span class="sd">            string.</span>
+<span class="sd">        cart_coords (bool, optional): Write cartesian coordinates (``True``)</span>
+<span class="sd">            or a z-matrix; defaults to ``True``.</span>
+<span class="sd">        ghost_indices (set of int, optional): site indices to write as ghost atoms</span>
+<span class="sd">        (prefixed &quot;Gh(...)&quot; -- basis functions present, but no nucleus/electrons),</span>
+<span class="sd">        used for counterpoise (BSSE) correction; only supported with cart_coords,</span>
+<span class="sd">        since ghost atoms in an internal-coordinate Z-matrix are not a common/</span>
+<span class="sd">        well-defined combination.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ghost_indices</span> <span class="o">=</span> <span class="n">ghost_indices</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ghost_indices</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cart_coords</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ghost_indices is only supported with cart_coords=True&quot;</span><span class="p">)</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">charge</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">multiplicity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">cart_coords</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">site</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+            <span class="n">symbol</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="o">.</span><span class="n">symbol</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ghost_indices</span><span class="p">:</span>
+                <span class="n">symbol</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Gh(</span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">x</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">y</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">z</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">+=</span> <span class="n">_mol_to_zmatrix_block</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;units angstrom&quot;</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;symmetry c1&quot;</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;no_reorient&quot;</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;no_com&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_psi4_geometry_to_mol</span><span class="p">(</span><span class="n">psi4_mol</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">has_ghost</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert an (already updated) psi4.core.Molecule back to a pymatgen Molecule.</span>
+
+<span class="sd">    charge/multiplicity must be passed explicitly and set via set_charge_and_spin:</span>
+<span class="sd">    a plain Molecule(species, coords) call defaults to charge 0, with a</span>
+<span class="sd">    multiplicity guessed from the (charge-0) electron count -- silently wrong for</span>
+<span class="sd">    anything but a neutral species, and this molecule is what downstream steps</span>
+<span class="sd">    (e.g. a chained frequency calculation reading it back via prev_calc_key) use to</span>
+<span class="sd">    determine what charge/multiplicity to run at.</span>
+
+<span class="sd">    has_ghost (bool, optional): if True, skip set_charge_and_spin&#39;s electron-count</span>
+<span class="sd">        consistency check -- pymatgen&#39;s Molecule has no concept of &quot;ghost&quot; atoms</span>
+<span class="sd">        (basis functions only, no real nucleus/electrons), so it would count a</span>
+<span class="sd">        ghost atom&#39;s full atomic number towards the electron total and (correctly,</span>
+<span class="sd">        from its point of view, but wrongly for this case) reject the requested</span>
+<span class="sd">        charge/multiplicity as inconsistent. The resulting molecule is only used</span>
+<span class="sd">        for bookkeeping in a counterpoise-correction calculation, not further</span>
+<span class="sd">        chemistry, so an unchecked charge/multiplicity is fine here.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">psi4_mol</span><span class="o">.</span><span class="n">update_geometry</span><span class="p">()</span>
+    <span class="n">bohr_to_angstrom</span> <span class="o">=</span> <span class="mf">0.52917721067</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">psi4_mol</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">np</span> <span class="o">*</span> <span class="n">bohr_to_angstrom</span>
+    <span class="c1"># psi4 returns element symbols in all caps for multi-letter elements (e.g. &quot;LI&quot;</span>
+    <span class="c1"># instead of &quot;Li&quot;); pymatgen requires standard capitalization to recognize them</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">psi4_mol</span><span class="o">.</span><span class="n">symbol</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">psi4_mol</span><span class="o">.</span><span class="n">natom</span><span class="p">())]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">has_ghost</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">_charge</span> <span class="o">=</span> <span class="n">charge</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">_spin_multiplicity</span> <span class="o">=</span> <span class="n">multiplicity</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">set_charge_and_spin</span><span class="p">(</span><span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<div class="viewcode-block" id="RunPsi4"><a class="viewcode-back" href="../../../../mispr.psi4.firetasks.html#mispr.psi4.firetasks.run_calc.RunPsi4">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">RunPsi4</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a psi4 calculation (single point, geometry optimization, and/or frequency</span>
+<span class="sd">    analysis) and store the result under fw_spec[&quot;gaussian_output&quot;] using the same</span>
+<span class="sd">    dictionary schema mispr uses for Gaussian runs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        molecule (Molecule, optional): pymatgen Molecule to run the calculation on;</span>
+<span class="sd">            required unless ``prev_calc_key`` is provided.</span>
+<span class="sd">        prev_calc_key (str, optional): Key of a previous psi4/Gaussian-compatible run</span>
+<span class="sd">            in fw_spec[&quot;gaussian_output&quot;] whose output molecule should be used as the</span>
+<span class="sd">            input structure for this calculation (mirrors chaining an opt firework</span>
+<span class="sd">            into a freq firework); ignored if ``molecule`` is provided.</span>
+<span class="sd">        charge (int, optional): Molecular charge; defaults to the charge on</span>
+<span class="sd">            ``molecule`` if it carries one, otherwise 0.</span>
+<span class="sd">        multiplicity (int, optional): Spin multiplicity; defaults to the value on</span>
+<span class="sd">            ``molecule`` if it carries one, otherwise 1.</span>
+<span class="sd">        functional (str, optional): DFT functional (or &quot;hf&quot;/post-HF method name);</span>
+<span class="sd">            defaults to &quot;b3lyp&quot;.</span>
+<span class="sd">        basis_set (str, optional): Basis set; defaults to &quot;6-31g(d)&quot;.</span>
+<span class="sd">        route_parameters (dict, optional): Gaussian-style route parameters used only</span>
+<span class="sd">            to decide which psi4 driver call to make; recognized keys (case</span>
+<span class="sd">            insensitive) are &quot;opt&quot; (calls psi4.optimize), &quot;freq&quot; (calls</span>
+<span class="sd">            psi4.frequencies, implies &quot;opt&quot; was already done on the input geometry),</span>
+<span class="sd">            and anything else falls back to a single point energy</span>
+<span class="sd">            (psi4.energy). Defaults to a single point calculation.</span>
+<span class="sd">        solvent (dict, optional): Implicit solvent (PCM) options; supported keys are</span>
+<span class="sd">            &quot;solvent&quot; (a psi4 PCM solvent name, e.g. &quot;water&quot;) and &quot;pcm_string&quot; (a full</span>
+<span class="sd">            custom PCM input block, overrides &quot;solvent&quot; if given). If not provided, the</span>
+<span class="sd">            calculation is run in the gas phase.</span>
+<span class="sd">        memory (str, optional): psi4 memory setting; defaults to &quot;4 GB&quot;.</span>
+<span class="sd">        num_threads (int, optional): Number of threads for psi4; defaults to 4.</span>
+<span class="sd">        db (str or dict, optional): Database credentials; path to db.json or a dict.</span>
+<span class="sd">        save_to_db (bool, optional): Whether to insert the run into the runs collection.</span>
+<span class="sd">        save_to_file (bool, optional): Whether to save the run to a json file.</span>
+<span class="sd">        filename (str, optional): Name of the json file to save the run to; defaults</span>
+<span class="sd">            to &quot;run.json&quot;.</span>
+<span class="sd">        gout_key (str, optional): Key to store this run under in</span>
+<span class="sd">            fw_spec[&quot;gaussian_output&quot;]; the run is always additionally stored under</span>
+<span class="sd">            the default key &quot;gout_key&quot; (as with Gaussian runs).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;molecule&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prev_calc_key&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;charge&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;oxidation_states&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cart_coords&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ghost_indices&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;functional&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;basis_set&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;route_parameters&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;solvent&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;memory&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;num_threads&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;db&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;save_to_db&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;save_to_file&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;filename&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gout_key&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tag&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_charge_from_oxidation_states</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the charge of a molecule/cluster from the oxidation state of its</span>
+<span class="sd">        individual elements (e.g. {&quot;Li&quot;: 1, &quot;O&quot;: -2}); mirrors</span>
+<span class="sd">        mispr.gaussian.firetasks.write_inputs.WriteInput._update_charge, since this</span>
+<span class="sd">        is plain pymatgen bookkeeping with no dependency on the QM engine used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mol_copy</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">mol_copy</span><span class="o">.</span><span class="n">add_oxidation_state_by_element</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s2">&quot;oxidation_states&quot;</span><span class="p">])</span>
+        <span class="n">mol_copy</span><span class="o">.</span><span class="n">set_charge_and_spin</span><span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">IMolecule</span><span class="p">,</span> <span class="n">mol_copy</span><span class="p">)</span><span class="o">.</span><span class="n">charge</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">mol_copy</span><span class="o">.</span><span class="n">charge</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve the input molecule from (in priority order) the explicit</span>
+<span class="sd">        &quot;molecule&quot; param, a previous run&#39;s optimized geometry via</span>
+<span class="sd">        &quot;prev_calc_key&quot;, or a linked molecule left in fw_spec by an earlier</span>
+<span class="sd">        Firetask in the same Firework; raises KeyError if none is found.&quot;&quot;&quot;</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;molecule&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">Molecule</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;molecule must be a pymatgen Molecule object&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mol</span>
+
+        <span class="n">prev_calc_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prev_calc_key&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">prev_calc_key</span><span class="p">:</span>
+            <span class="n">gout_dict</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gaussian_output&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prev_calc_key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">gout_dict</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;No previous run found under fw_spec[&#39;gaussian_output&#39;]&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;[&#39;</span><span class="si">{</span><span class="n">prev_calc_key</span><span class="si">}</span><span class="s2">&#39;]&quot;</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">gout_dict</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">])</span>
+
+        <span class="c1"># set by mispr.gaussian.firetasks.geo_transformation.ProcessMoleculeInput</span>
+        <span class="c1"># (e.g. when it ran with operation_type=&quot;link_molecules&quot; to combine two</span>
+        <span class="c1"># previously-computed molecules into one, ahead of this Firetask in the</span>
+        <span class="c1"># same Firework); reused unmodified since it&#39;s plain molecule bookkeeping,</span>
+        <span class="c1"># not tied to any QM engine</span>
+        <span class="k">if</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prev_calc_molecule&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;prev_calc_molecule&quot;</span><span class="p">]</span>
+
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="s2">&quot;No molecule present; provide &#39;molecule&#39; or &#39;prev_calc_key&#39;, or check &quot;</span>
+            <span class="s2">&quot;fw_spec&quot;</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="RunPsi4.run_task"><a class="viewcode-back" href="../../../../mispr.psi4.firetasks.html#mispr.psi4.firetasks.run_calc.RunPsi4.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the requested job (opt/freq/sp, per &quot;route_parameters&quot;) and store</span>
+<span class="sd">        the result under fw_spec[&quot;gaussian_output&quot;] for downstream Firetasks</span>
+<span class="sd">        (e.g. ``mispr.gaussian.firetasks.parse_outputs.BDEtoDB``) to consume.&quot;&quot;&quot;</span>
+        <span class="n">working_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_molecule</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;oxidation_states&quot;</span><span class="p">):</span>
+            <span class="n">charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_charge_from_oxidation_states</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># the default multiplicity must be recomputed for whatever &quot;charge&quot;</span>
+            <span class="c1"># ends up being (e.g. when it comes from oxidation_states, which can</span>
+            <span class="c1"># differ from mol&#39;s own charge) -- mol&#39;s own spin_multiplicity</span>
+            <span class="c1"># attribute reflects mol&#39;s original charge, not this one, and using</span>
+            <span class="c1"># it here would silently pair a charge with an inconsistent</span>
+            <span class="c1"># multiplicity (caught downstream by psi4 as a validation error)</span>
+            <span class="n">mol_for_mult</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">mol_for_mult</span><span class="o">.</span><span class="n">set_charge_and_spin</span><span class="p">(</span><span class="n">charge</span><span class="p">)</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="n">mol_for_mult</span><span class="o">.</span><span class="n">spin_multiplicity</span>
+
+        <span class="n">functional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;functional&quot;</span><span class="p">,</span> <span class="n">DEFAULT_FUNCTIONAL</span><span class="p">)</span>
+        <span class="n">basis_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;basis_set&quot;</span><span class="p">,</span> <span class="n">DEFAULT_BASIS_SET</span><span class="p">)</span>
+        <span class="n">route_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;route_parameters&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="n">job_types</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">route_parameters</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">JOB_TYPES</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">job_types</span><span class="p">:</span>
+            <span class="n">job_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sp&quot;</span><span class="p">]</span>
+
+        <span class="n">solvent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;solvent&quot;</span><span class="p">)</span>
+
+        <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+        <span class="n">psi4</span><span class="o">.</span><span class="n">set_memory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory&quot;</span><span class="p">,</span> <span class="n">DEFAULT_MEMORY</span><span class="p">))</span>
+        <span class="n">psi4</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_threads&quot;</span><span class="p">,</span> <span class="n">DEFAULT_NUM_THREADS</span><span class="p">))</span>
+        <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">set_output_file</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="s2">&quot;psi4_output.dat&quot;</span><span class="p">),</span> <span class="kc">False</span>
+        <span class="p">)</span>
+
+        <span class="n">ghost_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ghost_indices&quot;</span><span class="p">)</span>
+        <span class="n">psi4_mol</span> <span class="o">=</span> <span class="n">_mol_to_psi4_geometry</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span>
+            <span class="n">charge</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">cart_coords</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cart_coords&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+            <span class="n">ghost_indices</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">ghost_indices</span><span class="p">)</span> <span class="k">if</span> <span class="n">ghost_indices</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># psi4 does not auto-select an open-shell reference from the molecule&#39;s</span>
+        <span class="c1"># multiplicity; radicals/odd-electron fragments (the norm after breaking a</span>
+        <span class="c1"># bond) need an explicit UHF/UKS reference, otherwise psi4 defaults to RHF</span>
+        <span class="c1"># and errors out (&quot;RHF reference is only for singlets&quot;)</span>
+        <span class="n">is_open_shell</span> <span class="o">=</span> <span class="n">multiplicity</span> <span class="o">!=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">is_open_shell</span><span class="p">:</span>
+            <span class="n">is_dft</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;hf&quot;</span><span class="p">,</span> <span class="s2">&quot;scf&quot;</span><span class="p">)</span>
+            <span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">({</span><span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="s2">&quot;uks&quot;</span> <span class="k">if</span> <span class="n">is_dft</span> <span class="k">else</span> <span class="s2">&quot;uhf&quot;</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">({</span><span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="s2">&quot;rks&quot;</span> <span class="k">if</span> <span class="n">functional</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;hf&quot;</span><span class="p">,</span> <span class="s2">&quot;scf&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;rhf&quot;</span><span class="p">})</span>
+
+        <span class="n">is_pcm</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">solvent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_pcm</span><span class="p">:</span>
+            <span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">({</span><span class="s2">&quot;pcm&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;pcm_scf_type&quot;</span><span class="p">:</span> <span class="s2">&quot;total&quot;</span><span class="p">})</span>
+            <span class="n">pcm_string</span> <span class="o">=</span> <span class="n">solvent</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pcm_string&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">DEFAULT_PCM_TEMPLATE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">solvent</span><span class="o">=</span><span class="n">solvent</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;solvent&quot;</span><span class="p">,</span> <span class="s2">&quot;water&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">psi4</span><span class="o">.</span><span class="n">pcm_helper</span><span class="p">(</span><span class="n">pcm_string</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">({</span><span class="s2">&quot;pcm&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+
+        <span class="n">method</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">functional</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">basis_set</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">st</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+        <span class="n">corrections</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">has_completed</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">error_msg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;opt&quot;</span> <span class="ow">in</span> <span class="n">job_types</span> <span class="ow">and</span> <span class="n">mol</span><span class="o">.</span><span class="n">num_sites</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># a single atom has no internal coordinates to optimize (no</span>
+                <span class="c1"># bond/angle for OPTKING to vary), and psi4.optimize() crashes</span>
+                <span class="c1"># trying anyway (&quot;not enough values to unpack&quot;) -- it&#39;s already</span>
+                <span class="c1"># at its one and only possible geometry, so just take the</span>
+                <span class="c1"># energy there (same bare-nucleus check as the single-atom</span>
+                <span class="c1"># &quot;freq&quot; branch below, since a monomer here could equally be one)</span>
+                <span class="n">n_electrons</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Z</span> <span class="o">-</span> <span class="n">charge</span>
+                <span class="k">if</span> <span class="n">n_electrons</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">energy</span> <span class="o">=</span> <span class="mf">0.0</span>
+                    <span class="n">final_mol</span> <span class="o">=</span> <span class="n">mol</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">energy</span><span class="p">,</span> <span class="n">wfn</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">psi4_mol</span><span class="p">,</span> <span class="n">return_wfn</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="n">final_mol</span> <span class="o">=</span> <span class="n">_psi4_geometry_to_mol</span><span class="p">(</span><span class="n">wfn</span><span class="o">.</span><span class="n">molecule</span><span class="p">(),</span> <span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">has_ghost</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">ghost_indices</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="s2">&quot;opt&quot;</span> <span class="ow">in</span> <span class="n">job_types</span><span class="p">:</span>
+                <span class="n">energy</span><span class="p">,</span> <span class="n">wfn</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">psi4_mol</span><span class="p">,</span> <span class="n">return_wfn</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">final_mol</span> <span class="o">=</span> <span class="n">_psi4_geometry_to_mol</span><span class="p">(</span><span class="n">wfn</span><span class="o">.</span><span class="n">molecule</span><span class="p">(),</span> <span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">has_ghost</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">ghost_indices</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="s2">&quot;freq&quot;</span> <span class="ow">in</span> <span class="n">job_types</span> <span class="ow">and</span> <span class="n">mol</span><span class="o">.</span><span class="n">num_sites</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># a single atom has no vibrational degrees of freedom; psi4&#39;s</span>
+                <span class="c1"># Hessian/frequency driver is not safe to call on 1-atom systems</span>
+                <span class="c1"># (has been observed to segfault), so compute the analytic</span>
+                <span class="c1"># ideal-gas atomic thermochemistry instead</span>
+                <span class="n">n_electrons</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Z</span> <span class="o">-</span> <span class="n">charge</span>
+                <span class="k">if</span> <span class="n">n_electrons</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># a bare nucleus (e.g. H+, which BDE&#39;s charge-state enumeration</span>
+                    <span class="c1"># assigns to a single-atom fragment when it gives that fragment</span>
+                    <span class="c1"># both bonding electrons) has no electronic structure for psi4 to</span>
+                    <span class="c1"># solve; RHF/UHF divide by the electron count internally and</span>
+                    <span class="c1"># crash with &quot;float division by zero&quot; if asked to try, so skip</span>
+                    <span class="c1"># psi4 entirely -- there is no electronic energy to compute</span>
+                    <span class="n">energy</span> <span class="o">=</span> <span class="mf">0.0</span>
+                    <span class="n">final_mol</span> <span class="o">=</span> <span class="n">mol</span>
+                    <span class="n">corrections</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;Zero-point correction&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                            <span class="s2">&quot;Enthalpy&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                            <span class="s2">&quot;Gibbs Free Energy&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                        <span class="p">}</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">energy</span><span class="p">,</span> <span class="n">wfn</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">psi4_mol</span><span class="p">,</span> <span class="n">return_wfn</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="n">final_mol</span> <span class="o">=</span> <span class="n">_psi4_geometry_to_mol</span><span class="p">(</span><span class="n">wfn</span><span class="o">.</span><span class="n">molecule</span><span class="p">(),</span> <span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">has_ghost</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">ghost_indices</span><span class="p">))</span>
+                    <span class="n">corrections</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                        <span class="n">_atomic_thermo_corrections</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">)</span>
+                    <span class="p">)</span>
+            <span class="k">elif</span> <span class="s2">&quot;freq&quot;</span> <span class="ow">in</span> <span class="n">job_types</span><span class="p">:</span>
+                <span class="n">energy</span><span class="p">,</span> <span class="n">wfn</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">frequencies</span><span class="p">(</span>
+                    <span class="n">method</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">psi4_mol</span><span class="p">,</span> <span class="n">return_wfn</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+                <span class="n">final_mol</span> <span class="o">=</span> <span class="n">_psi4_geometry_to_mol</span><span class="p">(</span><span class="n">wfn</span><span class="o">.</span><span class="n">molecule</span><span class="p">(),</span> <span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">has_ghost</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">ghost_indices</span><span class="p">))</span>
+                <span class="c1"># ZPVE is reported by psi4 as a correction on its own, while</span>
+                <span class="c1"># ENTHALPY/GIBBS FREE ENERGY are reported as totals (electronic</span>
+                <span class="c1"># energy + correction); mispr expects the correction alone in all</span>
+                <span class="c1"># three cases, to be added back to final_energy downstream (see</span>
+                <span class="c1"># BDEtoDB/IPEAtoDB)</span>
+                <span class="n">corrections</span><span class="p">[</span><span class="s2">&quot;Zero-point correction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">psi4</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="s2">&quot;ZPVE&quot;</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">qcvar</span> <span class="ow">in</span> <span class="p">[</span>
+                    <span class="p">(</span><span class="s2">&quot;Enthalpy&quot;</span><span class="p">,</span> <span class="s2">&quot;ENTHALPY&quot;</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s2">&quot;Gibbs Free Energy&quot;</span><span class="p">,</span> <span class="s2">&quot;GIBBS FREE ENERGY&quot;</span><span class="p">),</span>
+                <span class="p">]:</span>
+                    <span class="n">total</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="n">qcvar</span><span class="p">)</span>
+                    <span class="n">corrections</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">energy</span><span class="p">,</span> <span class="n">wfn</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">psi4_mol</span><span class="p">,</span> <span class="n">return_wfn</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">final_mol</span> <span class="o">=</span> <span class="n">_psi4_geometry_to_mol</span><span class="p">(</span><span class="n">wfn</span><span class="o">.</span><span class="n">molecule</span><span class="p">(),</span> <span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">has_ghost</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">ghost_indices</span><span class="p">))</span>
+
+            <span class="n">dipole</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">dipole</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">psi4</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="s2">&quot;CURRENT DIPOLE&quot;</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">has_completed</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">error_msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">final_mol</span> <span class="o">=</span> <span class="n">mol</span>
+            <span class="n">dipole</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">run_time</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">st</span>
+        <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;run_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_time</span>
+
+        <span class="n">output_block</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;final_energy&quot;</span><span class="p">:</span> <span class="n">energy</span><span class="p">,</span>
+            <span class="s2">&quot;molecule&quot;</span><span class="p">:</span> <span class="n">final_mol</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">corrections</span><span class="p">:</span>
+            <span class="n">output_block</span><span class="p">[</span><span class="s2">&quot;corrections&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">corrections</span>
+        <span class="k">if</span> <span class="n">dipole</span><span class="p">:</span>
+            <span class="n">output_block</span><span class="p">[</span><span class="s2">&quot;dipole_moment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dipole</span>
+        <span class="k">if</span> <span class="n">error_msg</span><span class="p">:</span>
+            <span class="n">output_block</span><span class="p">[</span><span class="s2">&quot;error_message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_msg</span>
+
+        <span class="n">gout_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;functional&quot;</span><span class="p">:</span> <span class="n">functional</span><span class="p">,</span>
+                <span class="s2">&quot;basis_set&quot;</span><span class="p">:</span> <span class="n">basis_set</span><span class="p">,</span>
+                <span class="s2">&quot;route_parameters&quot;</span><span class="p">:</span> <span class="n">route_parameters</span><span class="p">,</span>
+                <span class="s2">&quot;charge&quot;</span><span class="p">:</span> <span class="n">charge</span><span class="p">,</span>
+                <span class="s2">&quot;spin_multiplicity&quot;</span><span class="p">:</span> <span class="n">multiplicity</span><span class="p">,</span>
+                <span class="s2">&quot;molecule&quot;</span><span class="p">:</span> <span class="n">mol</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">output_block</span><span class="p">,</span>
+                <span class="s2">&quot;has_gaussian_completed&quot;</span><span class="p">:</span> <span class="n">has_completed</span><span class="p">,</span>
+                <span class="s2">&quot;is_pcm&quot;</span><span class="p">:</span> <span class="n">is_pcm</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;functional&quot;</span><span class="p">:</span> <span class="n">functional</span><span class="p">,</span>
+            <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="n">basis_set</span><span class="p">,</span>
+            <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;solution&quot;</span> <span class="k">if</span> <span class="n">is_pcm</span> <span class="k">else</span> <span class="s2">&quot;gas&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">job_types</span><span class="p">),</span>
+            <span class="c1"># get_chem_schema builds a SMILES/InChI/formula schema by treating every</span>
+            <span class="c1"># site as a real atom; that&#39;s meaningless (and errors out on the</span>
+            <span class="c1"># charge/electron-count check) for a ghost-atom counterpoise-correction</span>
+            <span class="c1"># calculation, where some &quot;atoms&quot; contribute basis functions only, no</span>
+            <span class="c1"># real nucleus/electrons -- skip it in that case, since only the energy</span>
+            <span class="c1"># is actually needed downstream</span>
+            <span class="o">**</span><span class="p">(</span><span class="n">get_chem_schema</span><span class="p">(</span><span class="n">final_mol</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">ghost_indices</span> <span class="k">else</span> <span class="p">{}),</span>
+            <span class="s2">&quot;gauss_version&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;psi4-</span><span class="si">{</span><span class="n">psi4</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">gout_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">i</span><span class="p">:</span> <span class="n">j</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">gout_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;sites&quot;</span><span class="p">,</span> <span class="s2">&quot;@module&quot;</span><span class="p">,</span> <span class="s2">&quot;@class&quot;</span><span class="p">,</span> <span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="s2">&quot;spin_multiplicity&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="s2">&quot;tag&quot;</span> <span class="ow">in</span> <span class="n">fw_spec</span><span class="p">:</span>
+            <span class="n">gout_dict</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+        <span class="n">gout_dict</span><span class="p">[</span><span class="s2">&quot;wall_time (s)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_time</span>
+        <span class="n">gout_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">gout_dict</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">_json_default</span><span class="p">))</span>
+        <span class="n">gout_dict</span> <span class="o">=</span> <span class="n">recursive_signature_remove</span><span class="p">(</span><span class="n">gout_dict</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">has_completed</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;psi4 did not complete normally: </span><span class="si">{</span><span class="n">error_msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">run_list</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;db&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;save_to_db&quot;</span><span class="p">):</span>
+            <span class="n">runs_db</span> <span class="o">=</span> <span class="n">get_db</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+            <span class="n">run_id</span> <span class="o">=</span> <span class="n">runs_db</span><span class="o">.</span><span class="n">insert_run</span><span class="p">(</span><span class="n">gout_dict</span><span class="p">)</span>
+            <span class="n">run_list</span><span class="p">[</span><span class="s2">&quot;run_id_list&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_id</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Saved parsed psi4 output to db&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;save_to_file&quot;</span><span class="p">):</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">gout_dict</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">))</span>
+            <span class="n">run_list</span><span class="p">[</span><span class="s2">&quot;run_loc_list&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">file_path</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Saved parsed psi4 output to json file&quot;</span><span class="p">)</span>
+
+        <span class="n">uid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gout_key&quot;</span><span class="p">)</span>
+        <span class="n">set_dict</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;gaussian_output-&gt;</span><span class="si">{</span><span class="n">DEFAULT_KEY</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">gout_dict</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="n">set_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;gaussian_output-&gt;</span><span class="si">{</span><span class="n">uid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gout_dict</span>
+        <span class="n">mod_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;_set&quot;</span><span class="p">:</span> <span class="n">set_dict</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">run_list</span><span class="p">:</span>
+            <span class="n">mod_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;_push&quot;</span><span class="p">:</span> <span class="n">run_list</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">mod_spec</span><span class="o">=</span><span class="n">mod_dict</span><span class="p">,</span> <span class="n">propagate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div></div>
+    
+<div class="viewcode-block" id="ESP"><a class="viewcode-back" href="../../../../mispr.psi4.firetasks.html#mispr.psi4.firetasks.run_calc.ESP">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">ESP</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute RESP (Restrained ElectroStatic Potential) atomic partial charges for a</span>
+<span class="sd">    molecule via psi4&#39;s ``resp`` package. Unlike ``RunPsi4``, this always runs a</span>
+<span class="sd">    single-point calculation (no opt/freq job types) -- callers are expected to</span>
+<span class="sd">    have already optimized the molecule (e.g. via a preceding ``RunPsi4`` Firework)</span>
+<span class="sd">    and pass it in through ``prev_calc_key``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        molecule (Molecule, optional): pymatgen Molecule to run the ESP</span>
+<span class="sd">            calculation on directly; mutually exclusive with ``prev_calc_key``</span>
+<span class="sd">            (one of the two must be provided).</span>
+<span class="sd">        prev_calc_key (str, optional): Key into fw_spec[&quot;gaussian_output&quot;] whose</span>
+<span class="sd">            optimized geometry should be used as the input structure.</span>
+<span class="sd">        charge (int, optional): Charge on the molecule; defaults to the molecule&#39;s</span>
+<span class="sd">            own charge (or 0).</span>
+<span class="sd">        multiplicity (int, optional): Spin multiplicity; defaults to the</span>
+<span class="sd">            molecule&#39;s own value (or 1).</span>
+<span class="sd">        oxidation_states (dict, optional): Oxidation states used to derive the</span>
+<span class="sd">            charge (e.g. {&quot;Li&quot;: 1, &quot;O&quot;: -2}); see ``RunPsi4`` for the same option.</span>
+<span class="sd">        cart_coords (bool, optional): Whether to build the psi4 geometry from</span>
+<span class="sd">            cartesian coordinates (``True``) or a z-matrix; defaults to ``True``.</span>
+<span class="sd">        method_esp (str, optional): Method for the ESP single-point calculation;</span>
+<span class="sd">            defaults to &quot;scf&quot;.</span>
+<span class="sd">        basis_esp (str, optional): Basis set for the ESP calculation; defaults to</span>
+<span class="sd">            &quot;6-31g*&quot;.</span>
+<span class="sd">        resp_options (dict, optional): Options passed to ``resp.resp()`` (e.g.</span>
+<span class="sd">            VDW_SCALE_FACTORS, RESP_A, RESP_B); merged over the module&#39;s default</span>
+<span class="sd">            RESP settings, with any keys given here taking precedence.</span>
+<span class="sd">        memory (str, optional): Memory for psi4; defaults to &quot;4 GB&quot;.</span>
+<span class="sd">        num_threads (int, optional): Number of threads for psi4; defaults to 4.</span>
+<span class="sd">        db (str or dict, optional): Database credentials; path to db.json or a dict.</span>
+<span class="sd">        save_to_db (bool, optional): Whether to insert the run into the runs</span>
+<span class="sd">            collection.</span>
+<span class="sd">        save_to_file (bool, optional): Whether to save the run to a json file.</span>
+<span class="sd">        filename (str, optional): Name of the json file to save the run to.</span>
+<span class="sd">        gout_key (str, optional): Key to store this run under in</span>
+<span class="sd">            fw_spec[&quot;gaussian_output&quot;]; the run is always additionally stored</span>
+<span class="sd">            under the default key &quot;gout_key&quot; (as with Gaussian runs).</span>
+<span class="sd">        tag (str, optional): Tag stored in the db documents for easy retrieval.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;molecule&quot;</span><span class="p">,</span> <span class="s2">&quot;prev_calc_key&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span> <span class="s2">&quot;oxidation_states&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cart_coords&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;method_esp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis_esp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resp_options&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;memory&quot;</span><span class="p">,</span> <span class="s2">&quot;num_threads&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="s2">&quot;save_to_db&quot;</span><span class="p">,</span> <span class="s2">&quot;save_to_file&quot;</span><span class="p">,</span> <span class="s2">&quot;filename&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gout_key&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+<div class="viewcode-block" id="ESP.run_task"><a class="viewcode-back" href="../../../../mispr.psi4.firetasks.html#mispr.psi4.firetasks.run_calc.ESP.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the ESP single-point calculation and RESP charge fit, then store</span>
+<span class="sd">        the result under fw_spec[&quot;gaussian_output&quot;] for a downstream</span>
+<span class="sd">        ``mispr.gaussian.firetasks.parse_outputs.ESPtoDB`` to consume.&quot;&quot;&quot;</span>
+        <span class="n">working_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;molecule&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prev_calc_key&quot;</span><span class="p">):</span>
+            <span class="n">prev_calc_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prev_calc_key&quot;</span><span class="p">)</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
+                <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gaussian_output&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prev_calc_key</span><span class="p">)[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t have &#39;molecule&#39; and &#39;prev_calc_key&#39; &quot;</span><span class="p">)</span>
+
+        <span class="n">charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">multiplicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;spin_multiplicity&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">1</span>
+        <span class="p">)</span>
+
+        <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+        <span class="n">psi4</span><span class="o">.</span><span class="n">set_memory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory&quot;</span><span class="p">,</span> <span class="n">DEFAULT_MEMORY</span><span class="p">))</span>
+        <span class="n">psi4</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_threads&quot;</span><span class="p">,</span> <span class="n">DEFAULT_NUM_THREADS</span><span class="p">))</span>
+        <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">set_output_file</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="s2">&quot;psi4_output.dat&quot;</span><span class="p">),</span> <span class="kc">False</span>
+        <span class="p">)</span>
+
+        <span class="n">psi4_mol</span> <span class="o">=</span> <span class="n">_mol_to_psi4_geometry</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">cart_coords</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cart_coords&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">method_esp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;method_esp&quot;</span><span class="p">,</span> <span class="s2">&quot;scf&quot;</span><span class="p">)</span>
+        <span class="n">basis_esp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;basis_esp&quot;</span><span class="p">,</span> <span class="s2">&quot;6-31g*&quot;</span><span class="p">)</span>
+
+        <span class="n">default_resp_options</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;VDW_SCALE_FACTORS&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
+            <span class="s2">&quot;VDW_POINT_DENSITY&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;RESP_A&quot;</span><span class="p">:</span> <span class="mf">0.0005</span><span class="p">,</span>
+            <span class="s2">&quot;RESP_B&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="s2">&quot;METHOD_ESP&quot;</span><span class="p">:</span> <span class="n">method_esp</span><span class="p">,</span>
+            <span class="s2">&quot;BASIS_ESP&quot;</span><span class="p">:</span> <span class="n">basis_esp</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c1"># ** means inserting a list into another list</span>
+        <span class="c1"># if there don&#39;t have any input files, it will use the default_resp_options</span>
+        <span class="n">resp_options</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">default_resp_options</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resp_options&quot;</span><span class="p">,</span> <span class="p">{})}</span>
+
+        <span class="n">has_completed</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">error_msg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method_esp</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">basis_esp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">psi4_mol</span><span class="p">,</span> <span class="n">return_wfn</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>  <span class="c1"># return_wfn = False means only return one value</span>
+            <span class="n">resp_charges</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">resp</span><span class="p">([</span><span class="n">psi4_mol</span><span class="p">],</span> <span class="n">resp_options</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">has_completed</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">error_msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">resp_charges</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">output_block</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;final_energy&quot;</span><span class="p">:</span> <span class="n">energy</span><span class="p">,</span>
+            <span class="s2">&quot;molecule&quot;</span><span class="p">:</span> <span class="n">mol</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">resp_charges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">output_block</span><span class="p">[</span><span class="s2">&quot;ESP_charges&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp_charges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">output_block</span><span class="p">[</span><span class="s2">&quot;RESP_charges&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp_charges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">error_msg</span><span class="p">:</span>
+            <span class="n">output_block</span><span class="p">[</span><span class="s2">&quot;error_message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_msg</span>
+
+        <span class="n">gout_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;functional&quot;</span><span class="p">:</span> <span class="n">method_esp</span><span class="p">,</span>
+                <span class="s2">&quot;basis_set&quot;</span><span class="p">:</span> <span class="n">basis_esp</span><span class="p">,</span>
+                <span class="s2">&quot;charge&quot;</span><span class="p">:</span> <span class="n">charge</span><span class="p">,</span>
+                <span class="s2">&quot;spin_multiplicity&quot;</span><span class="p">:</span> <span class="n">multiplicity</span><span class="p">,</span>
+                <span class="s2">&quot;molecule&quot;</span><span class="p">:</span> <span class="n">mol</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">output_block</span><span class="p">,</span>
+                <span class="s2">&quot;has_gaussian_completed&quot;</span><span class="p">:</span> <span class="n">has_completed</span><span class="p">,</span>
+                <span class="s2">&quot;is_pcm&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;functional&quot;</span><span class="p">:</span> <span class="n">method_esp</span><span class="p">,</span>
+            <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="n">basis_esp</span><span class="p">,</span>
+            <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;gas&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;esp&quot;</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">get_chem_schema</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span>
+            <span class="s2">&quot;gauss_version&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;psi4-</span><span class="si">{</span><span class="n">psi4</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">gout_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">i</span><span class="p">:</span> <span class="n">j</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">gout_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;sites&quot;</span><span class="p">,</span> <span class="s2">&quot;@module&quot;</span><span class="p">,</span> <span class="s2">&quot;@class&quot;</span><span class="p">,</span> <span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="s2">&quot;spin_multiplicity&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="s2">&quot;tag&quot;</span> <span class="ow">in</span> <span class="n">fw_spec</span><span class="p">:</span>
+            <span class="n">gout_dict</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+        <span class="n">gout_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">gout_dict</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">_json_default</span><span class="p">))</span>
+        <span class="n">gout_dict</span> <span class="o">=</span> <span class="n">recursive_signature_remove</span><span class="p">(</span><span class="n">gout_dict</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">has_completed</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;psi4 ESP calculation did not complete normally: </span><span class="si">{</span><span class="n">error_msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">run_list</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;db&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;save_to_db&quot;</span><span class="p">):</span>
+            <span class="n">runs_db</span> <span class="o">=</span> <span class="n">get_db</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+            <span class="n">run_id</span> <span class="o">=</span> <span class="n">runs_db</span><span class="o">.</span><span class="n">insert_run</span><span class="p">(</span><span class="n">gout_dict</span><span class="p">)</span>
+            <span class="n">run_list</span><span class="p">[</span><span class="s2">&quot;run_id_list&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_id</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Saved parsed psi4 ESP output to db&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;save_to_file&quot;</span><span class="p">):</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">gout_dict</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">))</span>
+            <span class="n">run_list</span><span class="p">[</span><span class="s2">&quot;run_loc_list&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">file_path</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Saved parsed psi4 ESP output to json file&quot;</span><span class="p">)</span>
+
+        <span class="n">uid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gout_key&quot;</span><span class="p">)</span>
+        <span class="n">set_dict</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;gaussian_output-&gt;</span><span class="si">{</span><span class="n">DEFAULT_KEY</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">gout_dict</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="n">set_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;gaussian_output-&gt;</span><span class="si">{</span><span class="n">uid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gout_dict</span>
+        <span class="n">mod_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;_set&quot;</span><span class="p">:</span> <span class="n">set_dict</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">run_list</span><span class="p">:</span>
+            <span class="n">mod_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;_push&quot;</span><span class="p">:</span> <span class="n">run_list</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">mod_spec</span><span class="o">=</span><span class="n">mod_dict</span><span class="p">,</span> <span class="n">propagate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div></div>
+
+        
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2022, MolMD Group.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    5.1.1.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://github.com/molmd/mispr" target="_blank" rel="noopener" title="Source on github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/molmd_group" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "navigation.expand", "navigation.sections"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../../../../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="../../../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../_static/togglebutton.js"></script>
+        <script src="../../../../_static/design-tabs.js"></script>
+        <script src="../../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+  </body>
+</html>

@@ -1,0 +1,1359 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>mispr.orca.workflows.base package - Materials informatics for structure-property relationships</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.30b2b08b91b832a08.min.css" />
+        <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+        <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+        <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+        <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+        <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+        <link rel="stylesheet" type="text/css" href="_static/style.css" />
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Materials informatics for structure-property relationships" class="md-header__button md-logo" aria-label="Materials informatics for structure-property relationships" data-md-component="logo">
+      <img src="_static/logo.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Materials informatics for structure-property relationships
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              mispr.orca.workflows.base package
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Materials informatics for structure-property relationships" class="md-nav__button md-logo" aria-label="Materials informatics for structure-property relationships" data-md-component="logo">
+      <img src="_static/logo.png" alt="logo">
+    </a>
+    Materials informatics for structure-property relationships
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview.html" class="md-nav__link">
+        <span class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="keywords.html" class="md-nav__link">
+        <span class="md-ellipsis">Keywords</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">Installation 🔧</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Installation 🔧" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Installation 🔧</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation/index.html" class="md-nav__link">
+        <span class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation/dependencies.html" class="md-nav__link">
+        <span class="md-ellipsis">Prerequisites</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation/configuration.html" class="md-nav__link">
+        <span class="md-ellipsis">Configuration Files</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation/test.html" class="md-nav__link">
+        <span class="md-ellipsis">Running a Test Workflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Workflows 🔀</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Workflows 🔀" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Workflows 🔀</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflows/basics.html" class="md-nav__link">
+        <span class="md-ellipsis">Workflow Basics</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflows/supported.html" class="md-nav__link">
+        <span class="md-ellipsis">Supported Workflows</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflows/tutorials.html" class="md-nav__link">
+        <span class="md-ellipsis">Workflow Tutorials</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflows/custom.html" class="md-nav__link">
+        <span class="md-ellipsis">Creating Custom Workflows</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          <span class="md-ellipsis">Resources 🖇️</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Resources 🖇️" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Resources 🖇️</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/faq.html" class="md-nav__link">
+        <span class="md-ellipsis">FAQ</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/resources.html" class="md-nav__link">
+        <span class="md-ellipsis">Helpful Links</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          <span class="md-ellipsis">Code Documentation 📚</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code Documentation 📚" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Code Documentation 📚</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="mispr.html"><span class="md-ellipsis">mispr</span></a>
+          
+            <label for="__nav_6_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="mispr" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">mispr</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mispr.common.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr.<wbr>common package</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mispr.gaussian.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr.<wbr>gaussian package</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mispr.hybrid.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr.<wbr>hybrid package</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mispr.lammps.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr.<wbr>lammps package</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1_5" type="checkbox" id="__nav_6_1_5" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="mispr.orca.html"><span class="md-ellipsis">mispr.<wbr>orca package</span></a>
+          
+            <label for="__nav_6_1_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="mispr.orca package" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">mispr.<wbr>orca package</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mispr.orca.firetasks.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr.<wbr>orca.<wbr>firetasks package</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mispr.orca.fireworks.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr.<wbr>orca.<wbr>fireworks package</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mispr.orca.utilities.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr.<wbr>orca.<wbr>utilities package</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1_5_4" type="checkbox" id="__nav_6_1_5_4" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="mispr.orca.workflows.html"><span class="md-ellipsis">mispr.<wbr>orca.<wbr>workflows package</span></a>
+          
+            <label for="__nav_6_1_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="mispr.orca.workflows package" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_1_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">mispr.<wbr>orca.<wbr>workflows package</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span class="md-ellipsis">mispr.<wbr>orca.<wbr>workflows.<wbr>base package</span>
+      </a>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mispr.psi4.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr.<wbr>psi4 package</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          <span class="md-ellipsis">Development 💻</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Development 💻" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Development 💻</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog.html" class="md-nav__link">
+        <span class="md-ellipsis">Changelog</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="citing.html" class="md-nav__link">
+        <span class="md-ellipsis">Citing MISPR</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="license.html" class="md-nav__link">
+        <span class="md-ellipsis">License</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1 id="mispr-orca-workflows-base-package">mispr.orca.workflows.base package<a class="headerlink" href="#mispr-orca-workflows-base-package" title="Permalink to this heading">¶</a></h1>
+<h2 id="submodules">Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+<h2 id="module-mispr.orca.workflows.base.bde"><span id="mispr-orca-workflows-base-bde-module"></span>mispr.orca.workflows.base.bde module<a class="headerlink" href="#module-mispr.orca.workflows.base.bde" title="Permalink to this heading">¶</a></h2>
+<p>Define the bond dissociation energy workflow, using ORCA instead of Gaussian.</p>
+<p>Mirrors <code class="docutils literal notranslate"><span class="pre">mispr.gaussian.workflows.base.bde.get_bde</span></code>. The bond-breaking/fragment
+enumeration (<code class="docutils literal notranslate"><span class="pre">BreakMolFW</span></code>) and the final energy bookkeeping (<code class="docutils literal notranslate"><span class="pre">BDEtoDB</span></code>) are
+pure cheminformatics/arithmetic that don’t care which QM engine produced the
+underlying energies, so both are reused as-is; only the optimization/frequency
+Fireworks are ORCA-specific (via <code class="docutils literal notranslate"><span class="pre">mispr.orca.workflows.base.core.common_fw</span></code>).</p>
+<dl class="py function objdesc">
+<dt class="sig sig-object highlight sig-wrap py" id="mispr.orca.workflows.base.bde.get_bde">
+<span class="sig-prename descclassname"><span class="pre">mispr.orca.workflows.base.bde.</span></span><span class="sig-name descname"><span class="pre">get_bde</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.mol_operation_type" title="mispr.orca.workflows.base.bde.get_bde.mol_operation_type (Python parameter) — Type of molecule operation; see process_mol in mispr/gaussian/utilities/mol.py for supported operations."><span class="n"><span class="pre">mol_operation_type</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.mol" title="mispr.orca.workflows.base.bde.get_bde.mol (Python parameter) — Source of the principle molecule to be processed; should match mol_operation_type."><span class="n"><span class="pre">mol</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.ref_charge" title="mispr.orca.workflows.base.bde.get_bde.ref_charge (Python parameter) — Charge on the principle molecule; defaults to 0."><span class="n"><span class="pre">ref_charge</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.fragment_charges" title="mispr.orca.workflows.base.bde.get_bde.fragment_charges (Python parameter) — Additional charges to try for each fragment, beyond the defaults derived from ref_charge; see mispr.gaussian.firetasks.geo_transformation.BreakMolecule for the full charge-enumeration rules. Defaults to None."><span class="n"><span class="pre">fragment_charges</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.bonds" title="mispr.orca.workflows.base.bde.get_bde.bonds (Python parameter) — List of bonds (as atom index pairs) to break; if None, every bond found in the molecule is broken in turn."><span class="n"><span class="pre">bonds</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.open_rings" title="mispr.orca.workflows.base.bde.get_bde.open_rings (Python parameter) — Whether to open rings instead of skipping ring bonds that can't be simply split; defaults to False."><span class="n"><span class="pre">open_rings</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.db" title="mispr.orca.workflows.base.bde.get_bde.db (Python parameter) — Database credentials; path to db.json or a dict; if None, read from the configuration files."><span class="n"><span class="pre">db</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.name" title="mispr.orca.workflows.base.bde.get_bde.name (Python parameter) — Name of the workflow; defaults to &quot;bde_calculation_orca&quot;."><span class="n"><span class="pre">name</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;bde_calculation_orca&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.working_dir" title="mispr.orca.workflows.base.bde.get_bde.working_dir (Python parameter) — Working directory for input/output files; defaults to the current working directory."><span class="n"><span class="pre">working_dir</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.opt_gaussian_inputs" title="mispr.orca.workflows.base.bde.get_bde.opt_gaussian_inputs (Python parameter) — Parameters for the optimization step; defaults to B3LYP/6-31G(d)."><span class="n"><span class="pre">opt_gaussian_inputs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.freq_gaussian_inputs" title="mispr.orca.workflows.base.bde.get_bde.freq_gaussian_inputs (Python parameter) — Parameters for the frequency step; defaults to B3LYP/6-31G(d)."><span class="n"><span class="pre">freq_gaussian_inputs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.skips" title="mispr.orca.workflows.base.bde.get_bde.skips (Python parameter) — If True, skips both &quot;opt&quot; and &quot;freq&quot; for the principle molecule; can also be a list like [&quot;opt&quot;] to skip only specific jobs. Defaults to False (skip nothing)."><span class="n"><span class="pre">skips</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.visualize" title="mispr.orca.workflows.base.bde.get_bde.visualize (Python parameter) — Whether BDEtoDB should generate a visualization of the computed BDEs; defaults to True."><span class="n"><span class="pre">visualize</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.orca_cmd" title="mispr.orca.workflows.base.bde.get_bde.orca_cmd (Python parameter) — Path to the ORCA executable; falls back to the ORCA_CMD environment variable, then to &quot;orca&quot; on PATH. Must be an absolute path when num_cores &gt; 1."><span class="n"><span class="pre">orca_cmd</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.num_cores" title="mispr.orca.workflows.base.bde.get_bde.num_cores (Python parameter) — Number of parallel ORCA processes per calculation; defaults to 1."><span class="n"><span class="pre">num_cores</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.memory" title="mispr.orca.workflows.base.bde.get_bde.memory (Python parameter) — Memory per core in MB; defaults to 4000."><span class="n"><span class="pre">memory</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="o"><span class="pre">**</span></span><a class="n reference internal" href="#mispr.orca.workflows.base.bde.get_bde.kwargs" title="mispr.orca.workflows.base.bde.get_bde.kwargs (Python parameter) — Additional kwargs passed to BreakMolFW/BDEtoDB/Workflow (e.g. tag)."><span class="n"><span class="pre">kwargs</span></span></a></em></span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mispr/orca/workflows/base/bde.html#get_bde"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a dynamic workflow for calculating the bond dissociation energy using
+ORCA: optimize + frequency the principle molecule, break it into fragments
+(trying several charge splits per bond), optimize + frequency each fragment,
+then compute the BDE for every bond/charge-split combination. Mirrors
+<code class="docutils literal notranslate"><span class="pre">mispr.gaussian.workflows.base.bde.get_bde</span></code>, which has the same overall
+structure and arguments; see that function’s docstring for more background
+on the fragment charge-enumeration behavior.</p>
+<p><code class="docutils literal notranslate"><span class="pre">opt_gaussian_inputs</span></code>/<code class="docutils literal notranslate"><span class="pre">freq_gaussian_inputs</span></code> use the same keys as the
+Gaussian workflow (e.g. {“functional”: “B3LYP”, “basis_set”: “6-31G(d)”,
+“route_parameters”: {“Opt”: None}}); Gaussian-only keys such as
+“link0_parameters” are accepted but ignored, and basis set names must be
+ones ORCA recognizes.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="mispr.orca.workflows.base.bde.get_bde-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde-parameters" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="mispr.orca.workflows.base.bde.get_bde.mol_operation_type"><span class="sig-name descname">mol_operation_type</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.mol_operation_type" title="Permalink to this definition">¶</a></dt><dd><p>Type of molecule operation; see <code class="docutils literal notranslate"><span class="pre">process_mol</span></code>
+in <code class="docutils literal notranslate"><span class="pre">mispr/gaussian/utilities/mol.py</span></code> for supported operations.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.mol"><span class="sig-name descname">mol</span><span class="p"> : </span><span class="desctype"><span class="desctype">Molecule, GaussianOutput, str, dict</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.mol" title="Permalink to this definition">¶</a></dt><dd><p>Source of the principle
+molecule to be processed; should match <code class="docutils literal notranslate"><span class="pre">mol_operation_type</span></code>.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.ref_charge"><span class="sig-name descname">ref_charge</span><span class="p"> : </span><span class="desctype"><span class="desctype">int, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.ref_charge" title="Permalink to this definition">¶</a></dt><dd><p>Charge on the principle molecule; defaults
+to 0.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.fragment_charges"><span class="sig-name descname">fragment_charges</span><span class="p"> : </span><span class="desctype"><span class="desctype">list, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.fragment_charges" title="Permalink to this definition">¶</a></dt><dd><p>Additional charges to try for each
+fragment, beyond the defaults derived from <code class="docutils literal notranslate"><span class="pre">ref_charge</span></code>; see
+<code class="docutils literal notranslate"><span class="pre">mispr.gaussian.firetasks.geo_transformation.BreakMolecule</span></code> for
+the full charge-enumeration rules. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.bonds"><span class="sig-name descname">bonds</span><span class="p"> : </span><span class="desctype"><span class="desctype">list, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.bonds" title="Permalink to this definition">¶</a></dt><dd><p>List of bonds (as atom index pairs) to break;
+if <code class="docutils literal notranslate"><span class="pre">None</span></code>, every bond found in the molecule is broken in turn.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.open_rings"><span class="sig-name descname">open_rings</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.open_rings" title="Permalink to this definition">¶</a></dt><dd><p>Whether to open rings instead of skipping
+ring bonds that can’t be simply split; defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.db"><span class="sig-name descname">db</span><span class="p"> : </span><span class="desctype"><span class="desctype">str or dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.db" title="Permalink to this definition">¶</a></dt><dd><p>Database credentials; path to db.json or a
+dict; if <code class="docutils literal notranslate"><span class="pre">None</span></code>, read from the configuration files.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.name"><span class="sig-name descname">name</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.name" title="Permalink to this definition">¶</a></dt><dd><p>Name of the workflow; defaults to
+“bde_calculation_orca”.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.working_dir"><span class="sig-name descname">working_dir</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.working_dir" title="Permalink to this definition">¶</a></dt><dd><p>Working directory for input/output files;
+defaults to the current working directory.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.opt_gaussian_inputs"><span class="sig-name descname">opt_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.opt_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Parameters for the optimization
+step; defaults to B3LYP/6-31G(d).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.freq_gaussian_inputs"><span class="sig-name descname">freq_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.freq_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Parameters for the frequency
+step; defaults to B3LYP/6-31G(d).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.skips"><span class="sig-name descname">skips</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool or list, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.skips" title="Permalink to this definition">¶</a></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, skips both “opt” and “freq”
+for the principle molecule; can also be a list like <code class="docutils literal notranslate"><span class="pre">[&quot;opt&quot;]</span></code> to
+skip only specific jobs. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code> (skip nothing).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.visualize"><span class="sig-name descname">visualize</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.visualize" title="Permalink to this definition">¶</a></dt><dd><p>Whether <code class="docutils literal notranslate"><span class="pre">BDEtoDB</span></code> should generate a
+visualization of the computed BDEs; defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.orca_cmd"><span class="sig-name descname">orca_cmd</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.orca_cmd" title="Permalink to this definition">¶</a></dt><dd><p>Path to the ORCA executable; falls back to
+the ORCA_CMD environment variable, then to “orca” on PATH. Must be
+an absolute path when <code class="docutils literal notranslate"><span class="pre">num_cores</span></code> &gt; 1.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.num_cores"><span class="sig-name descname">num_cores</span><span class="p"> : </span><span class="desctype"><span class="desctype">int, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.num_cores" title="Permalink to this definition">¶</a></dt><dd><p>Number of parallel ORCA processes per
+calculation; defaults to 1.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.memory"><span class="sig-name descname">memory</span><span class="p"> : </span><span class="desctype"><span class="desctype">int, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.memory" title="Permalink to this definition">¶</a></dt><dd><p>Memory per core in MB; defaults to 4000.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.bde.get_bde.kwargs"><span class="sig-name descname">kwargs</span><span class="p"> : </span><span class="desctype"><span class="desctype">keyword arguments</span></span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde.kwargs" title="Permalink to this definition">¶</a></dt><dd><p>Additional kwargs passed to
+<code class="docutils literal notranslate"><span class="pre">BreakMolFW</span></code>/<code class="docutils literal notranslate"><span class="pre">BDEtoDB</span></code>/<code class="docutils literal notranslate"><span class="pre">Workflow</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">tag</span></code>).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even" id="mispr.orca.workflows.base.bde.get_bde-returns">Returns<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.bde.get_bde-returns" title="Permalink to this headline">¶</a></dt>
+<dd class="field-even"><p>Workflow</p>
+</dd>
+</dl>
+</dd></dl>
+
+<h2 id="module-mispr.orca.workflows.base.binding_energy"><span id="mispr-orca-workflows-base-binding-energy-module"></span>mispr.orca.workflows.base.binding_energy module<a class="headerlink" href="#module-mispr.orca.workflows.base.binding_energy" title="Permalink to this heading">¶</a></h2>
+<p>Define the binding energy workflow, using ORCA instead of Gaussian.</p>
+<p>Mirrors <code class="docutils literal notranslate"><span class="pre">mispr.gaussian.workflows.base.binding_energy.get_binding_energies</span></code>.</p>
+<ul class="simple">
+<li><p><strong>Fireworks 1-4</strong>: Optimize + frequency for each of the two molecules.</p></li>
+<li><p><strong>Firework 5</strong>: Combine the two optimized molecules at <code class="docutils literal notranslate"><span class="pre">index</span></code> and optimize
+the resulting complex (<code class="docutils literal notranslate"><span class="pre">LinkedMolOrcaFW</span></code> – linking and optimizing must
+happen in the same Firework, since the linked molecule is only passed via
+<code class="docutils literal notranslate"><span class="pre">fw_spec[&quot;prev_calc_molecule&quot;]</span></code>, which does not survive a Firework
+boundary).</p></li>
+<li><p><strong>Firework 6</strong>: Frequency calculation on the optimized complex.</p></li>
+<li><p><strong>Firework 7</strong>: Compute the binding energy and save it (<code class="docutils literal notranslate"><span class="pre">BindingEnergytoDB</span></code>,
+reused unmodified from the Gaussian firetasks – pure energy bookkeeping, not
+tied to any QM engine).</p></li>
+</ul>
+<p>Unlike the psi4 counterpart, no counterpoise (BSSE) correction option is offered
+yet: it needs ghost-atom support in the ORCA input writer (ORCA marks ghost
+atoms with a “:” suffix on the element symbol), which is left as follow-up work.</p>
+<dl class="py function objdesc">
+<dt class="sig sig-object highlight sig-wrap py" id="mispr.orca.workflows.base.binding_energy.get_binding_energies">
+<span class="sig-prename descclassname"><span class="pre">mispr.orca.workflows.base.binding_energy.</span></span><span class="sig-name descname"><span class="pre">get_binding_energies</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.mol_operation_type" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.mol_operation_type (Python parameter) — Two-element list of molecule operation types, one per molecule; see process_mol in mispr/gaussian/utilities/mol.py for supported operations."><span class="n"><span class="pre">mol_operation_type</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.mol" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.mol (Python parameter) — Two-element list with the source of each molecule; each entry should match the corresponding mol_operation_type."><span class="n"><span class="pre">mol</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.index" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.index (Python parameter) — Two-element list of atom indices, one per molecule, at which the two molecules are expected to bind (i.e. the atoms brought into contact when linking them into the complex)."><span class="n"><span class="pre">index</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.bond_order" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.bond_order (Python parameter) — Bond order to assume between the two linked atoms when building the complex; defaults to 1."><span class="n"><span class="pre">bond_order</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.db" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.db (Python parameter) — Database credentials; path to db.json or a dict; if None, read from the configuration files."><span class="n"><span class="pre">db</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.name" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.name (Python parameter) — Name of the workflow; defaults to &quot;binding_energy_calculation&quot;."><span class="n"><span class="pre">name</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;binding_energy_calculation&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.working_dir" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.working_dir (Python parameter) — Working directory for input/output files; defaults to the current working directory."><span class="n"><span class="pre">working_dir</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.opt_gaussian_inputs" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.opt_gaussian_inputs (Python parameter) — Parameters for the optimization steps; defaults to B3LYP/6-31G(d)."><span class="n"><span class="pre">opt_gaussian_inputs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.freq_gaussian_inputs" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.freq_gaussian_inputs (Python parameter) — Parameters for the frequency steps; defaults to B3LYP/6-31G(d)."><span class="n"><span class="pre">freq_gaussian_inputs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.solvent_gaussian_inputs" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.solvent_gaussian_inputs (Python parameter) — Gaussian-style implicit solvent string (e.g. &quot;(Solvent=Water)&quot;); translated internally into ORCA's CPCM option, and also recorded as-is in the final db document for consistency with the Gaussian workflow's metadata."><span class="n"><span class="pre">solvent_gaussian_inputs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.solvent_properties" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.solvent_properties (Python parameter) — Additional solvent properties recorded in the final db document (e.g. {&quot;EPS&quot;: 12})."><span class="n"><span class="pre">solvent_properties</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.cart_coords" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.cart_coords (Python parameter) — Accepted for interface parity; the ORCA backend only supports cartesian-coordinate inputs (True)."><span class="n"><span class="pre">cart_coords</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.oxidation_states" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.oxidation_states (Python parameter) — Oxidation states used to derive molecule charges (e.g. {&quot;Li&quot;: 1, &quot;O&quot;: -2})."><span class="n"><span class="pre">oxidation_states</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.skips" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.skips (Python parameter) — Two-element list of jobs to skip per molecule (e.g. [[&quot;opt&quot;], None]); defaults to [None, None] (skip nothing)."><span class="n"><span class="pre">skips</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.orca_cmd" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.orca_cmd (Python parameter) — Path to the ORCA executable; falls back to the ORCA_CMD environment variable, then to &quot;orca&quot; on PATH. Must be an absolute path when num_cores &gt; 1."><span class="n"><span class="pre">orca_cmd</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.num_cores" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.num_cores (Python parameter) — Number of parallel ORCA processes per calculation; defaults to 1."><span class="n"><span class="pre">num_cores</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.memory" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.memory (Python parameter) — Memory per core in MB; defaults to 4000."><span class="n"><span class="pre">memory</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="o"><span class="pre">**</span></span><a class="n reference internal" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.kwargs" title="mispr.orca.workflows.base.binding_energy.get_binding_energies.kwargs (Python parameter) — Additional kwargs passed to BindingEnergytoDB/Workflow (e.g. tag)."><span class="n"><span class="pre">kwargs</span></span></a></em></span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mispr/orca/workflows/base/binding_energy.html#get_binding_energies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a workflow for calculating the binding energy between two molecules
+using ORCA: optimize + frequency each of the two molecules separately, link
+them together at the given atom indices and optimize the resulting complex,
+run its frequency, then compute the binding energy. Mirrors
+<code class="docutils literal notranslate"><span class="pre">mispr.gaussian.workflows.base.binding_energy.get_binding_energies</span></code>, which
+has the same overall structure and arguments.</p>
+<p><code class="docutils literal notranslate"><span class="pre">opt_gaussian_inputs</span></code>/<code class="docutils literal notranslate"><span class="pre">freq_gaussian_inputs</span></code> use the same keys as the
+Gaussian workflow (e.g. {“functional”: “B3LYP”, “basis_set”: “6-31G(d)”,
+“route_parameters”: {“Opt”: None}}); Gaussian-only keys are accepted but
+ignored, and basis set names must be ones ORCA recognizes.
+<code class="docutils literal notranslate"><span class="pre">solvent_gaussian_inputs</span></code>/<code class="docutils literal notranslate"><span class="pre">solvent_properties</span></code> keep their Gaussian-style
+format for <code class="docutils literal notranslate"><span class="pre">BindingEnergytoDB</span></code>’s db metadata bookkeeping; they are
+translated internally into the CPCM option RunOrca expects to actually
+drive the implicit-solvent calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="mispr.orca.workflows.base.binding_energy.get_binding_energies-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies-parameters" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.mol_operation_type"><span class="sig-name descname">mol_operation_type</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.mol_operation_type" title="Permalink to this definition">¶</a></dt><dd><p>Two-element list of molecule operation
+types, one per molecule; see <code class="docutils literal notranslate"><span class="pre">process_mol</span></code> in
+<code class="docutils literal notranslate"><span class="pre">mispr/gaussian/utilities/mol.py</span></code> for supported operations.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.mol"><span class="sig-name descname">mol</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.mol" title="Permalink to this definition">¶</a></dt><dd><p>Two-element list with the source of each molecule; each
+entry should match the corresponding <code class="docutils literal notranslate"><span class="pre">mol_operation_type</span></code>.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.index"><span class="sig-name descname">index</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.index" title="Permalink to this definition">¶</a></dt><dd><p>Two-element list of atom indices, one per molecule, at
+which the two molecules are expected to bind (i.e. the atoms
+brought into contact when linking them into the complex).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.bond_order"><span class="sig-name descname">bond_order</span><span class="p"> : </span><span class="desctype"><span class="desctype">int, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.bond_order" title="Permalink to this definition">¶</a></dt><dd><p>Bond order to assume between the two
+linked atoms when building the complex; defaults to 1.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.db"><span class="sig-name descname">db</span><span class="p"> : </span><span class="desctype"><span class="desctype">str or dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.db" title="Permalink to this definition">¶</a></dt><dd><p>Database credentials; path to db.json or a
+dict; if <code class="docutils literal notranslate"><span class="pre">None</span></code>, read from the configuration files.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.name"><span class="sig-name descname">name</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.name" title="Permalink to this definition">¶</a></dt><dd><p>Name of the workflow; defaults to
+“binding_energy_calculation”.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.working_dir"><span class="sig-name descname">working_dir</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.working_dir" title="Permalink to this definition">¶</a></dt><dd><p>Working directory for input/output files;
+defaults to the current working directory.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.opt_gaussian_inputs"><span class="sig-name descname">opt_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.opt_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Parameters for the optimization
+steps; defaults to B3LYP/6-31G(d).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.freq_gaussian_inputs"><span class="sig-name descname">freq_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.freq_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Parameters for the frequency
+steps; defaults to B3LYP/6-31G(d).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.solvent_gaussian_inputs"><span class="sig-name descname">solvent_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.solvent_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Gaussian-style implicit
+solvent string (e.g. “(Solvent=Water)”); translated internally into
+ORCA’s CPCM option, and also recorded as-is in the final db
+document for consistency with the Gaussian workflow’s metadata.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.solvent_properties"><span class="sig-name descname">solvent_properties</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.solvent_properties" title="Permalink to this definition">¶</a></dt><dd><p>Additional solvent properties
+recorded in the final db document (e.g. {“EPS”: 12}).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.cart_coords"><span class="sig-name descname">cart_coords</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.cart_coords" title="Permalink to this definition">¶</a></dt><dd><p>Accepted for interface parity; the ORCA
+backend only supports cartesian-coordinate inputs (<code class="docutils literal notranslate"><span class="pre">True</span></code>).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.oxidation_states"><span class="sig-name descname">oxidation_states</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.oxidation_states" title="Permalink to this definition">¶</a></dt><dd><p>Oxidation states used to derive
+molecule charges (e.g. {“Li”: 1, “O”: -2}).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.skips"><span class="sig-name descname">skips</span><span class="p"> : </span><span class="desctype"><span class="desctype">list, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.skips" title="Permalink to this definition">¶</a></dt><dd><p>Two-element list of jobs to skip per molecule
+(e.g. <code class="docutils literal notranslate"><span class="pre">[[&quot;opt&quot;],</span> <span class="pre">None]</span></code>); defaults to <code class="docutils literal notranslate"><span class="pre">[None,</span> <span class="pre">None]</span></code> (skip
+nothing).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.orca_cmd"><span class="sig-name descname">orca_cmd</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.orca_cmd" title="Permalink to this definition">¶</a></dt><dd><p>Path to the ORCA executable; falls back to
+the ORCA_CMD environment variable, then to “orca” on PATH. Must be
+an absolute path when <code class="docutils literal notranslate"><span class="pre">num_cores</span></code> &gt; 1.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.num_cores"><span class="sig-name descname">num_cores</span><span class="p"> : </span><span class="desctype"><span class="desctype">int, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.num_cores" title="Permalink to this definition">¶</a></dt><dd><p>Number of parallel ORCA processes per
+calculation; defaults to 1.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.memory"><span class="sig-name descname">memory</span><span class="p"> : </span><span class="desctype"><span class="desctype">int, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.memory" title="Permalink to this definition">¶</a></dt><dd><p>Memory per core in MB; defaults to 4000.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.binding_energy.get_binding_energies.kwargs"><span class="sig-name descname">kwargs</span><span class="p"> : </span><span class="desctype"><span class="desctype">keyword arguments</span></span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies.kwargs" title="Permalink to this definition">¶</a></dt><dd><p>Additional kwargs passed to
+<code class="docutils literal notranslate"><span class="pre">BindingEnergytoDB</span></code>/<code class="docutils literal notranslate"><span class="pre">Workflow</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">tag</span></code>).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even" id="mispr.orca.workflows.base.binding_energy.get_binding_energies-returns">Returns<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.binding_energy.get_binding_energies-returns" title="Permalink to this headline">¶</a></dt>
+<dd class="field-even"><p>Workflow</p>
+</dd>
+</dl>
+</dd></dl>
+
+<h2 id="module-mispr.orca.workflows.base.core"><span id="mispr-orca-workflows-base-core-module"></span>mispr.orca.workflows.base.core module<a class="headerlink" href="#module-mispr.orca.workflows.base.core" title="Permalink to this heading">¶</a></h2>
+<p>Define a list of common Fireworks used in ORCA workflows.</p>
+<dl class="py function objdesc">
+<dt class="sig sig-object highlight sig-wrap py" id="mispr.orca.workflows.base.core.common_fw">
+<span class="sig-prename descclassname"><span class="pre">mispr.orca.workflows.base.core.</span></span><span class="sig-name descname"><span class="pre">common_fw</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.mol" title="mispr.orca.workflows.base.core.common_fw.mol (Python parameter) — pymatgen Molecule to run the calculations on."><span class="n"><span class="pre">mol</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.working_dir" title="mispr.orca.workflows.base.core.common_fw.working_dir (Python parameter) — Path of the working directory."><span class="n"><span class="pre">working_dir</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.opt_gaussian_inputs" title="mispr.orca.workflows.base.core.common_fw.opt_gaussian_inputs (Python parameter) — Parameters for the optimization step (see mispr.orca.fireworks.core.OrcaFW)."><span class="n"><span class="pre">opt_gaussian_inputs</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.freq_gaussian_inputs" title="mispr.orca.workflows.base.core.common_fw.freq_gaussian_inputs (Python parameter) — Parameters for the frequency step."><span class="n"><span class="pre">freq_gaussian_inputs</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.gout_key" title="mispr.orca.workflows.base.core.common_fw.gout_key (Python parameter) — Unique key for the run dict; defaults to &quot;mol&quot;."><span class="n"><span class="pre">gout_key</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.db" title="mispr.orca.workflows.base.core.common_fw.db (Python parameter) — Database credentials."><span class="n"><span class="pre">db</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.mol_name" title="mispr.orca.workflows.base.core.common_fw.mol_name (Python parameter) — Name of the molecule, used for labeling."><span class="n"><span class="pre">mol_name</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.dir_head" title="mispr.orca.workflows.base.core.common_fw.dir_head (Python parameter) — Head of the directory where the workflow will run; defaults to mol_name."><span class="n"><span class="pre">dir_head</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.dir_structure" title="mispr.orca.workflows.base.core.common_fw.dir_structure (Python parameter) — Additional subfolders appended under dir_head."><span class="n"><span class="pre">dir_structure</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.skips" title="mispr.orca.workflows.base.core.common_fw.skips (Python parameter) — List of jobs to skip; e.g. [&quot;opt&quot;] or [&quot;freq&quot;]."><span class="n"><span class="pre">skips</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.tag" title="mispr.orca.workflows.base.core.common_fw.tag (Python parameter) — Tag stored in the db documents."><span class="n"><span class="pre">tag</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;unknown&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">cart_coords</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">oxidation_states</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">solvent</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="o"><span class="pre">**</span></span><a class="n reference internal" href="#mispr.orca.workflows.base.core.common_fw.kwargs" title="mispr.orca.workflows.base.core.common_fw.kwargs (Python parameter) — Additional kwargs passed through to OrcaFW (e.g. orca_cmd, num_cores); unrecognized ones are ignored (accepted for interface parity with the Gaussian common_fw)."><span class="n"><span class="pre">kwargs</span></span></a></em></span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mispr/orca/workflows/base/core.html#common_fw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a list of Fireworks commonly used in ORCA workflows: optimize a
+molecule, then run a frequency analysis on the optimized structure. Mirrors
+<code class="docutils literal notranslate"><span class="pre">mispr.psi4.workflows.base.core.common_fw</span></code> (and through it the Gaussian
+original), swapping the engine Firework for <code class="docutils literal notranslate"><span class="pre">OrcaFW</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="mispr.orca.workflows.base.core.common_fw-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw-parameters" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="mispr.orca.workflows.base.core.common_fw.mol"><span class="sig-name descname">mol</span><span class="p"> : </span><span class="desctype"><span class="desctype">Molecule</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.mol" title="Permalink to this definition">¶</a></dt><dd><p>pymatgen Molecule to run the calculations on.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.working_dir"><span class="sig-name descname">working_dir</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.working_dir" title="Permalink to this definition">¶</a></dt><dd><p>Path of the working directory.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.opt_gaussian_inputs"><span class="sig-name descname">opt_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.opt_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Parameters for the optimization step (see
+<code class="docutils literal notranslate"><span class="pre">mispr.orca.fireworks.core.OrcaFW</span></code>).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.freq_gaussian_inputs"><span class="sig-name descname">freq_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.freq_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Parameters for the frequency step.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.gout_key"><span class="sig-name descname">gout_key</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.gout_key" title="Permalink to this definition">¶</a></dt><dd><p>Unique key for the run dict; defaults to
+“mol”.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.db"><span class="sig-name descname">db</span><span class="p"> : </span><span class="desctype"><span class="desctype">str or dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.db" title="Permalink to this definition">¶</a></dt><dd><p>Database credentials.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.mol_name"><span class="sig-name descname">mol_name</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.mol_name" title="Permalink to this definition">¶</a></dt><dd><p>Name of the molecule, used for labeling.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.dir_head"><span class="sig-name descname">dir_head</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.dir_head" title="Permalink to this definition">¶</a></dt><dd><p>Head of the directory where the workflow will
+run; defaults to <code class="docutils literal notranslate"><span class="pre">mol_name</span></code>.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.dir_structure"><span class="sig-name descname">dir_structure</span><span class="p"> : </span><span class="desctype"><span class="desctype">list, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.dir_structure" title="Permalink to this definition">¶</a></dt><dd><p>Additional subfolders appended under
+<code class="docutils literal notranslate"><span class="pre">dir_head</span></code>.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.skips"><span class="sig-name descname">skips</span><span class="p"> : </span><span class="desctype"><span class="desctype">list, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.skips" title="Permalink to this definition">¶</a></dt><dd><p>List of jobs to skip; e.g. [“opt”] or [“freq”].</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.tag"><span class="sig-name descname">tag</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.tag" title="Permalink to this definition">¶</a></dt><dd><p>Tag stored in the db documents.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.core.common_fw.kwargs"><span class="o">**</span><span class="n sig-name">kwargs</span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw.kwargs" title="Permalink to this definition">¶</a></dt><dd><p>Additional kwargs passed through to <code class="docutils literal notranslate"><span class="pre">OrcaFW</span></code> (e.g.
+<code class="docutils literal notranslate"><span class="pre">orca_cmd</span></code>, <code class="docutils literal notranslate"><span class="pre">num_cores</span></code>); unrecognized ones are ignored
+(accepted for interface parity with the Gaussian <code class="docutils literal notranslate"><span class="pre">common_fw</span></code>).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even" id="mispr.orca.workflows.base.core.common_fw-returns">Returns<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw-returns" title="Permalink to this headline">¶</a></dt>
+<dd class="field-even"><p>The input molecule, a label, and a list of
+Fireworks.</p>
+</dd>
+<dt class="field-odd" id="mispr.orca.workflows.base.core.common_fw-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.core.common_fw-return-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>Molecule, str, list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<h2 id="module-mispr.orca.workflows.base.esp"><span id="mispr-orca-workflows-base-esp-module"></span>mispr.orca.workflows.base.esp module<a class="headerlink" href="#module-mispr.orca.workflows.base.esp" title="Permalink to this heading">¶</a></h2>
+<p>Define the electrostatic partial charge (ESP/CHELPG) workflow, using ORCA
+instead of Gaussian.</p>
+<p>Mirrors <code class="docutils literal notranslate"><span class="pre">mispr.gaussian.workflows.base.esp.get_esp_charges</span></code> (and the psi4
+counterpart): optimize + frequency the molecule, run a CHELPG ESP single-point
+on the optimized geometry, then save the result.</p>
+<dl class="py function objdesc">
+<dt class="sig sig-object highlight sig-wrap py" id="mispr.orca.workflows.base.esp.get_esp_charges">
+<span class="sig-prename descclassname"><span class="pre">mispr.orca.workflows.base.esp.</span></span><span class="sig-name descname"><span class="pre">get_esp_charges</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.mol_operation_type" title="mispr.orca.workflows.base.esp.get_esp_charges.mol_operation_type (Python parameter) — The type of molecule operation. See process_mol defined in mispr/gaussian/utilities/mol.py for supported operations."><span class="n"><span class="pre">mol_operation_type</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.mol" title="mispr.orca.workflows.base.esp.get_esp_charges.mol (Python parameter) — Source of the molecule to be processed. Should match the mol_operation_type."><span class="n"><span class="pre">mol</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.db" title="mispr.orca.workflows.base.esp.get_esp_charges.db (Python parameter) — Database credentials; could be provided as the path to the &quot;db.json&quot; file or in the form of a dictionary; if none is provided, attempts to get it from the configuration files."><span class="n"><span class="pre">db</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.name" title="mispr.orca.workflows.base.esp.get_esp_charges.name (Python parameter) — Name of the workflow. Defaults to &quot;esp_charges_calculation&quot;."><span class="n"><span class="pre">name</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;esp_charges_calculation&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.working_dir" title="mispr.orca.workflows.base.esp.get_esp_charges.working_dir (Python parameter) — Path of the working directory where any required input files can be found and output will be created. Defaults to the current working directory."><span class="n"><span class="pre">working_dir</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.opt_gaussian_inputs" title="mispr.orca.workflows.base.esp.get_esp_charges.opt_gaussian_inputs (Python parameter) — Input parameters for the optimization step, in the shared Gaussian-style format (see mispr.orca.fireworks.core.OrcaFW); basis set names must be ones ORCA recognizes. Defaults to B3LYP/6-31G(d)."><span class="n"><span class="pre">opt_gaussian_inputs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.freq_gaussian_inputs" title="mispr.orca.workflows.base.esp.get_esp_charges.freq_gaussian_inputs (Python parameter) — Input parameters for the frequency step; default parameters will be used if not specified."><span class="n"><span class="pre">freq_gaussian_inputs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.esp_gaussian_inputs" title="mispr.orca.workflows.base.esp.get_esp_charges.esp_gaussian_inputs (Python parameter) — Input parameters for the ESP step; recognized keys are &quot;functional&quot; (used as method_esp) and &quot;basis_set&quot; (used as basis_esp). Defaults to HF/6-31G*."><span class="n"><span class="pre">esp_gaussian_inputs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.solvent_gaussian_inputs" title="mispr.orca.workflows.base.esp.get_esp_charges.solvent_gaussian_inputs (Python parameter) — Accepted for interface parity with the Gaussian workflow; currently unused by the ORCA backend (pass a solvent dict through kwargs instead to request CPCM)."><span class="n"><span class="pre">solvent_gaussian_inputs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.solvent_properties" title="mispr.orca.workflows.base.esp.get_esp_charges.solvent_properties (Python parameter) — Accepted for interface parity; currently unused by the ORCA backend."><span class="n"><span class="pre">solvent_properties</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.cart_coords" title="mispr.orca.workflows.base.esp.get_esp_charges.cart_coords (Python parameter) — Accepted for interface parity; the ORCA backend only supports cartesian-coordinate inputs (True)."><span class="n"><span class="pre">cart_coords</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.oxidation_states" title="mispr.orca.workflows.base.esp.get_esp_charges.oxidation_states (Python parameter) — Dictionary of oxidation states used in setting the charge and spin multiplicity of the molecule; e.g.: {&quot;Li&quot;: 1, &quot;O&quot;: -2}. Defaults to None."><span class="n"><span class="pre">oxidation_states</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.skips" title="mispr.orca.workflows.base.esp.get_esp_charges.skips (Python parameter) — List of jobs to skip; e.g.: [&quot;opt&quot;, &quot;freq&quot;]; defaults to None."><span class="n"><span class="pre">skips</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.orca_cmd" title="mispr.orca.workflows.base.esp.get_esp_charges.orca_cmd (Python parameter) — Path to the ORCA executable; falls back to the ORCA_CMD environment variable, then to &quot;orca&quot; on PATH. Must be an absolute path when num_cores &gt; 1."><span class="n"><span class="pre">orca_cmd</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.num_cores" title="mispr.orca.workflows.base.esp.get_esp_charges.num_cores (Python parameter) — Number of parallel ORCA processes; defaults to 1."><span class="n"><span class="pre">num_cores</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.memory" title="mispr.orca.workflows.base.esp.get_esp_charges.memory (Python parameter) — Memory per core in MB; defaults to 4000."><span class="n"><span class="pre">memory</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="o"><span class="pre">**</span></span><a class="n reference internal" href="#mispr.orca.workflows.base.esp.get_esp_charges.kwargs" title="mispr.orca.workflows.base.esp.get_esp_charges.kwargs (Python parameter) — Additional kwargs to be passed to the workflow."><span class="n"><span class="pre">kwargs</span></span></a></em></span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mispr/orca/workflows/base/esp.html#get_esp_charges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a workflow for calculating the electrostatic partial charges with
+ORCA.</p>
+<ul class="simple">
+<li><p><strong>Firework 1</strong>: Optimize the molecule.</p></li>
+<li><p><strong>Firework 2</strong>: Run a frequency analysis.</p></li>
+<li><p><strong>Firework 3</strong>: Run a CHELPG ESP calculation.</p></li>
+<li><p><strong>Firework 4</strong>: Create ESP document/json file.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd" id="mispr.orca.workflows.base.esp.get_esp_charges-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges-parameters" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.mol_operation_type"><span class="sig-name descname">mol_operation_type</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.mol_operation_type" title="Permalink to this definition">¶</a></dt><dd><p>The type of molecule operation. See
+<code class="docutils literal notranslate"><span class="pre">process_mol</span></code> defined in <code class="docutils literal notranslate"><span class="pre">mispr/gaussian/utilities/mol.py</span></code> for
+supported operations.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.mol"><span class="sig-name descname">mol</span><span class="p"> : </span><span class="desctype"><span class="desctype">Molecule, GaussianOutput, str, dict</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.mol" title="Permalink to this definition">¶</a></dt><dd><p>Source of the molecule to be
+processed. Should match the <code class="docutils literal notranslate"><span class="pre">mol_operation_type</span></code>.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.db"><span class="sig-name descname">db</span><span class="p"> : </span><span class="desctype"><span class="desctype">str or dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.db" title="Permalink to this definition">¶</a></dt><dd><p>Database credentials; could be provided as
+the path to the “db.json” file or in the form of a dictionary; if
+none is provided, attempts to get it from the configuration files.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.name"><span class="sig-name descname">name</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.name" title="Permalink to this definition">¶</a></dt><dd><p>Name of the workflow. Defaults to
+“esp_charges_calculation”.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.working_dir"><span class="sig-name descname">working_dir</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.working_dir" title="Permalink to this definition">¶</a></dt><dd><p>Path of the working directory where any
+required input files can be found and output will be created.
+Defaults to the current working directory.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.opt_gaussian_inputs"><span class="sig-name descname">opt_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.opt_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Input parameters for the
+optimization step, in the shared Gaussian-style format (see
+<code class="docutils literal notranslate"><span class="pre">mispr.orca.fireworks.core.OrcaFW</span></code>); basis set names must be ones
+ORCA recognizes. Defaults to B3LYP/6-31G(d).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.freq_gaussian_inputs"><span class="sig-name descname">freq_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.freq_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Input parameters for the
+frequency step; default parameters will be used if not specified.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.esp_gaussian_inputs"><span class="sig-name descname">esp_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.esp_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Input parameters for the ESP step;
+recognized keys are “functional” (used as <code class="docutils literal notranslate"><span class="pre">method_esp</span></code>) and
+“basis_set” (used as <code class="docutils literal notranslate"><span class="pre">basis_esp</span></code>). Defaults to HF/6-31G*.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.solvent_gaussian_inputs"><span class="sig-name descname">solvent_gaussian_inputs</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.solvent_gaussian_inputs" title="Permalink to this definition">¶</a></dt><dd><p>Accepted for interface parity
+with the Gaussian workflow; currently unused by the ORCA backend
+(pass a <code class="docutils literal notranslate"><span class="pre">solvent</span></code> dict through <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> instead to request
+CPCM).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.solvent_properties"><span class="sig-name descname">solvent_properties</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.solvent_properties" title="Permalink to this definition">¶</a></dt><dd><p>Accepted for interface parity;
+currently unused by the ORCA backend.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.cart_coords"><span class="sig-name descname">cart_coords</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.cart_coords" title="Permalink to this definition">¶</a></dt><dd><p>Accepted for interface parity; the ORCA
+backend only supports cartesian-coordinate inputs (<code class="docutils literal notranslate"><span class="pre">True</span></code>).</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.oxidation_states"><span class="sig-name descname">oxidation_states</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.oxidation_states" title="Permalink to this definition">¶</a></dt><dd><p>Dictionary of oxidation states used
+in setting the charge and spin multiplicity of the molecule; e.g.:
+{“Li”: 1, “O”: -2}. Defaults to None.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.skips"><span class="sig-name descname">skips</span><span class="p"> : </span><span class="desctype"><span class="desctype">list, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.skips" title="Permalink to this definition">¶</a></dt><dd><p>List of jobs to skip; e.g.: [“opt”, “freq”];
+defaults to None.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.orca_cmd"><span class="sig-name descname">orca_cmd</span><span class="p"> : </span><span class="desctype"><span class="desctype">str, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.orca_cmd" title="Permalink to this definition">¶</a></dt><dd><p>Path to the ORCA executable; falls back to
+the ORCA_CMD environment variable, then to “orca” on PATH. Must be
+an absolute path when <code class="docutils literal notranslate"><span class="pre">num_cores</span></code> &gt; 1.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.num_cores"><span class="sig-name descname">num_cores</span><span class="p"> : </span><span class="desctype"><span class="desctype">int, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.num_cores" title="Permalink to this definition">¶</a></dt><dd><p>Number of parallel ORCA processes; defaults
+to 1.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.memory"><span class="sig-name descname">memory</span><span class="p"> : </span><span class="desctype"><span class="desctype">int, optional</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.memory" title="Permalink to this definition">¶</a></dt><dd><p>Memory per core in MB; defaults to 4000.</p>
+</dd>
+<dt id="mispr.orca.workflows.base.esp.get_esp_charges.kwargs"><span class="sig-name descname">kwargs</span><span class="p"> : </span><span class="desctype"><span class="desctype">keyword arguments</span></span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges.kwargs" title="Permalink to this definition">¶</a></dt><dd><p>Additional kwargs to be passed to the
+workflow.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even" id="mispr.orca.workflows.base.esp.get_esp_charges-returns">Returns<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges-returns" title="Permalink to this headline">¶</a></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Workflow</p></li>
+<li><p>str: Label of the molecule (e.g. “H2O”, “water”, etc.).</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd" id="mispr.orca.workflows.base.esp.get_esp_charges-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#mispr.orca.workflows.base.esp.get_esp_charges-return-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<h2 id="module-mispr.orca.workflows.base"><span id="module-contents"></span>Module contents<a class="headerlink" href="#module-mispr.orca.workflows.base" title="Permalink to this heading">¶</a></h2>
+<p>Base ORCA workflows (opt/freq building blocks and property workflows).</p>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="mispr.orca.workflows.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: mispr.orca.workflows package" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              mispr.orca.workflows package
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="mispr.psi4.html" class="md-footer__link md-footer__link--next" aria-label="Next: mispr.psi4 package" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              mispr.psi4 package
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2022, MolMD Group.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    5.1.1.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://github.com/molmd/mispr" target="_blank" rel="noopener" title="Source on github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/molmd_group" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.annotate", "navigation.expand", "navigation.sections"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js"></script>
+        <script src="_static/design-tabs.js"></script>
+        <script src="_static/js/rtd_search_config.js"></script>
+        <script src="_static/js/rtd_sphinx_search.min.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    
+  </body>
+</html>

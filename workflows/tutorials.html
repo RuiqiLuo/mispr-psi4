@@ -1,0 +1,1704 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>Workflow Tutorials - Materials informatics for structure-property relationships</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.30b2b08b91b832a08.min.css" />
+        <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+        <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+        <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+        <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+        <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+        <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#using-the-psi4-backend" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Materials informatics for structure-property relationships" class="md-header__button md-logo" aria-label="Materials informatics for structure-property relationships" data-md-component="logo">
+      <img src="../_static/logo.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Materials informatics for structure-property relationships
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Workflow Tutorials
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Materials informatics for structure-property relationships" class="md-nav__button md-logo" aria-label="Materials informatics for structure-property relationships" data-md-component="logo">
+      <img src="../_static/logo.png" alt="logo">
+    </a>
+    Materials informatics for structure-property relationships
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview.html" class="md-nav__link">
+        <span class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keywords.html" class="md-nav__link">
+        <span class="md-ellipsis">Keywords</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">Installation 🔧</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Installation 🔧" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Installation 🔧</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/index.html" class="md-nav__link">
+        <span class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/dependencies.html" class="md-nav__link">
+        <span class="md-ellipsis">Prerequisites</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/configuration.html" class="md-nav__link">
+        <span class="md-ellipsis">Configuration Files</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/test.html" class="md-nav__link">
+        <span class="md-ellipsis">Running a Test Workflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Workflows 🔀</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Workflows 🔀" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Workflows 🔀</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="basics.html" class="md-nav__link">
+        <span class="md-ellipsis">Workflow Basics</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="supported.html" class="md-nav__link">
+        <span class="md-ellipsis">Supported Workflows</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span class="md-ellipsis">Workflow Tutorials</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span class="md-ellipsis">Workflow Tutorials</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-psi4-backend" class="md-nav__link">
+    <span title="workflows/tutorials:using the psi4 backend (reference label)" class="md-ellipsis">Using the Psi4 backend</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-orca-backend" class="md-nav__link">
+    <span title="workflows/tutorials:using the orca backend (reference label)" class="md-ellipsis">Using the ORCA backend</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using the ORCA backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-set-up-the-environment" class="md-nav__link">
+    <span title="workflows/tutorials:step 1: set up the environment (reference label)" class="md-ellipsis">Step 1:<wbr> Set up the environment</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-install-orca" class="md-nav__link">
+    <span title="workflows/tutorials:step 2: install orca (reference label)" class="md-ellipsis">Step 2:<wbr> Install ORCA</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-run-a-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:step 3: run a workflow (reference label)" class="md-ellipsis">Step 3:<wbr> Run a workflow</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-find-and-read-the-results" class="md-nav__link">
+    <span title="workflows/tutorials:step 4: find and read the results (reference label)" class="md-ellipsis">Step 4:<wbr> Find and read the results</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Find and read the results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-an-annotated-esp-document" class="md-nav__link">
+    <span title="workflows/tutorials:example: an annotated ``esp`` document (reference label)" class="md-ellipsis">Example:<wbr> an annotated esp document</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-an-annotated-bde-document" class="md-nav__link">
+    <span title="workflows/tutorials:example: an annotated ``bde`` document (reference label)" class="md-ellipsis">Example:<wbr> an annotated bde document</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-an-esp-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:running an esp workflow (reference label)" class="md-ellipsis">Running an ESP workflow</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-a-bde-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:running a bde workflow (reference label)" class="md-ellipsis">Running a BDE workflow</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-an-md-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:running an md workflow (reference label)" class="md-ellipsis">Running an MD workflow</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-a-hybrid-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:running a hybrid workflow (reference label)" class="md-ellipsis">Running a hybrid workflow</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="custom.html" class="md-nav__link">
+        <span class="md-ellipsis">Creating Custom Workflows</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          <span class="md-ellipsis">Resources 🖇️</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Resources 🖇️" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Resources 🖇️</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/faq.html" class="md-nav__link">
+        <span class="md-ellipsis">FAQ</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/resources.html" class="md-nav__link">
+        <span class="md-ellipsis">Helpful Links</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          <span class="md-ellipsis">Code Documentation 📚</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code Documentation 📚" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Code Documentation 📚</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mispr.html" class="md-nav__link">
+        <span class="md-ellipsis">mispr</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          <span class="md-ellipsis">Development 💻</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Development 💻" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Development 💻</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog.html" class="md-nav__link">
+        <span class="md-ellipsis">Changelog</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../citing.html" class="md-nav__link">
+        <span class="md-ellipsis">Citing MISPR</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license.html" class="md-nav__link">
+        <span class="md-ellipsis">License</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-psi4-backend" class="md-nav__link">
+    <span title="workflows/tutorials:using the psi4 backend (reference label)" class="md-ellipsis">Using the Psi4 backend</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-orca-backend" class="md-nav__link">
+    <span title="workflows/tutorials:using the orca backend (reference label)" class="md-ellipsis">Using the ORCA backend</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using the ORCA backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-set-up-the-environment" class="md-nav__link">
+    <span title="workflows/tutorials:step 1: set up the environment (reference label)" class="md-ellipsis">Step 1:<wbr> Set up the environment</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-install-orca" class="md-nav__link">
+    <span title="workflows/tutorials:step 2: install orca (reference label)" class="md-ellipsis">Step 2:<wbr> Install ORCA</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-run-a-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:step 3: run a workflow (reference label)" class="md-ellipsis">Step 3:<wbr> Run a workflow</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-find-and-read-the-results" class="md-nav__link">
+    <span title="workflows/tutorials:step 4: find and read the results (reference label)" class="md-ellipsis">Step 4:<wbr> Find and read the results</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Find and read the results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-an-annotated-esp-document" class="md-nav__link">
+    <span title="workflows/tutorials:example: an annotated ``esp`` document (reference label)" class="md-ellipsis">Example:<wbr> an annotated esp document</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-an-annotated-bde-document" class="md-nav__link">
+    <span title="workflows/tutorials:example: an annotated ``bde`` document (reference label)" class="md-ellipsis">Example:<wbr> an annotated bde document</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-an-esp-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:running an esp workflow (reference label)" class="md-ellipsis">Running an ESP workflow</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-a-bde-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:running a bde workflow (reference label)" class="md-ellipsis">Running a BDE workflow</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-an-md-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:running an md workflow (reference label)" class="md-ellipsis">Running an MD workflow</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-a-hybrid-workflow" class="md-nav__link">
+    <span title="workflows/tutorials:running a hybrid workflow (reference label)" class="md-ellipsis">Running a hybrid workflow</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1 id="workflow-tutorials">Workflow Tutorials<a class="headerlink" href="#workflow-tutorials" title="Permalink to this heading">¶</a></h1>
+<p>This page is under construction.</p>
+<h2 id="using-the-psi4-backend">Using the Psi4 backend<a class="headerlink" href="#using-the-psi4-backend" title="Permalink to this heading">¶</a></h2>
+<p>As of version 0.0.5, the <code class="docutils literal notranslate"><span class="pre">bde</span></code>, <code class="docutils literal notranslate"><span class="pre">binding_energy</span></code>, and <code class="docutils literal notranslate"><span class="pre">esp</span></code> workflows
+are also available with a <a class="reference external" href="https://psicode.org">Psi4</a> backend
+(<code class="docutils literal notranslate"><span class="pre">mispr.psi4.workflows.base</span></code>), as a free/open-source alternative to
+Gaussian. The workflow functions have the same names and (mostly) the same
+arguments as their Gaussian counterparts – only the import path changes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="kn">import</span> <span class="n">Molecule</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="kn">import</span> <span class="n">LaunchPad</span>
+<span class="kn">from</span> <span class="nn">fireworks.core.rocket_launcher</span> <span class="kn">import</span> <span class="n">rapidfire</span>
+<span class="kn">from</span> <span class="nn">mispr.psi4.workflows.base.esp</span> <span class="kn">import</span> <span class="n">get_esp_charges</span>
+
+<span class="c1"># FW_CONFIG_FILE must be set before importing fireworks/mispr, since</span>
+<span class="c1"># fireworks reads it once, at import time</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FW_CONFIG_FILE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/path/to/config/FW_config.yaml&quot;</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.117300</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.757200</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.469200</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.000000</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.757200</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.469200</span><span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">wf</span> <span class="o">=</span> <span class="n">get_esp_charges</span><span class="p">(</span>
+    <span class="n">mol_operation_type</span><span class="o">=</span><span class="s2">&quot;get_from_mol&quot;</span><span class="p">,</span>
+    <span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+    <span class="n">working_dir</span><span class="o">=</span><span class="s2">&quot;/path/to/run_output&quot;</span><span class="p">,</span>
+    <span class="n">opt_gaussian_inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;functional&quot;</span><span class="p">:</span> <span class="s2">&quot;hf&quot;</span><span class="p">,</span> <span class="s2">&quot;basis_set&quot;</span><span class="p">:</span> <span class="s2">&quot;sto-3g&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;route_parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Opt&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="n">freq_gaussian_inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;functional&quot;</span><span class="p">:</span> <span class="s2">&quot;hf&quot;</span><span class="p">,</span> <span class="s2">&quot;basis_set&quot;</span><span class="p">:</span> <span class="s2">&quot;sto-3g&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;route_parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Freq&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="n">save_to_db</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;my_first_psi4_esp_run&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">lp</span> <span class="o">=</span> <span class="n">LaunchPad</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;/path/to/config/my_launchpad.yaml&quot;</span><span class="p">)</span>
+<span class="n">lp</span><span class="o">.</span><span class="n">add_wf</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+<span class="n">rapidfire</span><span class="p">(</span><span class="n">lp</span><span class="p">,</span> <span class="n">m_dir</span><span class="o">=</span><span class="s2">&quot;/path/to/run_output&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">rapidfire</span></code> runs every ready Firework and then polls forever for new
+ones – it does not exit on its own once the workflow finishes. Check
+<code class="docutils literal notranslate"><span class="pre">lpad</span> <span class="pre">get_wflows</span></code> for the workflow’s state and interrupt/stop the
+process once it shows <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code> (or a <code class="docutils literal notranslate"><span class="pre">FIZZLED</span></code> step that can’t
+make further progress).</p>
+</div>
+<h2 id="using-the-orca-backend">Using the ORCA backend<a class="headerlink" href="#using-the-orca-backend" title="Permalink to this heading">¶</a></h2>
+<p>As of version 0.0.5, the <code class="docutils literal notranslate"><span class="pre">bde</span></code>, <code class="docutils literal notranslate"><span class="pre">binding_energy</span></code>, and <code class="docutils literal notranslate"><span class="pre">esp</span></code> workflows are
+also available with an <a class="reference external" href="https://www.faccts.de/orca/">ORCA</a> backend
+(<code class="docutils literal notranslate"><span class="pre">mispr.orca.workflows.base</span></code>). The workflow functions have the same names and
+arguments as their Gaussian/Psi4 counterparts – only the import path changes.
+This section is a complete, self-contained guide: environment setup, ORCA
+installation, running each workflow, and how to read the results out of the
+database.</p>
+<h3 id="step-1-set-up-the-environment">Step 1: Set up the environment<a class="headerlink" href="#step-1-set-up-the-environment" title="Permalink to this heading">¶</a></h3>
+<p>The ORCA backend needs the same base environment as the rest of MISPR (see
+<a class="reference internal" href="../installation/dependencies.html"><span class="doc">Prerequisites</span></a> for full details). In
+short, on a cluster this means a conda environment with MISPR and its Python
+dependencies installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">mispr</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">mispr</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">mispr</span><span class="o">/</span><span class="n">clone</span>     <span class="c1"># editable install of this repo</span>
+</code></pre></div>
+</div>
+<p>plus the four FireWorks/MISPR configuration files (<code class="docutils literal notranslate"><span class="pre">FW_config.yaml</span></code>,
+<code class="docutils literal notranslate"><span class="pre">db.json</span></code>, <code class="docutils literal notranslate"><span class="pre">my_launchpad.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">my_fworker.yaml</span></code>) in a config directory.
+These are the files that tell MISPR where your MongoDB database lives; they are
+engine-independent – if you already ran Gaussian or Psi4 workflows with MISPR,
+the exact same config directory works for ORCA unchanged.</p>
+<div class="important admonition">
+<p class="admonition-title">Important</p>
+<p><code class="docutils literal notranslate"><span class="pre">FW_CONFIG_FILE</span></code> must be set <strong>before</strong> any <code class="docutils literal notranslate"><span class="pre">fireworks</span></code>/<code class="docutils literal notranslate"><span class="pre">mispr</span></code> import
+is executed – fireworks reads this environment variable once, at import
+time. Setting it after the imports is the single most common cause of
+<code class="docutils literal notranslate"><span class="pre">FileNotFoundError:</span> <span class="pre">Please</span> <span class="pre">provide</span> <span class="pre">the</span> <span class="pre">database</span> <span class="pre">configurations</span></code>. In a
+Jupyter notebook, also remember that editing/pulling new MISPR code requires
+a <strong>kernel restart</strong> to take effect (Python caches imported modules).</p>
+</div>
+<h3 id="step-2-install-orca">Step 2: Install ORCA<a class="headerlink" href="#step-2-install-orca" title="Permalink to this heading">¶</a></h3>
+<p>The ORCA backend was developed and validated against <strong>ORCA 6.1.1</strong>; any ORCA
+6.x release is expected to work (the output parser keys on stable markers of
+the ORCA 6 output format such as <code class="docutils literal notranslate"><span class="pre">FINAL</span> <span class="pre">SINGLE</span> <span class="pre">POINT</span> <span class="pre">ENERGY</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">VIBRATIONAL</span> <span class="pre">FREQUENCIES</span></code> section).</p>
+<ol class="arabic">
+<li><p>Register (free for academic use) on the
+<a class="reference external" href="https://orcaforum.kofo.mpg.de">ORCA forum</a> and download the Linux
+archive matching your cluster, e.g.
+<code class="docutils literal notranslate"><span class="pre">orca_6_1_1_linux_x86-64_shared_openmpi418.tar.xz</span></code> (the
+“shared, OpenMPI 4.1.8” variant).</p></li>
+<li><p>Transfer it to the cluster (e.g. <code class="docutils literal notranslate"><span class="pre">scp</span></code> from your local machine) and
+extract it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="n">tar</span> <span class="o">-</span><span class="n">xf</span> <span class="n">orca_6_1_1_linux_x86</span><span class="o">-</span><span class="mi">64</span><span class="n">_shared_openmpi418</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
+</code></pre></div>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Warning</p>
+<p>The extracted installation is ~17 GB. On HPC clusters with small home
+quotas (often ~20 GB), extract into a scratch/project filesystem, not
+<code class="docutils literal notranslate"><span class="pre">$HOME</span></code> – a half-written extraction on a full quota leaves a broken
+installation that must be deleted and redone.</p>
+</div>
+</li>
+<li><p>Verify it runs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">orca_6_1_1_linux_x86</span><span class="o">-</span><span class="mi">64</span><span class="n">_shared_openmpi418</span><span class="o">/</span><span class="n">orca</span> <span class="o">--</span><span class="n">version</span>
+</code></pre></div>
+</div>
+</li>
+<li><p>Tell MISPR where it is. Three options, in priority order:</p>
+<ul class="simple">
+<li><p>the <code class="docutils literal notranslate"><span class="pre">orca_cmd</span></code> argument accepted by every ORCA workflow function,</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">ORCA_CMD</span></code> environment variable (recommended: set it once per
+session, next to <code class="docutils literal notranslate"><span class="pre">FW_CONFIG_FILE</span></code>),</p></li>
+<li><p>a bare <code class="docutils literal notranslate"><span class="pre">orca</span></code> found on <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Running ORCA in parallel (<code class="docutils literal notranslate"><span class="pre">num_cores</span></code> &gt; 1) requires the <strong>full
+absolute path</strong> to the binary (an ORCA/OpenMPI requirement) and the
+matching OpenMPI version loadable in your environment. Serial runs have
+no such requirement.</p>
+</div>
+</li>
+</ol>
+<h3 id="step-3-run-a-workflow">Step 3: Run a workflow<a class="headerlink" href="#step-3-run-a-workflow" title="Permalink to this heading">¶</a></h3>
+<p>The ESP workflow runs four steps:</p>
+<div class="mermaid">
+            %%{
+init: {
+    'theme': 'base',
+    'themeVariables': {
+    'primaryTextColor': 'black',
+    'lineColor': 'lightgrey',
+    'secondaryColor': 'pink',
+    'tertiaryColor': 'lightgrey'
+    }
+}
+}%%
+
+graph TD
+    A[(Input Structure)] --&gt;|Preprocessing| ORCA
+    ORCA --&gt;| | B[Geometry Optimization]
+    B --&gt;| | C[Frequency Calculation]
+    C --&gt;| | D[CHELPG ESP Calculation]
+    D --&gt;|Postprocessing| E[(esp collection in MongoDB)]
+
+    subgraph ORCA
+    B[Geometry Optimization]
+    C[Frequency Calculation]
+    D[CHELPG ESP Calculation]
+    end
+
+    style A fill:#EBEBEB,stroke:#BB2528
+    style ORCA fill:#DDEEFF,stroke:#DDEEFF,font-weight:bold
+    style B fill:#fff,stroke-dasharray: 5, 5, stroke:#BB2528
+    style C fill:#fff,stroke-dasharray: 5, 5, stroke:#BB2528
+    style D fill:#fff,stroke:#BB2528
+    style E fill:#EBEBEB,stroke:#BB2528
+        </div><p>A complete, runnable script (water molecule, B3LYP/6-31G(d)):</p>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># both must be set before the fireworks/mispr imports</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FW_CONFIG_FILE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/path/to/config/FW_config.yaml&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;ORCA_CMD&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/path/to/orca_installation/orca&quot;</span>
+
+<span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="kn">import</span> <span class="n">Molecule</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="kn">import</span> <span class="n">LaunchPad</span>
+<span class="kn">from</span> <span class="nn">fireworks.core.rocket_launcher</span> <span class="kn">import</span> <span class="n">rapidfire</span>
+<span class="kn">from</span> <span class="nn">mispr.orca.workflows.base.esp</span> <span class="kn">import</span> <span class="n">get_esp_charges</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.117300</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.757200</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.469200</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.000000</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.757200</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.469200</span><span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">wf</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_esp_charges</span><span class="p">(</span>
+    <span class="n">mol_operation_type</span><span class="o">=</span><span class="s2">&quot;get_from_mol&quot;</span><span class="p">,</span>
+    <span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+    <span class="n">working_dir</span><span class="o">=</span><span class="s2">&quot;/path/to/run_output&quot;</span><span class="p">,</span>
+    <span class="n">opt_gaussian_inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;functional&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis_set&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31G(d)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;route_parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Opt&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="n">freq_gaussian_inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;functional&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis_set&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31G(d)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;route_parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Freq&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="n">save_to_db</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;my_first_orca_esp_run&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">lp</span> <span class="o">=</span> <span class="n">LaunchPad</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;/path/to/config/my_launchpad.yaml&quot;</span><span class="p">)</span>
+<span class="n">lp</span><span class="o">.</span><span class="n">add_wf</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+<span class="n">rapidfire</span><span class="p">(</span><span class="n">lp</span><span class="p">,</span> <span class="n">m_dir</span><span class="o">=</span><span class="s2">&quot;/path/to/run_output&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">rapidfire</span></code> runs every ready Firework and then polls forever for new ones
+– it does not exit on its own once the workflow finishes. Check
+<code class="docutils literal notranslate"><span class="pre">lpad</span> <span class="pre">get_wflows</span></code> for the workflow’s state and interrupt/stop the process
+once it shows <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code> (or a <code class="docutils literal notranslate"><span class="pre">FIZZLED</span></code> step that can’t make further
+progress; <code class="docutils literal notranslate"><span class="pre">lpad</span> <span class="pre">get_fws</span> <span class="pre">-i</span> <span class="pre">&lt;id&gt;</span> <span class="pre">-d</span> <span class="pre">more</span></code> shows the failing step’s
+traceback).</p>
+</div>
+<p>The BDE and binding energy workflows are imported and driven the same way;
+only the function arguments differ:</p>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">mispr.orca.workflows.base.bde</span> <span class="kn">import</span> <span class="n">get_bde</span>
+<span class="kn">from</span> <span class="nn">mispr.orca.workflows.base.binding_energy</span> <span class="kn">import</span> <span class="n">get_binding_energies</span>
+
+<span class="c1"># BDE: breaks every bond of the molecule, tries several fragment charge</span>
+<span class="c1"># splits per bond, and computes the dissociation energy of each</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">get_bde</span><span class="p">(</span>
+    <span class="n">mol_operation_type</span><span class="o">=</span><span class="s2">&quot;get_from_mol&quot;</span><span class="p">,</span> <span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">ref_charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">working_dir</span><span class="o">=</span><span class="s2">&quot;/path/to/bde_run&quot;</span><span class="p">,</span>
+    <span class="n">opt_gaussian_inputs</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="n">freq_gaussian_inputs</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span>
+    <span class="n">save_to_db</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">visualize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;my_orca_bde_run&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Binding energy: optimizes two molecules separately, links them at the</span>
+<span class="c1"># given atom indices (here: atom 0 of each), optimizes the complex, and</span>
+<span class="c1"># computes E(complex) - E(mol_1) - E(mol_2)</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">get_binding_energies</span><span class="p">(</span>
+    <span class="n">mol_operation_type</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;get_from_mol&quot;</span><span class="p">,</span> <span class="s2">&quot;get_from_mol&quot;</span><span class="p">],</span> <span class="n">mol</span><span class="o">=</span><span class="p">[</span><span class="n">mol_1</span><span class="p">,</span> <span class="n">mol_2</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">working_dir</span><span class="o">=</span><span class="s2">&quot;/path/to/be_run&quot;</span><span class="p">,</span>
+    <span class="n">opt_gaussian_inputs</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="n">freq_gaussian_inputs</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span>
+    <span class="n">save_to_db</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;my_orca_be_run&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>Every ORCA workflow function additionally accepts <code class="docutils literal notranslate"><span class="pre">orca_cmd</span></code> (executable
+path, overriding <code class="docutils literal notranslate"><span class="pre">ORCA_CMD</span></code>), <code class="docutils literal notranslate"><span class="pre">num_cores</span></code> (parallel processes per
+calculation, default 1), and <code class="docutils literal notranslate"><span class="pre">memory</span></code> (MB per core, default 4000).</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Method and basis set choices are plain runtime arguments – changing the
+level of theory means changing the two strings in
+<code class="docutils literal notranslate"><span class="pre">opt_gaussian_inputs</span></code>/<code class="docutils literal notranslate"><span class="pre">freq_gaussian_inputs</span></code>, never the code. Basis set
+names are passed to ORCA verbatim, so they must be spellings ORCA
+recognizes (e.g. <code class="docutils literal notranslate"><span class="pre">6-31G(d)</span></code>, <code class="docutils literal notranslate"><span class="pre">def2-SVP</span></code>). When benchmarking against
+Gaussian, note that ORCA’s <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code> keyword uses the VWN5 local
+correlation variant while Gaussian’s uses VWN3; use ORCA’s <code class="docutils literal notranslate"><span class="pre">B3LYP/G</span></code>
+keyword for a strictly Gaussian-compatible B3LYP.</p>
+</div>
+<h3 id="step-4-find-and-read-the-results">Step 4: Find and read the results<a class="headerlink" href="#step-4-find-and-read-the-results" title="Permalink to this heading">¶</a></h3>
+<p>Results end up in two kinds of MongoDB collections (same layout as the
+Gaussian and Psi4 backends, so cross-engine results are directly comparable):</p>
+<ul class="simple">
+<li><p>the <strong>runs collection</strong> gets one document per individual calculation
+(each optimization, each frequency job, each ESP single point) – the raw
+record, including the parsed output and the input parameters used;</p></li>
+<li><p>one <strong>property collection per workflow</strong> (<code class="docutils literal notranslate"><span class="pre">esp</span></code>, <code class="docutils literal notranslate"><span class="pre">bde</span></code>,
+<code class="docutils literal notranslate"><span class="pre">binding_energy</span></code>) gets a single summary document per workflow run – this
+is normally what you query. Filter by your <code class="docutils literal notranslate"><span class="pre">tag</span></code> to find a specific run.</p></li>
+</ul>
+<p>Fields shared by all property documents:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">molecule</span></code>: the final (optimized) structure, as a serialized pymatgen
+Molecule – species, coordinates, charge, spin multiplicity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">smiles</span></code> / <code class="docutils literal notranslate"><span class="pre">inchi</span></code> / <code class="docutils literal notranslate"><span class="pre">formula_alphabetical</span></code> / <code class="docutils literal notranslate"><span class="pre">chemsys</span></code>: standard
+chemical identifiers generated from the structure (via OpenBabel), so the
+database can be searched by molecule later without matching coordinates.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">functional</span></code> / <code class="docutils literal notranslate"><span class="pre">basis</span></code>: level of theory of the underlying calculations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phase</span></code>: <code class="docutils literal notranslate"><span class="pre">gas</span></code> or <code class="docutils literal notranslate"><span class="pre">solution</span></code> (implicit solvent).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tag</span></code>: the label you passed in – your primary lookup key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: <code class="docutils literal notranslate"><span class="pre">successful</span></code> if the workflow completed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wall_time</span> <span class="pre">(s)</span></code>: summed runtime of all steps in the workflow.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gauss_version</span></code>: which engine produced the numbers – e.g. <code class="docutils literal notranslate"><span class="pre">orca-6.1.1</span></code>
+(the field name is historical; Gaussian runs store the Gaussian version and
+Psi4 runs store <code class="docutils literal notranslate"><span class="pre">psi4-&lt;version&gt;</span></code> in the same place).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last_updated</span></code>: UTC timestamp of the database insert.</p></li>
+</ul>
+<p>Workflow-specific fields:</p>
+<ul class="simple">
+<li><p><strong>esp</strong> documents:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code>: final electronic energy of the ESP single point, in Hartree.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">esp</span></code>: the fitted CHELPG partial charges as a plain list, one entry per
+atom, in the same order as the atoms in <code class="docutils literal notranslate"><span class="pre">molecule</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">esp_by_atom</span></code>: the same charges keyed by element + atom index (e.g.
+<code class="docutils literal notranslate"><span class="pre">O0</span></code>, <code class="docutils literal notranslate"><span class="pre">H1</span></code>, <code class="docutils literal notranslate"><span class="pre">H2</span></code>), readable without cross-referencing <code class="docutils literal notranslate"><span class="pre">molecule</span></code>.
+For a neutral molecule the charges must sum to ~0; chemically sensible
+signs (e.g. negative on oxygen) are a quick sanity check.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dipole_moment</span></code>: dipole vector [x, y, z] in atomic units, taken from
+the frequency step.</p></li>
+</ul>
+</li>
+<li><p><strong>bde</strong> documents:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">fragments</span></code>: the unique fragments produced by breaking each bond.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bde_eV</span></code>: nested mapping <em>bond -&gt; charge split -&gt; energy</em>: the first
+level is the broken bond as an atom-index pair (e.g. <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code>), the
+second level labels each fragment pair with its formula and charge (e.g.
+<code class="docutils literal notranslate"><span class="pre">O1(q=0)+H1(q=0)</span></code>), and the value is the dissociation energy in eV.
+The <code class="docutils literal notranslate"><span class="pre">q=0</span></code> + <code class="docutils literal notranslate"><span class="pre">q=0</span></code> entry is the homolytic BDE (the number usually
+meant by “bond dissociation energy”); entries with opposite charges are
+the heterolytic channels, which are legitimately much larger in gas
+phase and need <em>not</em> be symmetric to each other (e.g. losing H+ is
+cheaper than losing H- for water). Chemically equivalent bonds (the two
+O-H bonds of water) should give identical values – a built-in
+consistency check.</p></li>
+</ul>
+</li>
+<li><p><strong>binding_energy</strong> documents:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">be_eV</span></code>: E(complex) - E(mol_1) - E(mol_2), in eV. Negative means
+binding is favorable; hydrogen-bond complexes typically land between
+roughly -0.1 and -0.4 eV.</p></li>
+</ul>
+</li>
+</ul>
+<p>Working files (the actual ORCA <code class="docutils literal notranslate"><span class="pre">.inp</span></code>/<code class="docutils literal notranslate"><span class="pre">.out</span></code> text files of every step) are
+kept under <code class="docutils literal notranslate"><span class="pre">working_dir</span></code>, organized per molecule and step (<code class="docutils literal notranslate"><span class="pre">Optimization</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Frequency</span></code>, <code class="docutils literal notranslate"><span class="pre">ESP</span></code>, <code class="docutils literal notranslate"><span class="pre">fragments/&lt;formula&gt;/charge_&lt;q&gt;</span></code>, …), so any
+number in the database can be traced back to the raw ORCA output that
+produced it.</p>
+<h4 id="example-an-annotated-esp-document">Example: an annotated <code class="docutils literal notranslate"><span class="pre">esp</span></code> document<a class="headerlink" href="#example-an-annotated-esp-document" title="Permalink to this heading">¶</a></h4>
+<p>What one real document looks like in the <code class="docutils literal notranslate"><span class="pre">esp</span></code> collection (water,
+HF/6-31G* ESP step, ORCA 6.1.1), with every field annotated – including what
+the collapsed <code class="docutils literal notranslate"><span class="pre">Object</span></code>/<code class="docutils literal notranslate"><span class="pre">Array</span></code> entries contain once expanded:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">ObjectId</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">),</span><span class="w">          </span><span class="c1">// assigned by MongoDB, not by MISPR</span>
+<span class="w">  </span><span class="s2">&quot;molecule&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">                    </span><span class="c1">// the optimized structure (serialized pymatgen Molecule)</span>
+<span class="w">    </span><span class="s2">&quot;@module&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;pymatgen.core.structure&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;@class&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Molecule&quot;</span><span class="p">,</span><span class="w">          </span><span class="c1">// these two let pymatgen re-load the object:</span>
+<span class="w">                                   </span><span class="c1">//   Molecule.from_dict(doc[&quot;molecule&quot;])</span>
+<span class="w">    </span><span class="s2">&quot;charge&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">                   </span><span class="c1">// total molecular charge</span>
+<span class="w">    </span><span class="s2">&quot;spin_multiplicity&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w">        </span><span class="c1">// 2S+1; 1 = closed shell (all electrons paired)</span>
+<span class="w">    </span><span class="s2">&quot;sites&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w">                     </span><span class="c1">// one entry per atom, in order (index 0, 1, 2, ...)</span>
+<span class="w">      </span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;O&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="s2">&quot;species&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;element&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;O&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;occu&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">}],</span>
+<span class="w">       </span><span class="s2">&quot;xyz&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0873</span><span class="p">],</span><span class="w">  </span><span class="c1">// optimized cartesian coordinates, in Angstrom</span>
+<span class="w">       </span><span class="s2">&quot;properties&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}},</span>
+<span class="w">      </span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;H&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="s2">&quot;species&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;element&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;H&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;occu&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">}],</span>
+<span class="w">       </span><span class="s2">&quot;xyz&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7509</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.4787</span><span class="p">],</span>
+<span class="w">       </span><span class="s2">&quot;properties&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}},</span>
+<span class="w">      </span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;H&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="s2">&quot;species&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;element&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;H&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;occu&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">}],</span>
+<span class="w">       </span><span class="s2">&quot;xyz&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.7509</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.4787</span><span class="p">],</span>
+<span class="w">       </span><span class="s2">&quot;properties&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="s2">&quot;smiles&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;O&quot;</span><span class="p">,</span><span class="w">                   </span><span class="c1">// SMILES string; &quot;O&quot; is water (H atoms implicit)</span>
+<span class="w">  </span><span class="s2">&quot;inchi&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;InChI=1S/H2O/h1H2&quot;</span><span class="p">,</span><span class="w">    </span><span class="c1">// InChI identifier -- unambiguous, searchable</span>
+<span class="w">  </span><span class="s2">&quot;formula_alphabetical&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;H2 O1&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// formula with elements alphabetized</span>
+<span class="w">  </span><span class="s2">&quot;chemsys&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;H-O&quot;</span><span class="p">,</span><span class="w">                </span><span class="c1">// the chemical system (elements only, no counts)</span>
+<span class="w">  </span><span class="s2">&quot;energy&quot;</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">76.005438414963</span><span class="p">,</span><span class="w">      </span><span class="c1">// final electronic energy of the ESP single</span>
+<span class="w">                                   </span><span class="c1">// point, in Hartree</span>
+<span class="w">  </span><span class="s2">&quot;esp&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w">                         </span><span class="c1">// CHELPG charges, one per atom, same order</span>
+<span class="w">    </span><span class="o">-</span><span class="mf">0.777227</span><span class="p">,</span><span class="w">                     </span><span class="c1">//   as molecule.sites -- so this is the O</span>
+<span class="w">     </span><span class="mf">0.388383</span><span class="p">,</span><span class="w">                     </span><span class="c1">//   first H</span>
+<span class="w">     </span><span class="mf">0.388844</span><span class="w">                      </span><span class="c1">//   second H; sum = 0.000000 (neutral molecule)</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="s2">&quot;esp_by_atom&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">                 </span><span class="c1">// identical numbers, keyed element+index,</span>
+<span class="w">    </span><span class="s2">&quot;O0&quot;</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">0.777227</span><span class="p">,</span><span class="w">               </span><span class="c1">//   readable without cross-referencing</span>
+<span class="w">    </span><span class="s2">&quot;H1&quot;</span><span class="o">:</span><span class="w">  </span><span class="mf">0.388383</span><span class="p">,</span><span class="w">               </span><span class="c1">//   molecule.sites</span>
+<span class="w">    </span><span class="s2">&quot;H2&quot;</span><span class="o">:</span><span class="w">  </span><span class="mf">0.388844</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="s2">&quot;functional&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;hf&quot;</span><span class="p">,</span><span class="w">              </span><span class="c1">// level of theory of the ESP step</span>
+<span class="w">  </span><span class="s2">&quot;basis&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;6-31G*&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;phase&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;gas&quot;</span><span class="p">,</span><span class="w">                  </span><span class="c1">// no implicit solvent was used</span>
+<span class="w">  </span><span class="s2">&quot;tag&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;orca_esp_first_test&quot;</span><span class="p">,</span><span class="w">    </span><span class="c1">// the tag passed to get_esp_charges --</span>
+<span class="w">                                   </span><span class="c1">//   your primary lookup key</span>
+<span class="w">  </span><span class="s2">&quot;state&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;successful&quot;</span><span class="p">,</span><span class="w">           </span><span class="c1">// workflow completed normally</span>
+<span class="w">  </span><span class="s2">&quot;wall_time (s)&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">2.53</span><span class="p">,</span><span class="w">           </span><span class="c1">// summed runtime of all workflow steps</span>
+<span class="w">  </span><span class="s2">&quot;version&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0.0.5&quot;</span><span class="p">,</span><span class="w">              </span><span class="c1">// MISPR version</span>
+<span class="w">  </span><span class="s2">&quot;gauss_version&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;orca-6.1.1&quot;</span><span class="p">,</span><span class="w">   </span><span class="c1">// which engine + version produced the numbers</span>
+<span class="w">                                   </span><span class="c1">//   (field name is historical: Gaussian runs</span>
+<span class="w">                                   </span><span class="c1">//   store e.g. &quot;16revisionC.01&quot; here, Psi4 runs</span>
+<span class="w">                                   </span><span class="c1">//   &quot;psi4-1.9.1&quot;)</span>
+<span class="w">  </span><span class="s2">&quot;last_updated&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">&quot;2026-07-19T15:09:09Z&quot;</span><span class="p">),</span><span class="w">  </span><span class="c1">// UTC insert time</span>
+<span class="w">  </span><span class="s2">&quot;dipole_moment&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w">               </span><span class="c1">// dipole vector [x, y, z] in atomic units,</span>
+<span class="w">    </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.8677</span><span class="w">              </span><span class="c1">//   from the frequency step; magnitude here</span>
+<span class="w">  </span><span class="p">]</span><span class="w">                                </span><span class="c1">//   ~0.87 a.u. ~ 2.2 Debye, typical for water</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h4 id="example-an-annotated-bde-document">Example: an annotated <code class="docutils literal notranslate"><span class="pre">bde</span></code> document<a class="headerlink" href="#example-an-annotated-bde-document" title="Permalink to this heading">¶</a></h4>
+<p>The shared fields (<code class="docutils literal notranslate"><span class="pre">molecule</span></code>, <code class="docutils literal notranslate"><span class="pre">smiles</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code>, …) mean the same as
+above; what is specific to BDE is the <code class="docutils literal notranslate"><span class="pre">fragments</span></code>/<code class="docutils literal notranslate"><span class="pre">bde_eV</span></code> pair (water,
+B3LYP/6-31G(d), ORCA 6.1.1):</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="c1">// ... shared fields as above ...</span>
+<span class="w">  </span><span class="s2">&quot;energy&quot;</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">76.370015904495</span><span class="p">,</span><span class="w">      </span><span class="c1">// electronic energy of the (whole) principle</span>
+<span class="w">                                   </span><span class="c1">//   molecule -- lower than the HF value above</span>
+<span class="w">                                   </span><span class="c1">//   because B3LYP includes electron correlation</span>
+<span class="w">  </span><span class="s2">&quot;functional&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;basis&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;6-31G(d)&quot;</span><span class="p">,</span>
+
+<span class="w">  </span><span class="s2">&quot;fragments&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">                   </span><span class="c1">// the unique fragments produced by breaking</span>
+<span class="w">    </span><span class="c1">// each fragment appears once, as a serialized Molecule (same format as</span>
+<span class="w">    </span><span class="c1">// &quot;molecule&quot; above) together with the charges it was computed at --</span>
+<span class="w">    </span><span class="c1">// for water: the OH fragment and the lone H atom</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="s2">&quot;bde_eV&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">                      </span><span class="c1">// the actual results: bond -&gt; charge split -&gt; eV</span>
+<span class="w">    </span><span class="s2">&quot;[0, 1]&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">                    </span><span class="c1">// the bond between atom 0 (O) and atom 1 (H)</span>
+<span class="w">      </span><span class="s2">&quot;H1 O1(q=-1)+H1(q=1)&quot;</span><span class="o">:</span><span class="w">  </span><span class="mf">18.4039</span><span class="p">,</span><span class="w">  </span><span class="c1">// heterolytic: OH(-) + H(+)  (&quot;acid&quot; channel)</span>
+<span class="w">      </span><span class="s2">&quot;H1 O1(q=0)+H1(q=0)&quot;</span><span class="o">:</span><span class="w">    </span><span class="mf">4.7322</span><span class="p">,</span><span class="w">  </span><span class="c1">// homolytic: OH(.) + H(.) -- THE bond</span>
+<span class="w">                                        </span><span class="c1">//   dissociation energy in the usual sense</span>
+<span class="w">                                        </span><span class="c1">//   (expt. ~5.1 eV; B3LYP/6-31G(d) is</span>
+<span class="w">                                        </span><span class="c1">//   expected to land slightly below)</span>
+<span class="w">      </span><span class="s2">&quot;H1 O1(q=1)+H1(q=-1)&quot;</span><span class="o">:</span><span class="w">  </span><span class="mf">21.7011</span><span class="w">   </span><span class="c1">// heterolytic: OH(+) + H(-) -- costlier,</span>
+<span class="w">                                        </span><span class="c1">//   as both products are unstable species;</span>
+<span class="w">                                        </span><span class="c1">//   the two heterolytic channels are</span>
+<span class="w">                                        </span><span class="c1">//   different reactions and need NOT match</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;[0, 2]&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">                    </span><span class="c1">// the other O-H bond: chemically equivalent,</span>
+<span class="w">      </span><span class="s2">&quot;H1 O1(q=-1)+H1(q=1)&quot;</span><span class="o">:</span><span class="w">  </span><span class="mf">18.4039</span><span class="p">,</span><span class="w">  </span><span class="c1">//   so its three values must reproduce</span>
+<span class="w">      </span><span class="s2">&quot;H1 O1(q=0)+H1(q=0)&quot;</span><span class="o">:</span><span class="w">    </span><span class="mf">4.7322</span><span class="p">,</span><span class="w">  </span><span class="c1">//   [0, 1] essentially exactly -- a</span>
+<span class="w">      </span><span class="s2">&quot;H1 O1(q=1)+H1(q=-1)&quot;</span><span class="o">:</span><span class="w">  </span><span class="mf">21.7011</span><span class="w">   </span><span class="c1">//   built-in consistency check</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// no [1, 2] entry: there is no H-H bond in water to break</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="s2">&quot;wall_time (s)&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">40.62</span><span class="p">,</span><span class="w">          </span><span class="c1">// BDE runs many calculations (principle molecule</span>
+<span class="w">                                   </span><span class="c1">//   opt+freq, then opt+freq per fragment per</span>
+<span class="w">                                   </span><span class="c1">//   charge state), hence the longer runtime</span>
+<span class="w">  </span><span class="s2">&quot;gauss_version&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;orca-6.1.1&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>The key format inside <code class="docutils literal notranslate"><span class="pre">bde_eV</span></code> reads as <em>&lt;fragment formula&gt;(q=&lt;charge&gt;) +
+&lt;fragment formula&gt;(q=&lt;charge&gt;)</em>: e.g. <code class="docutils literal notranslate"><span class="pre">O1(q=0)+H1(q=0)</span></code> means “an OH
+fragment with charge 0, plus an H fragment with charge 0” – i.e. the two
+radicals of a homolytic split. The energies include the thermochemistry
+corrections from the frequency steps, not just raw electronic energies.</p>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">binding_energy</span></code> documents the specific field is a single scalar,
+<code class="docutils literal notranslate"><span class="pre">be_eV</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">-0.19</span></code>): E(complex) - E(mol_1) - E(mol_2) in eV, negative
+when binding is favorable.</p>
+<h2 id="running-an-esp-workflow">Running an ESP workflow<a class="headerlink" href="#running-an-esp-workflow" title="Permalink to this heading">¶</a></h2>
+<p>The ESP workflow calculates the partial charges on atoms of a molecule. The charges are
+fit to the electrostatic potential at points selected according to the Merz-Singh-Kollman
+scheme, but other schemes supported by Gaussian can be used as well.</p>
+<p><strong>The ESP workflow performs the following steps:</strong></p>
+<div class="mermaid">
+            %%{
+init: {
+    'theme': 'base',
+    'themeVariables': {
+    'primaryTextColor': 'black',
+    'lineColor': 'lightgrey',
+    'secondaryColor': 'pink',
+    'tertiaryColor': 'lightgrey'
+    }
+}
+}%%
+
+graph TD
+    A[(Input Structure)] --&gt;|Preprocessing| DFT
+    DFT --&gt;| | B[Geometry Optimization]
+    B --&gt;| | C[Frequency Calculation]
+    C --&gt;| | D[ESP Calculation]
+    D --&gt;|Postprocessing| E[(Output)]
+
+    subgraph DFT
+    B[Geometry Optimization]
+    C[Frequency Calculation]
+    D[ESP Calculation]
+    end
+
+    style A fill:#EBEBEB,stroke:#BB2528
+    style DFT fill:#DDEEFF,stroke:#DDEEFF,font-weight:bold
+    style B fill:#fff,stroke-dasharray: 5, 5, stroke:#BB2528
+    style C fill:#fff,stroke-dasharray: 5, 5, stroke:#BB2528
+    style D fill:#fff,stroke:#BB2528
+    style E fill:#EBEBEB,stroke:#BB2528
+        </div><div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>The geometry optimization and frequency calculation steps (marked with a dashed
+border in the above diagram) are optional. If the input structure is already
+optimized, the workflow will skip these steps.</p>
+</div>
+<p>In the following example, we will run the ESP workflow on a monoglyme molecule.</p>
+<div class="highlight-python notranslate"><div class="annotate highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">fireworks</span> <span class="kn">import</span> <span class="n">LaunchPad</span>
+
+<span class="kn">from</span> <span class="nn">mispr.gaussian.workflows.base.esp</span> <span class="kn">import</span> <span class="n">get_esp_charges</span>
+
+<span class="n">lpad</span> <span class="o">=</span> <span class="n">LaunchPad</span><span class="o">.</span><span class="n">auto_load</span><span class="p">()</span>
+
+<span class="n">wf</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_esp_charges</span><span class="p">(</span>
+    <span class="n">mol_operation_type</span><span class="o">=</span><span class="s2">&quot;get_from_pubchem&quot;</span><span class="p">,</span> <span class="c1"># (1)!</span>
+    <span class="n">mol</span><span class="o">=</span><span class="s2">&quot;monoglyme&quot;</span><span class="p">,</span>
+    <span class="n">format_chk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_to_db</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_to_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">additional_prop_doc_fields</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;monoglyme&quot;</span><span class="p">},</span>
+    <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;mispr_tutorial&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">lpad</span><span class="o">.</span><span class="n">add_wf</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span> <span class="c1"># (2)!</span>
+</code></pre></div></td></tr></table></div>
+<ol class="arabic">
+<li><p><code class="code docutils literal notranslate"><span class="pre">mol_operation_type</span></code> refers to the operation to be performed on the input to process the molecule.</p>
+<p>In this example, we are requesting to directly retrieve the molecule from PubChem by providing a
+common name for the molecule to be used as query criteria for searching the PubChem database via
+the <code class="code docutils literal notranslate"><span class="pre">mol</span></code> input argument. For a list of supported <code class="code docutils literal notranslate"><span class="pre">mol_operation_type</span></code> and the corresponding
+<code class="code docutils literal notranslate"><span class="pre">mol</span></code>, refer to <a class="reference internal" href="../mispr.gaussian.utilities.html#mispr.gaussian.utilities.mol.process_mol" title="mispr.gaussian.utilities.mol.process_mol (Python function) — Process a molecule. Used for handling different molecule formats provided to Gaussian workflows."><code class="xref py py-meth docutils literal notranslate"><span class="pre">mispr.gaussian.utilities.mol.process_mol()</span></code></a>.</p>
+</li>
+<li><p>Adds the workflow to the launchpad.</p></li>
+</ol>
+</div>
+<p>Download <a class="reference download internal" download="" href="../_downloads/d67a679cb2e669df06832fe26664fc83/esp_tutorial.py"><code class="xref download docutils literal notranslate"><span class="pre">esp_tutorial.py</span></code></a>.</p>
+<p>Run the script using the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>esp_tutorial.py
+</code></pre></div>
+</div>
+<p>And then launch the job through the queueing system using the following command:</p>
+<div class="highlight-bash notranslate"><div class="annotate highlight"><pre><span></span><code>qlaunch<span class="w"> </span>rapidfire<span class="w"> </span><span class="c1"># (1)!</span>
+</code></pre></div>
+<ol class="arabic simple">
+<li><p>This command can submit a large number of jobs at once
+or maintain a certain number of jobs in the queue.</p></li>
+</ol>
+</div>
+<p>The workflow will run and create a directory named <code class="code docutils literal notranslate"><span class="pre">C4H10O2</span></code> in the current working
+directory. The directory will contain the following subdirectories:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>C4H10O2
+├──<span class="w"> </span>Optimization
+├──<span class="w"> </span>Frequency
+├──<span class="w"> </span>ESP
+├──<span class="w"> </span>analysis
+</code></pre></div>
+</div>
+<p>Inside the <code class="code docutils literal notranslate"><span class="pre">Optimization</span></code>, <code class="code docutils literal notranslate"><span class="pre">Frequency</span></code>, and <code class="code docutils literal notranslate"><span class="pre">ESP</span></code> subdirectories, you
+will find the Gaussian input and output files for the corresponding step. Inside the
+<code class="code docutils literal notranslate"><span class="pre">Optimization</span></code> subdirectory, you will also find a “convergence.png” figure that
+shows the forces and displacement convergence during the course of the optimization.</p>
+<figure class="align-default">
+<img alt="../_images/convergence.png" src="../_images/convergence.png" />
+</figure>
+<p>The <code class="code docutils literal notranslate"><span class="pre">analysis</span></code> subdirectory contains the results of the workflow in the form of a
+<code class="code docutils literal notranslate"><span class="pre">esp.json</span></code> file. You can read the content of the <code class="code docutils literal notranslate"><span class="pre">esp.json</span></code> file using the
+following commands:</p>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;C4H10O2/analysis/esp.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">esp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">esp</span><span class="p">[</span><span class="s2">&quot;esp&quot;</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>This will output the partial charges on the atoms of the molecule:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.374646</span><span class="p">],</span>
+<span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.373831</span><span class="p">],</span>
+<span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.132166</span><span class="p">],</span>
+<span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.132716</span><span class="p">],</span>
+<span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.034284</span><span class="p">],</span>
+<span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.031733</span><span class="p">],</span>
+<span class="s2">&quot;7&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.033853</span><span class="p">],</span>
+<span class="s2">&quot;8&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.034024</span><span class="p">],</span>
+<span class="s2">&quot;9&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.034218</span><span class="p">],</span>
+<span class="s2">&quot;10&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.034388</span><span class="p">],</span>
+<span class="s2">&quot;11&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.070724</span><span class="p">],</span>
+<span class="s2">&quot;12&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.03474</span><span class="p">],</span>
+<span class="s2">&quot;13&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.03438</span><span class="p">],</span>
+<span class="s2">&quot;14&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.034621</span><span class="p">],</span>
+<span class="s2">&quot;15&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.071656</span><span class="p">],</span>
+<span class="s2">&quot;16&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mf">0.034974</span><span class="p">],</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h2 id="running-a-bde-workflow">Running a BDE workflow<a class="headerlink" href="#running-a-bde-workflow" title="Permalink to this heading">¶</a></h2>
+<h2 id="running-an-md-workflow">Running an MD workflow<a class="headerlink" href="#running-an-md-workflow" title="Permalink to this heading">¶</a></h2>
+<h2 id="running-a-hybrid-workflow">Running a hybrid workflow<a class="headerlink" href="#running-a-hybrid-workflow" title="Permalink to this heading">¶</a></h2>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="supported.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Supported Workflows" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Supported Workflows
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="custom.html" class="md-footer__link md-footer__link--next" aria-label="Next: Creating Custom Workflows" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Creating Custom Workflows
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2022, MolMD Group.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    5.1.1.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://github.com/molmd/mispr" target="_blank" rel="noopener" title="Source on github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/molmd_group" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "navigation.expand", "navigation.sections"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script src="../_static/design-tabs.js"></script>
+        <script src="../_static/js/rtd_search_config.js"></script>
+        <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+  </body>
+</html>
