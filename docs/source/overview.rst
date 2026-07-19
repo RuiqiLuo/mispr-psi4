@@ -40,6 +40,14 @@ is an in-house package for analyzing MD output and trajectory files.
   dissociation energy, binding energy, redox potential, and nuclear
   magnetic resonance (NMR) tensors
 
+* Support for multiple DFT engines behind the same workflow interface:
+  the core molecular workflows (ESP, bond dissociation energy, binding
+  energy) can be run with `Gaussian <https://gaussian.com>`_ (commercial),
+  `ORCA <https://www.faccts.de/orca/>`_ (free for academic use), or
+  `Psi4 <https://psicode.org>`_ (open source), using the same input
+  dictionaries and producing database documents with the same schema --
+  so results from different engines are directly comparable
+
 * Derivation of many molecular ensemble properties such as radial
   distribution functions, diffusion coefficients, viscosity, and
   conductivity of liquid solutions, which are critical to understanding
@@ -62,6 +70,12 @@ is an in-house package for analyzing MD output and trajectory files.
 
 .. note::
    MISPR is primarily built to work with `Gaussian <https://gaussian.com>`_
-   electronic structure software for DFT calculation and
+   electronic structure software for DFT calculations and
    `LAMMPS <https://www.lammps.org/#gsc.tab=0>`_
-   open-source software for MD simulations.
+   open-source software for MD simulations. As of version 0.0.5, the ESP,
+   bond dissociation energy, and binding energy workflows can alternatively
+   be run through `ORCA <https://www.faccts.de/orca/>`_ (free for academic
+   use, registration required) or `Psi4 <https://psicode.org>`_ (fully open
+   source) -- so these molecular-level DFT workflows no longer require a
+   Gaussian license. See :doc:`Workflow Tutorials <workflows/tutorials>`
+   for how to use each backend.

@@ -13,6 +13,13 @@ creating the following set of configuration files.
    Here, we will only discuss the basic configuration options which are
    sufficient for using MISPR as in this tutorial.
 
+.. note::
+   In all the examples below, ``|CODES_DIR|`` is a placeholder for the
+   absolute path of the directory where you keep your code checkouts and
+   configuration files (e.g. ``/home/username/codes``, or a scratch/project
+   path on HPC clusters with small home quotas) -- replace it with your
+   actual path.
+
 
 Writing the Configuration Files
 ------------------------------------
@@ -209,6 +216,14 @@ Writing the Configuration Files
         * ``tcmd``: the command to run tleap
 
         .. note::
+            The ORCA and Psi4 backends do **not** read this file. Psi4 runs
+            through its Python API (nothing to configure here), and ORCA is
+            located through the ``orca_cmd`` workflow argument or the
+            ``ORCA_CMD`` environment variable -- see
+            :doc:`Prerequisites <dependencies>`. If you only use those
+            backends, ``gcmd``/``formchkcmd`` can be left unset.
+
+        .. note::
             Anything between two dollar signs ($ $) is a placeholder for
             a variable and should not be changed.
 
@@ -234,10 +249,11 @@ Writing the Configuration Files
 Configuring Bash Profile
 ------------------------------
 After creating the above six configuration files and replacing the
-placeholders with your specific settings, create a directory in
-your ``|CODES_DIR|`` (see :doc:`Definition <../keywords>`) called ``config``
-and move the above configuration files into it. The ``|CODES_DIR|/config``
-should look like:
+placeholders with your specific settings, create a directory called
+``config`` (a common choice is next to your code checkouts, e.g.
+``~/codes/config`` -- on HPC clusters with small home quotas, a scratch or
+project filesystem also works) and move the above configuration files into
+it. The ``config`` directory should look like:
 
 ::
 
