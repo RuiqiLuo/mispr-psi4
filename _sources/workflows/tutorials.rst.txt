@@ -2,64 +2,41 @@
 Workflow Tutorials
 ===================
 
-This page is under construction.
+This page shows how to run MISPR's DFT workflows and how to read their
+results. Three workflows appear throughout, each named after the property it
+computes:
 
-Using the Psi4 backend
-------------------------------
-As of version 0.0.5, the ``bde``, ``binding_energy``, and ``esp`` workflows
-are also available with a `Psi4 <https://psicode.org>`_ backend
-(``mispr.psi4.workflows.base``), as a free/open-source alternative to
-Gaussian. The workflow functions have the same names and (mostly) the same
-arguments as their Gaussian counterparts -- only the import path changes:
+* **ESP** (electrostatic partial charges) -- fits a partial charge to every
+  atom of a molecule; the standard input for building classical force
+  fields.
+* **BDE** (bond dissociation energy) -- how much energy it takes to break
+  each bond of a molecule.
+* **Binding energy** -- how strongly two molecules stick together when they
+  form a complex.
 
-.. code-block:: python
-    :linenos:
+Each workflow is a fixed recipe of calculation steps. MISPR builds the
+recipe; `FireWorks <https://materialsproject.github.io/fireworks/>`_ stores
+it in your MongoDB database and executes it. Four FireWorks words are used
+on this page without further ceremony:
 
-    import os
-    from pymatgen.core.structure import Molecule
-    from fireworks import LaunchPad
-    from fireworks.core.rocket_launcher import rapidfire
-    from mispr.psi4.workflows.base.esp import get_esp_charges
+* a **workflow** is the whole recipe, made of individual jobs called
+  **Fireworks**;
+* the **LaunchPad** is the database-backed queue that workflows are
+  submitted to and run from;
+* each Firework's state moves from ``READY`` to ``RUNNING`` to
+  ``COMPLETED`` -- or to ``FIZZLED``, FireWorks' word for *failed*.
 
-    # FW_CONFIG_FILE must be set before importing fireworks/mispr, since
-    # fireworks reads it once, at import time
-    os.environ["FW_CONFIG_FILE"] = "/path/to/config/FW_config.yaml"
+.. important::
+   Before anything on this page can work, the
+   :doc:`installation <../installation/index>` must be finished: ``import
+   mispr`` succeeds in your environment, the
+   :doc:`configuration files <../installation/configuration>` are written,
+   and your MongoDB database is reachable from the machine you run on.
 
-    mol = Molecule(
-        ["O", "H", "H"],
-        [
-            [0.000000, 0.000000, 0.117300],
-            [0.000000, 0.757200, -0.469200],
-            [0.000000, -0.757200, -0.469200],
-        ],
-    )
-
-    wf = get_esp_charges(
-        mol_operation_type="get_from_mol",
-        mol=mol,
-        working_dir="/path/to/run_output",
-        opt_gaussian_inputs={
-            "functional": "hf", "basis_set": "sto-3g",
-            "route_parameters": {"Opt": None},
-        },
-        freq_gaussian_inputs={
-            "functional": "hf", "basis_set": "sto-3g",
-            "route_parameters": {"Freq": None},
-        },
-        save_to_db=True,
-        tag="my_first_psi4_esp_run",
-    )
-
-    lp = LaunchPad.from_file("/path/to/config/my_launchpad.yaml")
-    lp.add_wf(wf)
-    rapidfire(lp, m_dir="/path/to/run_output")
-
-.. note::
-   ``rapidfire`` runs every ready Firework and then polls forever for new
-   ones -- it does not exit on its own once the workflow finishes. Check
-   ``lpad get_wflows`` for the workflow's state and interrupt/stop the
-   process once it shows ``COMPLETED`` (or a ``FIZZLED`` step that can't
-   make further progress).
+The ORCA section below is the most detailed walkthrough -- it explains every
+line of the driving script and every field of the results, so it is worth
+reading once even if you use a different DFT engine; the Psi4 section
+afterwards only describes what differs.
 
 Using the ORCA backend
 ------------------------------
@@ -177,14 +154,236 @@ The ESP workflow runs four steps:
         style D fill:#fff,stroke:#BB2528
         style E fill:#EBEBEB,stroke:#BB2528
 
-A complete, runnable script (water molecule, B3LYP/6-31G(d)):
+Below, the driving script is built up one piece at a time, with the meaning
+of each piece explained; the assembled, runnable version is at the end.
+
+3a. Point the script at your configuration and at ORCA
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    import os
+
+    os.environ["FW_CONFIG_FILE"] = "/path/to/config/FW_config.yaml"
+    os.environ["ORCA_CMD"] = "/path/to/orca_installation/orca"
+
+These two environment variables connect the script to everything that lives
+*outside* Python:
+
+* ``FW_CONFIG_FILE`` points to the FireWorks master configuration file, which
+  in turn points to the directory holding ``db.json``/``my_launchpad.yaml`` --
+  i.e. this is how the script finds your MongoDB database.
+* ``ORCA_CMD`` is the full path of the ``orca`` executable, so MISPR knows
+  what to invoke for each calculation.
+
+Both can equally well be ``export``-ed once in your ``~/.bashrc`` or job
+script, in which case this block disappears entirely. The one hard rule:
+``FW_CONFIG_FILE`` must be set **before** the ``fireworks``/``mispr`` imports
+of the next step -- fireworks reads it once, at import time, and setting it
+afterwards is the single most common cause of
+``FileNotFoundError: Please provide the database configurations``.
+
+3b. Imports
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    from pymatgen.core.structure import Molecule
+    from fireworks import LaunchPad
+    from fireworks.core.rocket_launcher import rapidfire
+    from mispr.orca.workflows.base.esp import get_esp_charges
+
+Each import plays a distinct role:
+
+* ``Molecule`` -- pymatgen's structure object; the form in which MISPR passes
+  molecules around (elements + cartesian coordinates + charge/spin).
+* ``LaunchPad`` -- the connection to the FireWorks database; adding a
+  workflow to the LaunchPad is what queues it for execution.
+* ``rapidfire`` -- the runner: it pulls ready jobs off the LaunchPad and
+  executes them, one after another, in the current process.
+* ``get_esp_charges`` -- the workflow *builder*: it only constructs the
+  workflow object (which steps, in which order, with which settings); nothing
+  is computed yet when you call it.
+
+The import path is also where the engine is chosen: swap
+``mispr.orca.workflows.base.esp`` for ``mispr.gaussian.workflows.base.esp``
+or ``mispr.psi4.workflows.base.esp`` and the same script drives a different
+DFT engine.
+
+3c. Create the molecule
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    mol = Molecule(
+        ["O", "H", "H"],
+        [
+            [0.000000, 0.000000, 0.117300],
+            [0.000000, 0.757200, -0.469200],
+            [0.000000, -0.757200, -0.469200],
+        ],
+    )
+
+A ``Molecule`` is a list of element symbols plus one ``[x, y, z]`` cartesian
+coordinate (in Angstrom) per atom. The starting geometry only needs to be
+*reasonable*, not exact -- the workflow's first step is a geometry
+optimization that relaxes it to the true minimum.
+
+Typing coordinates by hand is just one option. The workflow's
+``mol_operation_type`` argument (step 3e) tells MISPR how to interpret
+``mol``; the most useful values are:
+
+* ``"get_from_mol"`` -- ``mol`` is a ``Molecule`` object, as here;
+* ``"get_from_file"`` -- ``mol`` is the path of a structure file (e.g.
+  ``.xyz``, ``.mol``, ``.pdb`` -- anything OpenBabel reads);
+* ``"get_from_pubchem"`` -- ``mol`` is a common name (e.g. ``"water"``,
+  ``"monoglyme"``) looked up in the PubChem database, no coordinates needed.
+
+The full list of operations (including looking up molecules from earlier
+runs stored in your database) is documented at
+:meth:`mispr.gaussian.utilities.mol.process_mol`.
+
+3d. Choose the level of theory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This is usually the most confusing part, so it gets its own step. Each
+calculation in the workflow is controlled by a small dict of three entries:
+
+.. code-block:: python
+
+    opt_inputs = {
+        "functional": "b3lyp",           # WHICH approximation solves the electrons
+        "basis_set": "6-31G(d)",         # HOW MANY functions describe each atom
+        "route_parameters": {"Opt": None},  # WHAT KIND of job this step runs
+    }
+    freq_inputs = {
+        "functional": "b3lyp",
+        "basis_set": "6-31G(d)",
+        "route_parameters": {"Freq": None},
+    }
+
+* ``functional`` is the electronic-structure method -- the physical
+  approximation used to solve for the electrons. ``"hf"`` (Hartree-Fock) is
+  the fastest and least accurate; DFT functionals improve on it at moderate
+  cost: ``"b3lyp"`` (the default, a reliable general-purpose choice),
+  ``"pbe0"``, ``"m062x"``, etc. The string is passed to ORCA verbatim (it
+  becomes ORCA's ``!`` keyword line), so any method name ORCA understands is
+  legal here.
+
+* ``basis_set`` is the size of the mathematical basis describing each atom:
+  bigger basis = more accurate = slower. ``"6-31G(d)"`` (the default) is a
+  small standard basis good for geometries; ``"def2-SVP"`` is a comparable
+  modern alternative; ``"def2-TZVP"`` is a typical step up when energies
+  matter. Also passed to ORCA verbatim, so the spelling must be one ORCA
+  recognizes.
+
+* ``route_parameters`` decides the *job type* of the step. The ORCA backend
+  looks only at the keys (case-insensitively): ``"Opt"`` requests a geometry
+  optimization, ``"Freq"`` a frequency calculation, both together an
+  ``Opt Freq`` run, and no recognized key means a plain single-point energy.
+  The values (``None`` here) and any other Gaussian-style route options are
+  ignored by the ORCA backend.
+
+Why the workflow runs *opt* then *freq* at all: the optimization relaxes the
+structure to its energy minimum, and the frequency step both verifies it
+really is a minimum (no imaginary, i.e. negative, frequencies) and produces
+the thermochemistry corrections and dipole moment that downstream analysis
+uses. The two steps are chained automatically -- the frequency calculation
+runs on the geometry the optimization produced, not on your input structure.
+
+**Skipping the optimization.** If your structure is already optimized at the
+same level of theory (e.g. taken from an earlier run), add ``skips=["opt"]``
+to the workflow call in step 3e -- the frequency step then runs directly on
+the input structure and everything downstream is unchanged. Skipping the
+frequency step (``skips=["freq"]``) is also accepted but rarely what you
+want: the ESP fit and the BDE enthalpies read their input from the frequency
+step's output, so the workflow would have nothing to consume downstream.
+
+**Checking what the two steps did.** Each step leaves its raw ORCA files
+under ``working_dir`` (``mol/Optimization/mol.out``,
+``mol/Frequency/mol.out``). MISPR checks convergence itself -- a
+non-converged optimization fails the workflow with
+``ORCA geometry optimization did not converge`` rather than silently
+continuing. What MISPR does *not* judge for you is imaginary frequencies: if
+the frequency output (or the ``frequencies`` list in the run document)
+contains a negative value, the structure is a saddle point rather than a
+true minimum, and the standard fix is to perturb the geometry slightly along
+that mode (or simply start from a different initial geometry) and re-run.
+
+If you omit these dicts entirely, the defaults are exactly the B3LYP/6-31G(d)
+settings shown above. The ESP fitting step has its *own* level-of-theory
+argument (``esp_gaussian_inputs``) with a *different* default, HF/6-31G* --
+deliberately so: partial charges destined for classical force fields are
+conventionally fitted at HF/6-31G* (the level the common force-field charge
+models were parameterized against), so mixing a B3LYP geometry with an HF
+charge fit is standard practice, not an inconsistency.
+
+.. note::
+   When benchmarking against Gaussian, note that ORCA's ``B3LYP`` keyword
+   uses the VWN5 local correlation variant while Gaussian's uses VWN3; use
+   ORCA's ``B3LYP/G`` keyword for a strictly Gaussian-compatible B3LYP.
+
+3e. Build the workflow
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    wf, _ = get_esp_charges(
+        mol_operation_type="get_from_mol",   # how to interpret `mol` (step 3c)
+        mol=mol,
+        working_dir="/path/to/run_output",   # where .inp/.out files will be written
+        opt_gaussian_inputs=opt_inputs,      # level of theory (step 3d)
+        freq_gaussian_inputs=freq_inputs,
+        save_to_db=True,                     # write the final document to MongoDB
+        tag="my_first_orca_esp_run",         # label you will query results by
+    )
+
+This call only *builds* the workflow object -- four linked Fireworks
+(optimize, frequency, ESP fit, save-to-database) with all settings baked in.
+Nothing runs yet. The ``tag`` is worth choosing carefully: it is stored in
+every document the workflow writes and is your primary key for finding the
+results later (``db.esp.find({"tag": "my_first_orca_esp_run"})``).
+
+``get_esp_charges`` returns a ``(workflow, label)`` tuple, hence the
+``wf, _ =`` unpacking. (The BDE and binding-energy builders return the
+workflow alone.)
+
+3f. Submit and run
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    lp = LaunchPad.from_file("/path/to/config/my_launchpad.yaml")
+    lp.add_wf(wf)
+    rapidfire(lp, m_dir="/path/to/run_output")
+
+``add_wf`` records the workflow in the LaunchPad database -- at this point it
+is queued but still not running, and the script could simply stop here: on a
+cluster you would then launch the queued jobs separately with ``rlaunch`` /
+``qlaunch`` (see the Gaussian tutorial below). ``rapidfire`` is the
+run-it-right-here alternative: it pulls ready jobs off the LaunchPad and
+executes them in the current process, which is the simplest way to run a
+small test.
+
+.. note::
+   ``rapidfire`` runs every ready Firework and then polls forever for new ones
+   -- it does not exit on its own once the workflow finishes. Check
+   ``lpad get_wflows`` for the workflow's state and interrupt/stop the process
+   once it shows ``COMPLETED`` (or a ``FIZZLED`` step that can't make further
+   progress; ``lpad get_fws -i <id> -d more`` shows the failing step's
+   traceback).
+
+The complete script
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The six pieces above, assembled (water molecule, B3LYP/6-31G(d)):
 
 .. code-block:: python
     :linenos:
 
     import os
 
-    # both must be set before the fireworks/mispr imports
+    # both must be set before the fireworks/mispr imports (step 3a)
     os.environ["FW_CONFIG_FILE"] = "/path/to/config/FW_config.yaml"
     os.environ["ORCA_CMD"] = "/path/to/orca_installation/orca"
 
@@ -222,56 +421,187 @@ A complete, runnable script (water molecule, B3LYP/6-31G(d)):
     lp.add_wf(wf)
     rapidfire(lp, m_dir="/path/to/run_output")
 
-.. note::
-   ``rapidfire`` runs every ready Firework and then polls forever for new ones
-   -- it does not exit on its own once the workflow finishes. Check
-   ``lpad get_wflows`` for the workflow's state and interrupt/stop the process
-   once it shows ``COMPLETED`` (or a ``FIZZLED`` step that can't make further
-   progress; ``lpad get_fws -i <id> -d more`` shows the failing step's
-   traceback).
+The BDE and binding-energy workflows
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The BDE and binding energy workflows are imported and driven the same way;
-only the function arguments differ:
+The BDE and binding energy workflows are imported and driven the same way --
+steps 3a, 3b, 3c, and 3f carry over unchanged, and the level-of-theory dicts
+have exactly the meaning explained in step 3d; only the workflow function
+call (step 3e) differs. Both examples below are complete and runnable as-is
+once the two paths are adjusted.
+
+**BDE** breaks every bond of the molecule (or only the bonds you list via the
+``bonds`` argument), generates the fragments, tries several fragment charge
+splits per bond (for a neutral molecule: 0/0, the homolytic split, plus +1/-1
+and -1/+1, the two heterolytic splits), runs opt + freq on the whole molecule
+and on every fragment/charge combination, and computes each dissociation
+energy from the enthalpies.
+
+The import and the workflow call are the only lines that change relative to
+the ESP script:
 
 .. code-block:: python
-    :linenos:
 
     from mispr.orca.workflows.base.bde import get_bde
+
+    wf = get_bde(
+        mol_operation_type="get_from_mol",
+        mol=mol,                          # the same water Molecule as in step 3c
+        ref_charge=0,
+        bonds=None,
+        working_dir="/path/to/bde_run",
+        opt_gaussian_inputs=opt_inputs,   # level of theory, exactly as in step 3d
+        freq_gaussian_inputs=freq_inputs,
+        save_to_db=True,
+        visualize=False,
+        tag="my_orca_bde_run",
+    )
+
+The arguments that are new compared to ESP:
+
+* ``ref_charge`` -- the charge of the *principle* (whole) molecule; the
+  fragment charge splits are enumerated relative to it. 0 for a neutral
+  molecule.
+* ``bonds`` -- which bonds to break. ``None`` means every bond in the
+  molecule; a list of atom-index pairs (e.g. ``[(0, 1)]``, "the bond between
+  atoms 0 and 1") restricts the workflow to just those, which is the main
+  lever for keeping the number of calculations down on larger molecules.
+* ``visualize`` -- ``True`` additionally draws a bar chart of all computed
+  BDEs with the corresponding bonds highlighted on the 2D structure
+  (requires ``rdkit``); the numbers in the database are identical either way.
+* ``get_bde`` returns the workflow alone -- ``wf = ...``, no tuple
+  unpacking.
+
+.. dropdown:: Complete runnable BDE script
+
+    .. code-block:: python
+        :linenos:
+
+        import os
+
+        os.environ["FW_CONFIG_FILE"] = "/path/to/config/FW_config.yaml"
+        os.environ["ORCA_CMD"] = "/path/to/orca_installation/orca"
+
+        from pymatgen.core.structure import Molecule
+        from fireworks import LaunchPad
+        from fireworks.core.rocket_launcher import rapidfire
+        from mispr.orca.workflows.base.bde import get_bde
+
+        mol = Molecule(
+            ["O", "H", "H"],
+            [
+                [0.000000, 0.000000, 0.117300],
+                [0.000000, 0.757200, -0.469200],
+                [0.000000, -0.757200, -0.469200],
+            ],
+        )
+
+        wf = get_bde(
+            mol_operation_type="get_from_mol",
+            mol=mol,
+            ref_charge=0,
+            bonds=None,
+            working_dir="/path/to/bde_run",
+            opt_gaussian_inputs={
+                "functional": "b3lyp", "basis_set": "6-31G(d)",
+                "route_parameters": {"Opt": None},
+            },
+            freq_gaussian_inputs={
+                "functional": "b3lyp", "basis_set": "6-31G(d)",
+                "route_parameters": {"Freq": None},
+            },
+            save_to_db=True,
+            visualize=False,
+            tag="my_orca_bde_run",
+        )
+
+        lp = LaunchPad.from_file("/path/to/config/my_launchpad.yaml")
+        lp.add_wf(wf)
+        rapidfire(lp, m_dir="/path/to/bde_run")
+
+**Binding energy** takes *two* molecules: it optimizes + runs frequency on
+each separately, links them into a complex at the atom indices you give in
+``index``, optimizes the complex, and computes
+E(complex) - E(mol_1) - E(mol_2).
+
+Because there are two input molecules, the three molecule-related arguments
+become two-element lists (one entry per molecule), which is the main new
+thing to absorb:
+
+.. code-block:: python
+
     from mispr.orca.workflows.base.binding_energy import get_binding_energies
 
-    # BDE: breaks every bond of the molecule, tries several fragment charge
-    # splits per bond, and computes the dissociation energy of each
-    wf = get_bde(
-        mol_operation_type="get_from_mol", mol=mol, ref_charge=0,
-        working_dir="/path/to/bde_run",
-        opt_gaussian_inputs={...}, freq_gaussian_inputs={...},
-        save_to_db=True, visualize=False, tag="my_orca_bde_run",
+    wf = get_binding_energies(
+        mol_operation_type=["get_from_mol", "get_from_mol"],
+        mol=[water, water.copy()],        # the two molecules; here: a water dimer
+        index=[0, 1],
+        working_dir="/path/to/be_run",
+        opt_gaussian_inputs=opt_inputs,   # level of theory, exactly as in step 3d
+        freq_gaussian_inputs=freq_inputs,
+        save_to_db=True,
+        tag="my_orca_be_run",
     )
 
-    # Binding energy: optimizes two molecules separately, links them at the
-    # given atom indices (here: atom 0 of each), optimizes the complex, and
-    # computes E(complex) - E(mol_1) - E(mol_2)
-    wf = get_binding_energies(
-        mol_operation_type=["get_from_mol", "get_from_mol"], mol=[mol_1, mol_2],
-        index=[0, 0],
-        working_dir="/path/to/be_run",
-        opt_gaussian_inputs={...}, freq_gaussian_inputs={...},
-        save_to_db=True, tag="my_orca_be_run",
-    )
+* ``mol_operation_type`` / ``mol`` -- as in step 3c, but one entry per
+  molecule; the two entries are independent (e.g. one molecule from a file,
+  the other from PubChem is fine).
+* ``index`` -- *which atom of each molecule* is brought into contact when
+  the two are linked into the complex, counted from 0 within each molecule
+  separately. Here ``[0, 1]`` connects the O (atom 0) of the first water to
+  an H (atom 1) of the second -- the hydrogen bond of the water dimer.
+  Choosing chemically sensible contact atoms matters: the complex geometry
+  is built from this pairing before being re-optimized.
+* ``get_binding_energies`` also returns the workflow alone.
+
+.. dropdown:: Complete runnable binding-energy script
+
+    .. code-block:: python
+        :linenos:
+
+        import os
+
+        os.environ["FW_CONFIG_FILE"] = "/path/to/config/FW_config.yaml"
+        os.environ["ORCA_CMD"] = "/path/to/orca_installation/orca"
+
+        from pymatgen.core.structure import Molecule
+        from fireworks import LaunchPad
+        from fireworks.core.rocket_launcher import rapidfire
+        from mispr.orca.workflows.base.binding_energy import get_binding_energies
+
+        water = Molecule(
+            ["O", "H", "H"],
+            [
+                [0.000000, 0.000000, 0.117300],
+                [0.000000, 0.757200, -0.469200],
+                [0.000000, -0.757200, -0.469200],
+            ],
+        )
+
+        wf = get_binding_energies(
+            mol_operation_type=["get_from_mol", "get_from_mol"],
+            mol=[water, water.copy()],
+            index=[0, 1],
+            working_dir="/path/to/be_run",
+            opt_gaussian_inputs={
+                "functional": "b3lyp", "basis_set": "6-31G(d)",
+                "route_parameters": {"Opt": None},
+            },
+            freq_gaussian_inputs={
+                "functional": "b3lyp", "basis_set": "6-31G(d)",
+                "route_parameters": {"Freq": None},
+            },
+            save_to_db=True,
+            tag="my_orca_be_run",
+        )
+
+        lp = LaunchPad.from_file("/path/to/config/my_launchpad.yaml")
+        lp.add_wf(wf)
+        rapidfire(lp, m_dir="/path/to/be_run")
 
 Every ORCA workflow function additionally accepts ``orca_cmd`` (executable
 path, overriding ``ORCA_CMD``), ``num_cores`` (parallel processes per
 calculation, default 1), and ``memory`` (MB per core, default 4000).
-
-.. note::
-   Method and basis set choices are plain runtime arguments -- changing the
-   level of theory means changing the two strings in
-   ``opt_gaussian_inputs``/``freq_gaussian_inputs``, never the code. Basis set
-   names are passed to ORCA verbatim, so they must be spellings ORCA
-   recognizes (e.g. ``6-31G(d)``, ``def2-SVP``). When benchmarking against
-   Gaussian, note that ORCA's ``B3LYP`` keyword uses the VWN5 local
-   correlation variant while Gaussian's uses VWN3; use ORCA's ``B3LYP/G``
-   keyword for a strictly Gaussian-compatible B3LYP.
 
 Step 4: Find and read the results
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -334,9 +664,12 @@ Workflow-specific fields:
 
 * **binding_energy** documents:
 
-  * ``be_eV``: E(complex) - E(mol_1) - E(mol_2), in eV. Negative means
-    binding is favorable; hydrogen-bond complexes typically land between
-    roughly -0.1 and -0.4 eV.
+  * ``be_eV``: not a bare number but a small object with three entries --
+    ``value`` is E(complex) - E(mol_1) - E(mol_2) in eV (electronic
+    energies; negative means binding is favorable, hydrogen-bond complexes
+    typically land between roughly -0.1 and -0.4 eV), while ``sites`` and
+    ``atoms`` record *which* two atoms were linked, as indices into the
+    complex and as element symbols.
 
 Working files (the actual ORCA ``.inp``/``.out`` text files of every step) are
 kept under ``working_dir``, organized per molecule and step (``Optimization``,
@@ -467,9 +800,133 @@ B3LYP/6-31G(d), ORCA 6.1.1):
    radicals of a homolytic split. The energies include the thermochemistry
    corrections from the frequency steps, not just raw electronic energies.
 
-For ``binding_energy`` documents the specific field is a single scalar,
-``be_eV`` (e.g. ``-0.19``): E(complex) - E(mol_1) - E(mol_2) in eV, negative
-when binding is favorable.
+Example: an annotated ``binding_energy`` document
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Produced by the water-dimer example from Step 3 (B3LYP/6-31G(d),
+ORCA 6.1.1). The shared fields describe the **complex** (the linked,
+re-optimized two-molecule system), not the individual molecules:
+
+.. code-block:: javascript
+
+    {
+      // ... shared fields as above, but for the complex: ...
+      "molecule": { /* the optimized water DIMER: 6 atoms; molecule 1's atoms
+                       come first (indices 0-2), molecule 2's follow (3-5) */ },
+      "smiles": "O.O",                 // "." separates the two disconnected waters
+      "formula_alphabetical": "H4 O2", // formula of the whole complex
+      "chemsys": "H-O",
+      "energy": -152.828358210114,     // electronic energy of the COMPLEX, in Hartree
+
+      "be_eV": {                       // the binding energy result itself:
+        "sites": [0, 4],               //   the two linked atoms, as indices into the
+                                       //   complex: 0 = O of molecule 1; 4 = atom 1 of
+                                       //   molecule 2 (its index 1 + the 3 atoms of
+                                       //   molecule 1 that precede it)
+        "atoms": ["O", "H"],           //   the same two atoms as element symbols
+        "value": -0.284276             //   E(complex) - E(mol_1) - E(mol_2), in eV.
+                                       //   Negative = binding favorable; ~-0.28 eV
+                                       //   (~6.6 kcal/mol) is the right scale for the
+                                       //   water-dimer hydrogen bond at this level
+                                       //   (raw electronic energies: no ZPE and no
+                                       //   counterpoise/BSSE correction, which is why
+                                       //   it overshoots the ~-0.22 eV benchmark value)
+      },
+
+      "functional": "b3lyp",
+      "basis": "6-31G(d)",
+      "wall_time (s)": 31.85,          // six calculations: opt+freq for each molecule
+                                       //   and for the complex
+      "gauss_version": "orca-6.1.1"
+    }
+
+.. note::
+   The energies entering ``be_eV.value`` are the raw electronic energies of
+   the three optimization runs -- deliberately the same convention as the
+   Gaussian backend, so numbers are comparable across engines. For
+   publication-quality interaction energies you would typically also want a
+   counterpoise (BSSE) correction and a larger basis set; a positive way to
+   read this field is as the *uncorrected supermolecular* binding energy at
+   the chosen level of theory.
+
+Using the Psi4 backend
+------------------------------
+As of version 0.0.5, the ``bde``, ``binding_energy``, and ``esp`` workflows
+are also available with a `Psi4 <https://psicode.org>`_ backend
+(``mispr.psi4.workflows.base``), as a free/open-source alternative to
+Gaussian. The workflow functions have the same names and (mostly) the same
+arguments as their Gaussian counterparts -- only the import path changes.
+
+The driving script has the same shape as the ORCA one, which the previous
+section walks through piece by piece (steps 3a--3f); everything said there
+applies to Psi4 too, with two differences: there is no external executable
+to point at (Psi4 runs in-process through its Python API, so nothing like
+``ORCA_CMD`` exists), and the import comes from ``mispr.psi4``. Piece by
+piece:
+
+1. Point the script at your configuration. Must happen **before** the
+   ``fireworks``/``mispr`` imports -- fireworks reads this variable once, at
+   import time::
+
+       import os
+       os.environ["FW_CONFIG_FILE"] = "/path/to/config/FW_config.yaml"
+
+2. Imports -- ``mispr.psi4`` in the last line is the only Psi4-specific
+   part::
+
+       from pymatgen.core.structure import Molecule
+       from fireworks import LaunchPad
+       from fireworks.core.rocket_launcher import rapidfire
+       from mispr.psi4.workflows.base.esp import get_esp_charges
+
+3. Create the molecule -- element symbols plus one cartesian coordinate (in
+   Angstrom) per atom; it only needs to be a reasonable starting guess, the
+   workflow's first step optimizes it::
+
+       mol = Molecule(
+           ["O", "H", "H"],
+           [
+               [0.000000, 0.000000, 0.117300],
+               [0.000000, 0.757200, -0.469200],
+               [0.000000, -0.757200, -0.469200],
+           ],
+       )
+
+4. Build the workflow. The level-of-theory dicts use the same three keys
+   (``functional``, ``basis_set``, ``route_parameters``) explained in the
+   ORCA section's step 3d, except the strings must be spellings *Psi4*
+   recognizes -- here the minimal HF/STO-3G, chosen to make a first test run
+   in seconds::
+
+       wf = get_esp_charges(
+           mol_operation_type="get_from_mol",
+           mol=mol,
+           working_dir="/path/to/run_output",
+           opt_gaussian_inputs={
+               "functional": "hf", "basis_set": "sto-3g",
+               "route_parameters": {"Opt": None},
+           },
+           freq_gaussian_inputs={
+               "functional": "hf", "basis_set": "sto-3g",
+               "route_parameters": {"Freq": None},
+           },
+           save_to_db=True,
+           tag="my_first_psi4_esp_run",
+       )
+
+5. Submit and run -- ``add_wf`` queues the workflow in the database,
+   ``rapidfire`` then executes it in the current process::
+
+       lp = LaunchPad.from_file("/path/to/config/my_launchpad.yaml")
+       lp.add_wf(wf)
+       rapidfire(lp, m_dir="/path/to/run_output")
+
+.. note::
+   ``rapidfire`` runs every ready Firework and then polls forever for new
+   ones -- it does not exit on its own once the workflow finishes. Check
+   ``lpad get_wflows`` for the workflow's state and interrupt/stop the
+   process once it shows ``COMPLETED`` (or a ``FIZZLED`` step that can't
+   make further progress).
 
 Running an ESP workflow
 ------------------------------
