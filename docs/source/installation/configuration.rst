@@ -46,6 +46,16 @@ Writing the Configuration Files
                 "port": |PORT|,
             }
 
+        .. note::
+           **Using MongoDB Atlas?** Use URI mode instead of the
+           host/port/user fields above: set ``"uri_mode": true`` and put
+           the full ``mongodb+srv://...`` connection string (with the
+           database name in its path) in ``"host"`` -- the other credential
+           fields are then ignored. A complete Atlas walkthrough, including
+           the firewall (IP whitelist) setup that HPC clusters need, is in
+           :ref:`installation/dependencies:Setting up MongoDB Atlas for an
+           HPC cluster, step by step`.
+
     .. tab-item:: my_fworker.yaml
 
         This file stores your FireWorker's credentials. In
