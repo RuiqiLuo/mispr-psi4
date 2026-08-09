@@ -18,10 +18,11 @@ WORKFLOW_KWARGS = Workflow.__init__.__code__.co_varnames
 
 
 def common_fw(
-    mol,
-    working_dir,
-    opt_gaussian_inputs,
-    freq_gaussian_inputs,
+    mol=None,
+    prev_calc_key=None,
+    working_dir=None,
+    opt_gaussian_inputs=None,
+    freq_gaussian_inputs=None,
     gout_key=None,
     db=None,
     mol_name=None,
@@ -41,7 +42,14 @@ def common_fw(
     original), swapping the engine Firework for ``OrcaFW``.
 
     Args:
-        mol (Molecule): pymatgen Molecule to run the calculations on.
+        mol (Molecule, optional): pymatgen Molecule to run the calculations on;
+            required unless ``prev_calc_key`` is given (e.g. when chaining onto
+            a state produced by an earlier node in a tree-structured workflow,
+            such as ``mispr.orca.workflows.base.ip_ea``, where the geometry
+            only exists once that earlier Firework actually runs).
+        prev_calc_key (str, optional): Key of a previous run in
+            fw_spec["gaussian_output"] to use as the starting structure instead
+            of ``mol``.
         working_dir (str): Path of the working directory.
         opt_gaussian_inputs (dict): Parameters for the optimization step (see
             ``mispr.orca.fireworks.core.OrcaFW``).
@@ -78,6 +86,7 @@ def common_fw(
     if not skips:
         opt_fw = OrcaFW(
             molecule=mol,
+            prev_calc_key=prev_calc_key,
             gaussian_input_params=opt_gaussian_inputs,
             db=db,
             name=f"{label}_optimization",
@@ -109,6 +118,7 @@ def common_fw(
     elif len(skips) == 1 and skips[0].lower() == "opt":
         freq_fw = OrcaFW(
             molecule=mol,
+            prev_calc_key=prev_calc_key,
             gaussian_input_params=freq_gaussian_inputs,
             db=db,
             name=f"{label}_frequency",
@@ -125,6 +135,7 @@ def common_fw(
     elif len(skips) == 1 and skips[0].lower() == "freq":
         opt_fw = OrcaFW(
             molecule=mol,
+            prev_calc_key=prev_calc_key,
             gaussian_input_params=opt_gaussian_inputs,
             db=db,
             name=f"{label}_optimization",
