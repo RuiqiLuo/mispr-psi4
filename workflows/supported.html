@@ -694,16 +694,14 @@ extracted from MD simulations</p></li>
 of version 0.0.5, the ESP, bond dissociation energy, and binding energy
 workflows are additionally available with an
 <a class="reference external" href="https://www.faccts.de/orca/">ORCA</a> backend
-(<code class="docutils literal notranslate"><span class="pre">mispr/orca/workflows/base</span></code>) and a <a class="reference external" href="https://psicode.org">Psi4</a> backend
-(<code class="docutils literal notranslate"><span class="pre">mispr/psi4/workflows/base</span></code>); the workflow functions keep the same names
-and arguments across all three engines, so switching engine is an import-path
+(<code class="docutils literal notranslate"><span class="pre">mispr/orca/workflows/base</span></code>); the workflow functions keep the same names
+and arguments across both engines, so switching engine is an import-path
 change, not a code change. See
 <a class="reference internal" href="tutorials.html"><span class="doc">Workflow Tutorials</span></a> for per-backend setup and examples.</p>
 <p>One can customize any of the above workflows or create their own by reusing
 the building blocks provided by MISPR. The preset workflows are in
 <code class="docutils literal notranslate"><span class="pre">mispr/gaussian/workflows/base</span></code>, <code class="docutils literal notranslate"><span class="pre">mispr/orca/workflows/base</span></code>,
-<code class="docutils literal notranslate"><span class="pre">mispr/psi4/workflows/base</span></code>, <code class="docutils literal notranslate"><span class="pre">mispr/lammps/workflows/base</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">mispr/hybrid/workflows</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">mispr/lammps/workflows/base</span></code>, and <code class="docutils literal notranslate"><span class="pre">mispr/hybrid/workflows</span></code>.</p>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>Other types of force field parameters can be provided as

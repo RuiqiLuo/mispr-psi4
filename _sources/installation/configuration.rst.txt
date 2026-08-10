@@ -226,12 +226,20 @@ Writing the Configuration Files
         * ``tcmd``: the command to run tleap
 
         .. note::
-            The ORCA and Psi4 backends do **not** read this file. Psi4 runs
-            through its Python API (nothing to configure here), and ORCA is
+            The ORCA backend does **not** read this file. ORCA is
             located through the ``orca_cmd`` workflow argument or the
             ``ORCA_CMD`` environment variable -- see
-            :doc:`Prerequisites <dependencies>`. If you only use those
-            backends, ``gcmd``/``formchkcmd`` can be left unset.
+            :doc:`Prerequisites <dependencies>`. If you only use that
+            backend, ``gcmd``/``formchkcmd`` can be left unset.
+
+        .. note::
+            Each section is only read when a Firetask that needs it
+            actually runs (e.g. ``[LammpsRunCalc]`` is only read by a
+            LAMMPS Firetask). If you are not running MD (``[LammpsRunCalc]``,
+            ``[AmbertoolsRunCalc]``) or using Maestro/Schrodinger
+            (``[MaestroCalc]``), you can simply omit those sections from
+            ``config.ini`` entirely -- there is no need to fill them in
+            with placeholder values.
 
         .. note::
             Anything between two dollar signs ($ $) is a placeholder for

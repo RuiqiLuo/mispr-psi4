@@ -669,11 +669,26 @@
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LaunchPad</span></code></p></td>
 <td><p>FireWorks database that controls the workflows. It stores all the tasks to be run and their status (e.g., RUNNING, WAITING, COMPLETED, etc.)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FireTask</span></code></p></td>
-<td><p>Computing task to be performed</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Workflow</span></code></p></td>
+<td><p>A Directed Acyclic Graph of one or more Fireworks with dependencies between them, describing the full procedure for computing a property</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FireWork</span></code></p></td>
-<td><p>A list of FireTasks that are to be run in sequence</p></td>
+<td><p>A list of FireTasks that are to be run in sequence; one node in a Workflow (e.g. “Optimization”, “Frequency”, “ESP”)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FireTask</span></code></p></td>
+<td><p>Computing task to be performed; the smallest unit of work in a Firework (e.g. write an input file, submit a job, parse an output file)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FireWorker</span></code></p></td>
+<td><p>Defines where and how a job runs – can be as simple as the local workstation hosting the LaunchPad, or a supercomputing cluster with a queueing system; configured in <code class="docutils literal notranslate"><span class="pre">my_fworker.yaml</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Rocket</span></code> / <code class="docutils literal notranslate"><span class="pre">rlaunch</span></code></p></td>
+<td><p>The process that pulls a FireWork off the LaunchPad and executes it; <code class="docutils literal notranslate"><span class="pre">rlaunch</span></code> runs one Rocket, <code class="docutils literal notranslate"><span class="pre">qlaunch</span></code> submits Rockets through a queueing system</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">runs</span></code> collection</p></td>
+<td><p>The MongoDB collection where MISPR stores one document per individual calculation step; distinct from the property-specific collections (e.g. <code class="docutils literal notranslate"><span class="pre">esp</span></code>, <code class="docutils literal notranslate"><span class="pre">bde</span></code>) that hold the final, combined-analysis document for a workflow</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">orca_cmd</span></code> / <code class="docutils literal notranslate"><span class="pre">ORCA_CMD</span></code></p></td>
+<td><p>How the ORCA backend locates the <code class="docutils literal notranslate"><span class="pre">orca</span></code> executable: the <code class="docutils literal notranslate"><span class="pre">orca_cmd</span></code> argument accepted by every ORCA workflow function, or the <code class="docutils literal notranslate"><span class="pre">ORCA_CMD</span></code> environment variable if <code class="docutils literal notranslate"><span class="pre">orca_cmd</span></code> is not given. Unlike Gaussian/LAMMPS, this is not read from <code class="docutils literal notranslate"><span class="pre">config.ini</span></code></p></td>
 </tr>
 </tbody>
 </table>

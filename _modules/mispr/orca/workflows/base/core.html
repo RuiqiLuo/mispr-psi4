@@ -664,10 +664,11 @@
 
 
 <div class="viewcode-block" id="common_fw"><a class="viewcode-back" href="../../../../../mispr.orca.workflows.base.html#mispr.orca.workflows.base.core.common_fw">[docs]</a><span class="k">def</span> <span class="nf">common_fw</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">,</span>
-    <span class="n">working_dir</span><span class="p">,</span>
-    <span class="n">opt_gaussian_inputs</span><span class="p">,</span>
-    <span class="n">freq_gaussian_inputs</span><span class="p">,</span>
+    <span class="n">mol</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">prev_calc_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">working_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">opt_gaussian_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">freq_gaussian_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">gout_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">db</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">mol_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -683,11 +684,17 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Define a list of Fireworks commonly used in ORCA workflows: optimize a</span>
 <span class="sd">    molecule, then run a frequency analysis on the optimized structure. Mirrors</span>
-<span class="sd">    ``mispr.psi4.workflows.base.core.common_fw`` (and through it the Gaussian</span>
-<span class="sd">    original), swapping the engine Firework for ``OrcaFW``.</span>
+<span class="sd">    the Gaussian original, swapping the engine Firework for ``OrcaFW``.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        mol (Molecule): pymatgen Molecule to run the calculations on.</span>
+<span class="sd">        mol (Molecule, optional): pymatgen Molecule to run the calculations on;</span>
+<span class="sd">            required unless ``prev_calc_key`` is given (e.g. when chaining onto</span>
+<span class="sd">            a state produced by an earlier node in a tree-structured workflow,</span>
+<span class="sd">            such as ``mispr.orca.workflows.base.ip_ea``, where the geometry</span>
+<span class="sd">            only exists once that earlier Firework actually runs).</span>
+<span class="sd">        prev_calc_key (str, optional): Key of a previous run in</span>
+<span class="sd">            fw_spec[&quot;gaussian_output&quot;] to use as the starting structure instead</span>
+<span class="sd">            of ``mol``.</span>
 <span class="sd">        working_dir (str): Path of the working directory.</span>
 <span class="sd">        opt_gaussian_inputs (dict): Parameters for the optimization step (see</span>
 <span class="sd">            ``mispr.orca.fireworks.core.OrcaFW``).</span>
@@ -724,6 +731,7 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">skips</span><span class="p">:</span>
         <span class="n">opt_fw</span> <span class="o">=</span> <span class="n">OrcaFW</span><span class="p">(</span>
             <span class="n">molecule</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">prev_calc_key</span><span class="o">=</span><span class="n">prev_calc_key</span><span class="p">,</span>
             <span class="n">gaussian_input_params</span><span class="o">=</span><span class="n">opt_gaussian_inputs</span><span class="p">,</span>
             <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">_optimization&quot;</span><span class="p">,</span>
@@ -755,6 +763,7 @@
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">skips</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">skips</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;opt&quot;</span><span class="p">:</span>
         <span class="n">freq_fw</span> <span class="o">=</span> <span class="n">OrcaFW</span><span class="p">(</span>
             <span class="n">molecule</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">prev_calc_key</span><span class="o">=</span><span class="n">prev_calc_key</span><span class="p">,</span>
             <span class="n">gaussian_input_params</span><span class="o">=</span><span class="n">freq_gaussian_inputs</span><span class="p">,</span>
             <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">_frequency&quot;</span><span class="p">,</span>
@@ -771,6 +780,7 @@
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">skips</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">skips</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;freq&quot;</span><span class="p">:</span>
         <span class="n">opt_fw</span> <span class="o">=</span> <span class="n">OrcaFW</span><span class="p">(</span>
             <span class="n">molecule</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">prev_calc_key</span><span class="o">=</span><span class="n">prev_calc_key</span><span class="p">,</span>
             <span class="n">gaussian_input_params</span><span class="o">=</span><span class="n">opt_gaussian_inputs</span><span class="p">,</span>
             <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">_optimization&quot;</span><span class="p">,</span>

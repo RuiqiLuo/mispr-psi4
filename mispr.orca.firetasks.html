@@ -713,21 +713,6 @@
 
             
           
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="mispr.psi4.html" class="md-nav__link">
-        <span class="md-ellipsis">mispr.<wbr>psi4 package</span>
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -864,8 +849,7 @@ chemistry engine is used downstream – only the dynamically generated per-fragm
 optimization/frequency Fireworks are engine-specific. This module therefore
 subclasses the Gaussian <code class="docutils literal notranslate"><span class="pre">BreakMolecule</span></code> and overrides only the one method
 (<code class="docutils literal notranslate"><span class="pre">_workflow</span></code>) that decides which Fireworks to build for each fragment, pointing
-it at the ORCA <code class="docutils literal notranslate"><span class="pre">common_fw</span></code> instead of the Gaussian one – the same pattern the
-psi4 backend uses (mispr.psi4.firetasks.geo_transformation).</p>
+it at the ORCA <code class="docutils literal notranslate"><span class="pre">common_fw</span></code> instead of the Gaussian one.</p>
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="mispr.orca.firetasks.geo_transformation.BreakMolecule">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mispr.orca.firetasks.geo_transformation.</span></span><span class="sig-name descname"><span class="pre">BreakMolecule</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em></span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mispr/orca/firetasks/geo_transformation.html#BreakMolecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mispr.orca.firetasks.geo_transformation.BreakMolecule" title="Permalink to this definition">¶</a></dt>
@@ -879,11 +863,11 @@ each fragment instead of Gaussian ones.</p>
 <h2 id="module-mispr.orca.firetasks.run_calc"><span id="mispr-orca-firetasks-run-calc-module"></span>mispr.orca.firetasks.run_calc module<a class="headerlink" href="#module-mispr.orca.firetasks.run_calc" title="Permalink to this heading">¶</a></h2>
 <p>Define firetasks for running ORCA calculations.</p>
 <p>ORCA follows the same external-process model as Gaussian (write an input file,
-run the executable, parse the output file), not psi4’s in-memory Python API –
-but unlike Gaussian, there is no pymatgen.io support for its file formats, so
-the input writing / output parsing lives in mispr.orca.utilities. Like RunPsi4,
-RunOrca combines the write/run/parse steps into a single Firetask and stores a
-result dictionary with the same schema as mispr.gaussian.utilities.gout.
+run the executable, parse the output file), but unlike Gaussian, there is no
+pymatgen.io support for its file formats, so the input writing / output
+parsing lives in mispr.orca.utilities. RunOrca combines the write/run/parse
+steps into a single Firetask and stores a result dictionary with the same
+schema as mispr.gaussian.utilities.gout.
 process_run under fw_spec[“gaussian_output”], so any downstream Firetask
 written for Gaussian runs (BDEtoDB, ESPtoDB, BindingEnergytoDB, …) can
 consume ORCA results unmodified.</p>
@@ -897,12 +881,11 @@ follow-up work.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FiretaskBase</span></code></p>
 <p>Compute ESP-fitted atomic partial charges for a molecule via ORCA’s CHELPG
 scheme (grid-based ESP fitting – ORCA’s counterpart to the Merz-Singh-
-Kollman fit the Gaussian backend uses and the RESP fit the psi4 backend
-uses; all three fit atomic charges to the molecular electrostatic
-potential, differing in grid construction/restraints). Always runs a
-single-point calculation – callers are expected to have already optimized
-the molecule (e.g. via a preceding <code class="docutils literal notranslate"><span class="pre">RunOrca</span></code> Firework) and pass it in
-through <code class="docutils literal notranslate"><span class="pre">prev_calc_key</span></code>.</p>
+Kollman fit the Gaussian backend uses; both fit atomic charges to the
+molecular electrostatic potential, differing in grid
+construction/restraints). Always runs a single-point calculation –
+callers are expected to have already optimized the molecule (e.g. via a
+preceding <code class="docutils literal notranslate"><span class="pre">RunOrca</span></code> Firework) and pass it in through <code class="docutils literal notranslate"><span class="pre">prev_calc_key</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="mispr.orca.firetasks.run_calc.ESP-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#mispr.orca.firetasks.run_calc.ESP-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">

@@ -647,11 +647,11 @@
 <span></span><code><span class="sd">&quot;&quot;&quot;Define firetasks for running ORCA calculations.</span>
 
 <span class="sd">ORCA follows the same external-process model as Gaussian (write an input file,</span>
-<span class="sd">run the executable, parse the output file), not psi4&#39;s in-memory Python API --</span>
-<span class="sd">but unlike Gaussian, there is no pymatgen.io support for its file formats, so</span>
-<span class="sd">the input writing / output parsing lives in mispr.orca.utilities. Like RunPsi4,</span>
-<span class="sd">RunOrca combines the write/run/parse steps into a single Firetask and stores a</span>
-<span class="sd">result dictionary with the same schema as mispr.gaussian.utilities.gout.</span>
+<span class="sd">run the executable, parse the output file), but unlike Gaussian, there is no</span>
+<span class="sd">pymatgen.io support for its file formats, so the input writing / output</span>
+<span class="sd">parsing lives in mispr.orca.utilities. RunOrca combines the write/run/parse</span>
+<span class="sd">steps into a single Firetask and stores a result dictionary with the same</span>
+<span class="sd">schema as mispr.gaussian.utilities.gout.</span>
 <span class="sd">process_run under fw_spec[&quot;gaussian_output&quot;], so any downstream Firetask</span>
 <span class="sd">written for Gaussian runs (BDEtoDB, ESPtoDB, BindingEnergytoDB, ...) can</span>
 <span class="sd">consume ORCA results unmodified.</span>
@@ -734,8 +734,6 @@
 <span class="sd">    the lone H atoms produced by breaking X-H bonds -- reduces to the purely</span>
 <span class="sd">    translational + electronic corrections, computed analytically here instead</span>
 <span class="sd">    of invoking ORCA&#39;s Hessian machinery on a system it has nothing to do with.</span>
-<span class="sd">    (Same convention as the psi4 backend&#39;s identically-named helper, so both</span>
-<span class="sd">    backends put identical numbers in front of the shared BDE analysis code.)</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        dict: &quot;Zero-point correction&quot;, &quot;Enthalpy&quot;, and &quot;Gibbs Free Energy&quot;</span>
@@ -959,12 +957,12 @@
         <span class="n">run_opt</span> <span class="o">=</span> <span class="s2">&quot;opt&quot;</span> <span class="ow">in</span> <span class="n">job_types</span>
         <span class="n">run_freq</span> <span class="o">=</span> <span class="s2">&quot;freq&quot;</span> <span class="ow">in</span> <span class="n">job_types</span>
 
-        <span class="c1"># single-atom guards, mirroring the psi4 backend: an atom has no</span>
-        <span class="c1"># internal coordinates to optimize and no vibrational modes to compute,</span>
-        <span class="c1"># so opt degenerates to a single point and freq to analytic ideal-gas</span>
-        <span class="c1"># thermochemistry -- and a bare nucleus (e.g. the H+ fragment BDE&#39;s</span>
-        <span class="c1"># charge-state enumeration produces) has no electrons for ORCA&#39;s SCF to</span>
-        <span class="c1"># solve at all, so it is skipped entirely with zero energy</span>
+        <span class="c1"># single-atom guards: an atom has no internal coordinates to optimize</span>
+        <span class="c1"># and no vibrational modes to compute, so opt degenerates to a single</span>
+        <span class="c1"># point and freq to analytic ideal-gas thermochemistry -- and a bare</span>
+        <span class="c1"># nucleus (e.g. the H+ fragment BDE&#39;s charge-state enumeration</span>
+        <span class="c1"># produces) has no electrons for ORCA&#39;s SCF to solve at all, so it is</span>
+        <span class="c1"># skipped entirely with zero energy</span>
         <span class="n">single_atom</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">num_sites</span> <span class="o">==</span> <span class="mi">1</span>
         <span class="n">bare_nucleus</span> <span class="o">=</span> <span class="n">single_atom</span> <span class="ow">and</span> <span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Z</span> <span class="o">-</span> <span class="n">charge</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="n">single_atom</span><span class="p">:</span>
@@ -1138,12 +1136,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute ESP-fitted atomic partial charges for a molecule via ORCA&#39;s CHELPG</span>
 <span class="sd">    scheme (grid-based ESP fitting -- ORCA&#39;s counterpart to the Merz-Singh-</span>
-<span class="sd">    Kollman fit the Gaussian backend uses and the RESP fit the psi4 backend</span>
-<span class="sd">    uses; all three fit atomic charges to the molecular electrostatic</span>
-<span class="sd">    potential, differing in grid construction/restraints). Always runs a</span>
-<span class="sd">    single-point calculation -- callers are expected to have already optimized</span>
-<span class="sd">    the molecule (e.g. via a preceding ``RunOrca`` Firework) and pass it in</span>
-<span class="sd">    through ``prev_calc_key``.</span>
+<span class="sd">    Kollman fit the Gaussian backend uses; both fit atomic charges to the</span>
+<span class="sd">    molecular electrostatic potential, differing in grid</span>
+<span class="sd">    construction/restraints). Always runs a single-point calculation --</span>
+<span class="sd">    callers are expected to have already optimized the molecule (e.g. via a</span>
+<span class="sd">    preceding ``RunOrca`` Firework) and pass it in through ``prev_calc_key``.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        molecule (Molecule, optional): pymatgen Molecule to run the ESP</span>

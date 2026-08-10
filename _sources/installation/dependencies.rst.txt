@@ -22,41 +22,27 @@ backend you plan to use. The table below summarizes what each backend
 needs; the sections that follow give the exact commands.
 
 .. list-table::
-   :widths: 22 26 26 26
+   :widths: 22 26 26
    :header-rows: 1
 
    * - Component
      - Gaussian user
      - **ORCA user**
-     - Psi4 user
    * - ``openbabel`` (conda-forge)
      - required
      - required
-     - required
-   * - ``psi4`` + ``dftd3-python`` (conda-forge)
-     - not needed
-     - not needed
-     - required
-   * - ``resp`` (pip, from GitHub)
-     - not needed
-     - not needed
-     - required (ESP workflow only)
    * - MISPR itself (pip, from this repository)
-     - required
      - required
      - required
    * - MolMD fork of ``pymatgen`` (pip, from GitHub)
      - required
      - required
-     - required
    * - External program + license
      - Gaussian license, ``g16`` module
      - ORCA binaries (free academic download) + OpenMPI for parallel runs
-     - none (pure Python, installed by conda above)
    * - ``config.ini`` entry
      - ``gcmd`` / ``formchkcmd``
      - none (uses ``ORCA_CMD`` env variable instead)
-     - none
 
 In other words, if you only use the **ORCA backend**, your Python
 environment needs just: conda-forge ``openbabel``, then ``pip install``
@@ -73,7 +59,7 @@ install Miniconda by following the `official installation guide <https://docs.co
 
 Some MISPR dependencies must come from **conda** (conda-forge) and others
 from **pip**, and the **order matters** -- conda-forge packages first, pip
-packages second; see the warning below for why. The recipe is five steps,
+packages second; see the warning below for why. The recipe is four steps,
 run in exactly this order.
 
 **Step 1 -- create and activate the environment**::
@@ -93,12 +79,6 @@ This is the step that must come before any ``pip install``. ORCA and
 Gaussian users need OpenBabel plus an explicitly pinned numpy::
 
     conda install -c conda-forge openbabel=3.1.1 "numpy<2"
-
-Psi4 users additionally need the Psi4 engine and its dispersion-correction
-plugin (this makes the environment much larger, so skip it for the other
-backends)::
-
-    conda install -c conda-forge openbabel=3.1.1 psi4 dftd3-python "numpy<2"
 
 These packages ship compiled binaries, which is both why they must come from
 conda-forge (no reliable pip wheels) and why they must be installed *first*
@@ -121,7 +101,7 @@ pure-Python dependencies (FireWorks, custodian, pymongo, mdproptools, ...)
 are pulled in automatically here; you do not install them separately.
 
 Note the source: the PyPI ``mispr`` package does **not** include the
-ORCA/Psi4 backends, so the install must come from this repository. (For
+ORCA backend, so the install must come from this repository. (For
 development mode, ``git clone`` the repository first and run
 ``pip install -e /path/to/your/clone`` instead -- see the
 :ref:`development-mode installation steps <codes-develop-mode>`.)
@@ -133,15 +113,6 @@ development mode, ``git clone`` the repository first and run
 Required for every backend: MISPR relies on changes to pymatgen that have
 not been merged upstream, so the stock pymatgen must be replaced with this
 fork (see :ref:`py-package-deps` for details).
-
-**Step 5 -- the resp package (Psi4 ESP workflow only)**::
-
-    pip install git+https://github.com/cdsgroup/resp.git
-
-Only needed if you will run the Psi4 backend's ESP workflow; ORCA and
-Gaussian users skip this step. It must come from GitHub -- ``pip install
-resp`` from PyPI silently installs an unrelated package of the same name
-(see the warning in the Psi4 section below).
 
 Who decides which versions get installed?
 ============================================
@@ -189,8 +160,6 @@ manually:
      - 2024.10.16 (pinned by MISPR)
    * - pymongo
      - 3.12.0 (pinned by MISPR)
-   * - psi4 (Psi4 backend only)
-     - 1.11
    * - openbabel
      - 3.1.1
 
@@ -202,7 +171,7 @@ together, with the installing channel in the last column).
    **Why the order matters -- the numpy/scipy/pandas conflict.** pip wheels
    and conda-forge builds of ``numpy``, ``scipy``, and ``pandas`` are not
    always binary-compatible with each other. If pip installs its own numpy
-   first (as a dependency of mispr) and conda-forge's psi4/openbabel are
+   first (as a dependency of mispr) and conda-forge's openbabel is
    added on top later, imports start failing with errors like::
 
        numpy.dtype size changed, may indicate binary incompatibility
@@ -223,7 +192,7 @@ together, with the installing channel in the last column).
    **How to check who owns a package.** ``conda list numpy`` shows the
    installing channel in the last column: ``conda-forge`` means conda owns
    it (good), while ``pypi`` means pip has replaced it -- the state that
-   causes the errors above if psi4/openbabel were installed from
+   causes the errors above if openbabel was installed from
    conda-forge. This is the first thing to check when imports start
    failing after an installation step.
 
@@ -243,12 +212,7 @@ environment -- each line should print without an error::
     python -c "import pymatgen; print('pymatgen', pymatgen.__version__)"
     python -c "import fireworks; print('fireworks', fireworks.__version__)"
 
-Psi4 users additionally check::
-
-    python -c "import psi4; print('psi4', psi4.__version__)"
-    python -c "import resp; resp.resp; print('resp OK')"
-
-ORCA users instead check that the ORCA binary itself runs (it is not a
+ORCA users additionally check that the ORCA binary itself runs (it is not a
 Python package -- see the ORCA section below). Executing it with no
 arguments should print a usage message such as
 "This program requires the name of a parameterfile as argument"::
@@ -282,10 +246,6 @@ At the backend, MISPR uses:
      - Commercial
      - Perform DFT calculations
      - License required
-   * - `Psi4 <https://psicode.org>`_
-     - Open Source
-     - Perform DFT calculations (alternative to Gaussian)
-     - ``conda install -c conda-forge psi4``
    * - `ORCA <https://www.faccts.de/orca/>`_
      - Free for academic use (registration required)
      - Perform DFT calculations (alternative to Gaussian)
@@ -312,41 +272,11 @@ before using MISPR. If Gaussian, AmberTools, Schrödinger and LAMMPS are already
 machines, the user typically needs to load their corresponding modules
 before their use.
 
-Psi4 backend (alternative to Gaussian)
-=======================================
-As of version 0.0.5, MISPR also supports running DFT calculations through
-`Psi4 <https://psicode.org>`_ instead of Gaussian. Unlike Gaussian, Psi4 is
-free/open source and is driven entirely through its Python API (no separate
-executable, license, or input/output file handling required) -- so instead of
-loading a module, you install it directly into your conda environment::
-
-    conda install -c conda-forge psi4 dftd3-python
-
-MISPR's ESP workflow additionally needs the ``resp`` package (RESP charge
-fitting), which is not published on PyPI/conda-forge under that name and must
-be installed from its GitHub source::
-
-    pip install git+https://github.com/cdsgroup/resp.git
-
-.. important::
-   Do **not** ``pip install resp`` on its own -- PyPI has an unrelated,
-   unofficial package also named ``resp``; installing it silently gives you
-   the wrong package (no ``resp.resp()`` function), and code depending on it
-   will fail with ``AttributeError: module 'resp' has no attribute 'resp'``.
-
-.. warning::
-   Install Psi4 **before** installing MISPR via pip -- i.e. follow the exact
-   order given in
-   :ref:`installation/dependencies:Creating the environment: the exact recipe`
-   above. Installing Psi4 into an environment where pip already installed
-   ``numpy``/``scipy``/``pandas`` triggers the binary-incompatibility errors
-   described there.
-
 ORCA backend (alternative to Gaussian)
 =======================================
 As of version 0.0.5, MISPR also supports running DFT calculations through
-`ORCA <https://www.faccts.de/orca/>`_ instead of Gaussian. Like Gaussian (and
-unlike Psi4), ORCA runs as an external program: MISPR writes a text input file,
+`ORCA <https://www.faccts.de/orca/>`_ instead of Gaussian. Like Gaussian,
+ORCA runs as an external program: MISPR writes a text input file,
 invokes the ``orca`` binary, and parses the text output. This has two
 practical consequences:
 

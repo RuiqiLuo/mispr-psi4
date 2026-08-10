@@ -33,17 +33,12 @@ on this page without further ceremony:
    :doc:`configuration files <../installation/configuration>` are written,
    and your MongoDB database is reachable from the machine you run on.
 
-The ORCA section below is the most detailed walkthrough -- it explains every
-line of the driving script and every field of the results, so it is worth
-reading once even if you use a different DFT engine; the Psi4 section
-afterwards only describes what differs.
-
 Using the ORCA backend
 ------------------------------
 As of version 0.0.5, the ``bde``, ``binding_energy``, and ``esp`` workflows are
 also available with an `ORCA <https://www.faccts.de/orca/>`_ backend
 (``mispr.orca.workflows.base``). The workflow functions have the same names and
-arguments as their Gaussian/Psi4 counterparts -- only the import path changes.
+arguments as their Gaussian counterparts -- only the import path changes.
 This section is a complete, self-contained guide: environment setup, ORCA
 installation, running each workflow, and how to read the results out of the
 database.
@@ -63,7 +58,7 @@ dependencies installed::
 plus the four FireWorks/MISPR configuration files (``FW_config.yaml``,
 ``db.json``, ``my_launchpad.yaml``, ``my_fworker.yaml``) in a config directory.
 These are the files that tell MISPR where your MongoDB database lives; they are
-engine-independent -- if you already ran Gaussian or Psi4 workflows with MISPR,
+engine-independent -- if you already ran Gaussian workflows with MISPR,
 the exact same config directory works for ORCA unchanged.
 
 .. important::
@@ -207,8 +202,7 @@ Each import plays a distinct role:
 
 The import path is also where the engine is chosen: swap
 ``mispr.orca.workflows.base.esp`` for ``mispr.gaussian.workflows.base.esp``
-or ``mispr.psi4.workflows.base.esp`` and the same script drives a different
-DFT engine.
+and the same script drives a different DFT engine.
 
 3c. Create the molecule
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -607,7 +601,7 @@ Step 4: Find and read the results
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Results end up in two kinds of MongoDB collections (same layout as the
-Gaussian and Psi4 backends, so cross-engine results are directly comparable):
+Gaussian backend, so cross-engine results are directly comparable):
 
 * the **runs collection** gets one document per individual calculation
   (each optimization, each frequency job, each ESP single point) -- the raw
@@ -629,8 +623,8 @@ Fields shared by all property documents:
 * ``state``: ``successful`` if the workflow completed.
 * ``wall_time (s)``: summed runtime of all steps in the workflow.
 * ``gauss_version``: which engine produced the numbers -- e.g. ``orca-6.1.1``
-  (the field name is historical; Gaussian runs store the Gaussian version and
-  Psi4 runs store ``psi4-<version>`` in the same place).
+  (the field name is historical; Gaussian runs store the Gaussian version in
+  the same place).
 * ``last_updated``: UTC timestamp of the database insert.
 
 Workflow-specific fields:
@@ -735,8 +729,7 @@ the collapsed ``Object``/``Array`` entries contain once expanded:
       "version": "0.0.5",              // MISPR version
       "gauss_version": "orca-6.1.1",   // which engine + version produced the numbers
                                        //   (field name is historical: Gaussian runs
-                                       //   store e.g. "16revisionC.01" here, Psi4 runs
-                                       //   "psi4-1.9.1")
+                                       //   store e.g. "16revisionC.01" here)
       "last_updated": ISODate("2026-07-19T15:09:09Z"),  // UTC insert time
       "dipole_moment": [               // dipole vector [x, y, z] in atomic units,
         0.0, 0.0, -0.8677              //   from the frequency step; magnitude here
@@ -848,85 +841,6 @@ re-optimized two-molecule system), not the individual molecules:
    counterpoise (BSSE) correction and a larger basis set; a positive way to
    read this field is as the *uncorrected supermolecular* binding energy at
    the chosen level of theory.
-
-Using the Psi4 backend
-------------------------------
-As of version 0.0.5, the ``bde``, ``binding_energy``, and ``esp`` workflows
-are also available with a `Psi4 <https://psicode.org>`_ backend
-(``mispr.psi4.workflows.base``), as a free/open-source alternative to
-Gaussian. The workflow functions have the same names and (mostly) the same
-arguments as their Gaussian counterparts -- only the import path changes.
-
-The driving script has the same shape as the ORCA one, which the previous
-section walks through piece by piece (steps 3a--3f); everything said there
-applies to Psi4 too, with two differences: there is no external executable
-to point at (Psi4 runs in-process through its Python API, so nothing like
-``ORCA_CMD`` exists), and the import comes from ``mispr.psi4``. Piece by
-piece:
-
-1. Point the script at your configuration. Must happen **before** the
-   ``fireworks``/``mispr`` imports -- fireworks reads this variable once, at
-   import time::
-
-       import os
-       os.environ["FW_CONFIG_FILE"] = "/path/to/config/FW_config.yaml"
-
-2. Imports -- ``mispr.psi4`` in the last line is the only Psi4-specific
-   part::
-
-       from pymatgen.core.structure import Molecule
-       from fireworks import LaunchPad
-       from fireworks.core.rocket_launcher import rapidfire
-       from mispr.psi4.workflows.base.esp import get_esp_charges
-
-3. Create the molecule -- element symbols plus one cartesian coordinate (in
-   Angstrom) per atom; it only needs to be a reasonable starting guess, the
-   workflow's first step optimizes it::
-
-       mol = Molecule(
-           ["O", "H", "H"],
-           [
-               [0.000000, 0.000000, 0.117300],
-               [0.000000, 0.757200, -0.469200],
-               [0.000000, -0.757200, -0.469200],
-           ],
-       )
-
-4. Build the workflow. The level-of-theory dicts use the same three keys
-   (``functional``, ``basis_set``, ``route_parameters``) explained in the
-   ORCA section's step 3d, except the strings must be spellings *Psi4*
-   recognizes -- here the minimal HF/STO-3G, chosen to make a first test run
-   in seconds::
-
-       wf = get_esp_charges(
-           mol_operation_type="get_from_mol",
-           mol=mol,
-           working_dir="/path/to/run_output",
-           opt_gaussian_inputs={
-               "functional": "hf", "basis_set": "sto-3g",
-               "route_parameters": {"Opt": None},
-           },
-           freq_gaussian_inputs={
-               "functional": "hf", "basis_set": "sto-3g",
-               "route_parameters": {"Freq": None},
-           },
-           save_to_db=True,
-           tag="my_first_psi4_esp_run",
-       )
-
-5. Submit and run -- ``add_wf`` queues the workflow in the database,
-   ``rapidfire`` then executes it in the current process::
-
-       lp = LaunchPad.from_file("/path/to/config/my_launchpad.yaml")
-       lp.add_wf(wf)
-       rapidfire(lp, m_dir="/path/to/run_output")
-
-.. note::
-   ``rapidfire`` runs every ready Firework and then polls forever for new
-   ones -- it does not exit on its own once the workflow finishes. Check
-   ``lpad get_wflows`` for the workflow's state and interrupt/stop the
-   process once it shows ``COMPLETED`` (or a ``FIZZLED`` step that can't
-   make further progress).
 
 Running an ESP workflow
 ------------------------------

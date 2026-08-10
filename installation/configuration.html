@@ -214,6 +214,22 @@
 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../keywords.html" class="md-nav__link">
+        <span class="md-ellipsis">Keywords</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -223,17 +239,17 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_2">
+        <label class="md-nav__link" for="__nav_3">
           <span class="md-ellipsis">Installation 🔧</span>
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Installation 🔧" data-md-level="1">
-        <label class="md-nav__title" for="__nav_2">
+        <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           <span class="md-ellipsis">Installation 🔧</span>
         </label>
@@ -327,17 +343,17 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_3">
+        <label class="md-nav__link" for="__nav_4">
           <span class="md-ellipsis">Workflows 🔀</span>
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Workflows 🔀" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
+        <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           <span class="md-ellipsis">Workflows 🔀</span>
         </label>
@@ -423,17 +439,17 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_4">
+        <label class="md-nav__link" for="__nav_5">
           <span class="md-ellipsis">Resources 🖇️</span>
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Resources 🖇️" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           <span class="md-ellipsis">Resources 🖇️</span>
         </label>
@@ -489,17 +505,17 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_5">
+        <label class="md-nav__link" for="__nav_6">
           <span class="md-ellipsis">Code Documentation 📚</span>
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Code Documentation 📚" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           <span class="md-ellipsis">Code Documentation 📚</span>
         </label>
@@ -540,17 +556,17 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_6">
+        <label class="md-nav__link" for="__nav_7">
           <span class="md-ellipsis">Development 💻</span>
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Development 💻" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
+        <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
           <span class="md-ellipsis">Development 💻</span>
         </label>
@@ -848,12 +864,21 @@ a Gaussian checkpoint file into formatted forms</p></li>
 </ul>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
-<p>The ORCA and Psi4 backends do <strong>not</strong> read this file. Psi4 runs
-through its Python API (nothing to configure here), and ORCA is
+<p>The ORCA backend does <strong>not</strong> read this file. ORCA is
 located through the <code class="docutils literal notranslate"><span class="pre">orca_cmd</span></code> workflow argument or the
 <code class="docutils literal notranslate"><span class="pre">ORCA_CMD</span></code> environment variable – see
-<a class="reference internal" href="dependencies.html"><span class="doc">Prerequisites</span></a>. If you only use those
-backends, <code class="docutils literal notranslate"><span class="pre">gcmd</span></code>/<code class="docutils literal notranslate"><span class="pre">formchkcmd</span></code> can be left unset.</p>
+<a class="reference internal" href="dependencies.html"><span class="doc">Prerequisites</span></a>. If you only use that
+backend, <code class="docutils literal notranslate"><span class="pre">gcmd</span></code>/<code class="docutils literal notranslate"><span class="pre">formchkcmd</span></code> can be left unset.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Each section is only read when a Firetask that needs it
+actually runs (e.g. <code class="docutils literal notranslate"><span class="pre">[LammpsRunCalc]</span></code> is only read by a
+LAMMPS Firetask). If you are not running MD (<code class="docutils literal notranslate"><span class="pre">[LammpsRunCalc]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">[AmbertoolsRunCalc]</span></code>) or using Maestro/Schrodinger
+(<code class="docutils literal notranslate"><span class="pre">[MaestroCalc]</span></code>), you can simply omit those sections from
+<code class="docutils literal notranslate"><span class="pre">config.ini</span></code> entirely – there is no need to fill them in
+with placeholder values.</p>
 </div>
 <div class="note admonition">
 <p class="admonition-title">Note</p>

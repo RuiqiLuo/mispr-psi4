@@ -669,61 +669,34 @@ is an in-house package for analyzing MD output and trajectory files.</p>
 </figure>
 <p><strong>Features of MISPR include</strong>:</p>
 <ul class="simple">
-<li><p>Automation of DFT and MD simulations and all their underlying tasks
-from file management and job submission to supercomputing resources,
-to output parsing and data analytics; a task that can be done to a
-single molecule/system or to a large number of systems in parallel</p></li>
-<li><p>Creation of computational databases of force field parameters and DFT
-and MD derived properties of molecular systems for establishing
-structure-property relations and maintaining data provenance and
+<li><p>Automates DFT and MD simulations end-to-end – file management, job
+submission, output parsing, data analytics – for a single molecule
+or thousands of systems in parallel</p></li>
+<li><p>Builds computational databases of force-field parameters and
+DFT/MD-derived properties for structure-property analysis and
 reproducibility</p></li>
-<li><p>Detection of the inevitable errors that occur during the simulations
-and their on-the-fly correction based on template responses that have
-been designed relying on human intuition coupled with extensive
-experience to significantly improve the success rate of high-throughput
-simulations while eliminating human intervention</p></li>
-<li><p>Support for flexible and well-tested DFT workflows that compute various
-properties of individual molecular species or complexes such as bond
-dissociation energy, binding energy, redox potential, and nuclear
-magnetic resonance (NMR) tensors</p></li>
-<li><p>Support for multiple DFT engines behind the same workflow interface:
-the core molecular workflows (ESP, bond dissociation energy, binding
-energy) can be run with <a class="reference external" href="https://gaussian.com">Gaussian</a> (commercial),
-<a class="reference external" href="https://www.faccts.de/orca/">ORCA</a> (free for academic use), or
-<a class="reference external" href="https://psicode.org">Psi4</a> (open source), using the same input
-dictionaries and producing database documents with the same schema –
-so results from different engines are directly comparable</p></li>
-<li><p>Derivation of many molecular ensemble properties such as radial
-distribution functions, diffusion coefficients, viscosity, and
-conductivity of liquid solutions, which are critical to understanding
-complex inter- and intra-atomic interactions controlling the performance
-of solutions within various chemistry, biology, and materials science
-applications</p></li>
-<li><p>Seamless integration of DFT and MD simulations through hybrid
-workflows that enable force field generation and information flow
-between the two length scales to allow exploring wide chemical and
-parameter spaces (e.g., temperature, pressure, concentration, etc.),
-a task that can be infeasible experimentally and challenging using
-manual calculations</p></li>
-<li><p>Automatic extraction of hundreds of thousands of solvation structures
-from MD ensembles and their use in DFT workflows to accurately represent
-the electronic environment, which is crucial to derive reliable energetics
-and other properties such as NMR chemical shifts and redox potentials
-and match them to experimental data</p></li>
+<li><p>Detects and auto-corrects common simulation errors on the fly,
+reducing manual intervention in high-throughput runs</p></li>
+<li><p>Provides tested DFT workflows for electrostatic partial charges (ESP),
+bond dissociation energy, binding energy, redox potential, and nuclear
+magnetic resonance (NMR) tensors – runnable with
+<a class="reference external" href="https://gaussian.com">Gaussian</a> or, for all but NMR,
+<a class="reference external" href="https://www.faccts.de/orca/">ORCA</a> (free for academic use,
+registration required) behind the same workflow interface, producing
+directly comparable results – see
+<a class="reference internal" href="workflows/tutorials.html"><span class="doc">Workflow Tutorials</span></a> for how to use the
+ORCA backend</p></li>
+<li><p>Derives ensemble properties – radial distribution functions,
+diffusion coefficients, viscosity, conductivity – from MD
+trajectories of liquid solutions</p></li>
+<li><p>Links DFT and MD through hybrid workflows: force-field generation and
+data flow between the two length scales, across chemical and
+parameter spaces (temperature, pressure, concentration, etc.) that
+would be infeasible to explore manually</p></li>
+<li><p>Extracts solvation structures from MD ensembles for use in DFT
+workflows, improving the accuracy of energetics, NMR chemical shifts,
+and redox potentials against experimental data</p></li>
 </ul>
-<div class="note admonition">
-<p class="admonition-title">Note</p>
-<p>MISPR is primarily built to work with <a class="reference external" href="https://gaussian.com">Gaussian</a>
-electronic structure software for DFT calculations and
-<a class="reference external" href="https://www.lammps.org/#gsc.tab=0">LAMMPS</a>
-open-source software for MD simulations. As of version 0.0.5, the ESP,
-bond dissociation energy, and binding energy workflows can alternatively
-be run through <a class="reference external" href="https://www.faccts.de/orca/">ORCA</a> (free for academic
-use, registration required) or <a class="reference external" href="https://psicode.org">Psi4</a> (fully open
-source) – so these molecular-level DFT workflows no longer require a
-Gaussian license. See <a class="reference internal" href="workflows/tutorials.html"><span class="doc">Workflow Tutorials</span></a>
-for how to use each backend.</p>
-</div>
 
 
 

@@ -12,7 +12,6 @@ Subpackages
    mispr.hybrid
    mispr.lammps
    mispr.orca
-   mispr.psi4
 
 Module contents
 ---------------

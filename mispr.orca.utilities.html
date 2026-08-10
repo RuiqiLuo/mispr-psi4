@@ -713,21 +713,6 @@
 
             
           
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="mispr.psi4.html" class="md-nav__link">
-        <span class="md-ellipsis">mispr.<wbr>psi4 package</span>
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -857,10 +842,9 @@
 <h2 id="submodules">Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 <h2 id="module-mispr.orca.utilities.inputs"><span id="mispr-orca-utilities-inputs-module"></span>mispr.orca.utilities.inputs module<a class="headerlink" href="#module-mispr.orca.utilities.inputs" title="Permalink to this heading">¶</a></h2>
 <p>Build ORCA input files from pymatgen Molecule objects.</p>
-<p>ORCA (unlike psi4, which is driven through a Python API) runs as an external
-process reading a text input file, so – exactly as pymatgen.io.gaussian’s
-GaussianInput does for Gaussian – the pymatgen Molecule has to be serialized
-into ORCA’s input format first:</p>
+<p>ORCA runs as an external process reading a text input file, so – exactly as
+pymatgen.io.gaussian’s GaussianInput does for Gaussian – the pymatgen
+Molecule has to be serialized into ORCA’s input format first:</p>
 <blockquote>
 <div><p>! B3LYP 6-31G(d) Opt Freq        &lt;- “keyword line”: method, basis, job types
 %maxcore 4000                    &lt;- memory per core, in MB
@@ -928,7 +912,7 @@ workflows need (final energy, optimized geometry, vibrational frequencies,
 thermochemistry, CHELPG charges, dipole moment) from that text.</p>
 <p>All energies are returned in Hartree (ORCA’s native output unit), coordinates in
 Angstrom, frequencies in cm**-1, dipole components in atomic units – matching
-the conventions of the psi4/Gaussian backends so downstream analysis firetasks
+the conventions of the Gaussian backend so downstream analysis firetasks
 (BDEtoDB, ESPtoDB, BindingEnergytoDB) can consume the results unmodified.</p>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight py" id="mispr.orca.utilities.outputs.parse_orca_output">

@@ -1282,9 +1282,9 @@
             <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span>
         <span class="p">}</span>
 
-        <span class="c1"># optional: a counterpoise (BSSE) correction, if a prior Firetask (e.g.</span>
-        <span class="c1"># mispr.psi4.firetasks.parse_outputs.CounterpoiseToDB) computed one and</span>
-        <span class="c1"># left it in fw_spec; absent for workflows that don&#39;t request it</span>
+        <span class="c1"># optional: a counterpoise (BSSE) correction, if a prior Firetask</span>
+        <span class="c1"># computed one and left it in fw_spec; absent for workflows that</span>
+        <span class="c1"># don&#39;t request it</span>
         <span class="k">if</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;be_eV_cp_corrected&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">be_dict</span><span class="p">[</span><span class="s2">&quot;be_eV_cp_corrected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;be_eV_cp_corrected&quot;</span><span class="p">]</span>
 

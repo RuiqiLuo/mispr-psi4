@@ -646,10 +646,9 @@
 <h1>Source code for mispr.orca.utilities.inputs</h1><div class="highlight"><pre>
 <span></span><code><span class="sd">&quot;&quot;&quot;Build ORCA input files from pymatgen Molecule objects.</span>
 
-<span class="sd">ORCA (unlike psi4, which is driven through a Python API) runs as an external</span>
-<span class="sd">process reading a text input file, so -- exactly as pymatgen.io.gaussian&#39;s</span>
-<span class="sd">GaussianInput does for Gaussian -- the pymatgen Molecule has to be serialized</span>
-<span class="sd">into ORCA&#39;s input format first:</span>
+<span class="sd">ORCA runs as an external process reading a text input file, so -- exactly as</span>
+<span class="sd">pymatgen.io.gaussian&#39;s GaussianInput does for Gaussian -- the pymatgen</span>
+<span class="sd">Molecule has to be serialized into ORCA&#39;s input format first:</span>
 
 <span class="sd">    ! B3LYP 6-31G(d) Opt Freq        &lt;- &quot;keyword line&quot;: method, basis, job types</span>
 <span class="sd">    %maxcore 4000                    &lt;- memory per core, in MB</span>
