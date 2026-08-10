@@ -14,8 +14,8 @@ Before installing MISPR, you need to follow the steps below in order:
 
 .. note::
    For the DFT engine (step 2), a Gaussian license is **not** the only
-   option: the ESP, bond dissociation energy, and binding energy workflows
-   can alternatively run through
+   option: the ESP, bond dissociation energy, binding energy, and redox
+   potential workflows can alternatively run through
    `ORCA <https://www.faccts.de/orca/>`_ (free for academic use). See the
    corresponding section in :doc:`Prerequisites <dependencies>` for how to
    install it, and :doc:`Workflow Tutorials <../workflows/tutorials>` for
@@ -85,9 +85,15 @@ The steps for installing the package in development mode are below.
 
 Post-installation
 -------------------------
-1. Before you go any further, confirm your package installations are correct.
-   First start IPython by typing ``ipython`` in your terminal, then confirm that
-   the command ``import mispr`` executes without any errors
+1. Before you go any further, confirm your package installations are correct::
+
+    ipython -c "import mispr; print('mispr', mispr.__version__)"
+
+   This should print the version number without any errors. For a fuller
+   check (openbabel, pymatgen, FireWorks, and -- for ORCA users -- the
+   ORCA binary itself) plus the exact package versions this documentation
+   was validated against, see
+   :ref:`installation/dependencies:Verifying the environment`.
 
 2. To update the mispr code later on: in development mode, execute
    ``git pull`` in the repository directory (with ``pip install -e .`` the

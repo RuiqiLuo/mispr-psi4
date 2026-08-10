@@ -233,6 +233,15 @@ Writing the Configuration Files
             backend, ``gcmd``/``formchkcmd`` can be left unset.
 
         .. note::
+            Each section is only read when a Firetask that needs it
+            actually runs (e.g. ``[LammpsRunCalc]`` is only read by a
+            LAMMPS Firetask). If you are not running MD (``[LammpsRunCalc]``,
+            ``[AmbertoolsRunCalc]``) or using Maestro/Schrodinger
+            (``[MaestroCalc]``), you can simply omit those sections from
+            ``config.ini`` entirely -- there is no need to fill them in
+            with placeholder values.
+
+        .. note::
             Anything between two dollar signs ($ $) is a placeholder for
             a variable and should not be changed.
 
