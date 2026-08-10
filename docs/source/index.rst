@@ -8,7 +8,6 @@
    :hidden:
 
    overview
-   keywords
 
 .. toctree::
    :caption: Installation 🔧
@@ -58,7 +57,12 @@ MISPR |release| Documentation
 MISPR is a Python library for computational materials science and contains
 preset workflows for running complex hierarchical density functional
 theory (DFT) and classical molecular dynamics (MD) simulations to compute
-properties of materials.
+properties of materials. DFT workflows run through
+`Gaussian <https://gaussian.com>`_, with
+`ORCA <https://www.faccts.de/orca/>`_ and `Psi4 <https://psicode.org>`_
+supported as license-free alternative engines for the molecular-level
+workflows (ESP, bond dissociation energy, binding energy); MD simulations
+run through `LAMMPS <https://www.lammps.org>`_.
 
 .. figure:: _static/summary.jpeg
    :scale: 70%
@@ -72,11 +76,13 @@ Installation
 
     .. grid-item::
 
-        Install using `pip <https://pypi.org/project/mispr/>`__:
+        Install using pip (from this repository -- the
+        `PyPI release <https://pypi.org/project/mispr/>`__ does not include
+        the ORCA/Psi4 backends):
 
         .. code-block:: bash
 
-            pip install mispr
+            pip install git+https://github.com/RuiqiLuo/mispr-psi4.git
 
 .. important::
    Before you can start using MISPR, there are additional steps you need to follow.
