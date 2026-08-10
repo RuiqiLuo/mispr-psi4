@@ -65,7 +65,7 @@ mermaid_theme = {
     },
 }
 
-autodoc_mock_imports = ["custodian", "tleap", "pymatgen", "openbabel", "psi4", "resp"]
+autodoc_mock_imports = ["custodian", "tleap", "pymatgen", "openbabel"]
 
 autosectionlabel_prefix_document = True
 templates_path = ["_templates"]

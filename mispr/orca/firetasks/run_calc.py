@@ -1,11 +1,11 @@
 """Define firetasks for running ORCA calculations.
 
 ORCA follows the same external-process model as Gaussian (write an input file,
-run the executable, parse the output file), not psi4's in-memory Python API --
-but unlike Gaussian, there is no pymatgen.io support for its file formats, so
-the input writing / output parsing lives in mispr.orca.utilities. Like RunPsi4,
-RunOrca combines the write/run/parse steps into a single Firetask and stores a
-result dictionary with the same schema as mispr.gaussian.utilities.gout.
+run the executable, parse the output file), but unlike Gaussian, there is no
+pymatgen.io support for its file formats, so the input writing / output
+parsing lives in mispr.orca.utilities. RunOrca combines the write/run/parse
+steps into a single Firetask and stores a result dictionary with the same
+schema as mispr.gaussian.utilities.gout.
 process_run under fw_spec["gaussian_output"], so any downstream Firetask
 written for Gaussian runs (BDEtoDB, ESPtoDB, BindingEnergytoDB, ...) can
 consume ORCA results unmodified.
@@ -88,8 +88,6 @@ def _atomic_thermo_corrections(mass_amu, multiplicity, t=STANDARD_T, p=STANDARD_
     the lone H atoms produced by breaking X-H bonds -- reduces to the purely
     translational + electronic corrections, computed analytically here instead
     of invoking ORCA's Hessian machinery on a system it has nothing to do with.
-    (Same convention as the psi4 backend's identically-named helper, so both
-    backends put identical numbers in front of the shared BDE analysis code.)
 
     Returns:
         dict: "Zero-point correction", "Enthalpy", and "Gibbs Free Energy"
@@ -313,12 +311,12 @@ class RunOrca(FiretaskBase):
         run_opt = "opt" in job_types
         run_freq = "freq" in job_types
 
-        # single-atom guards, mirroring the psi4 backend: an atom has no
-        # internal coordinates to optimize and no vibrational modes to compute,
-        # so opt degenerates to a single point and freq to analytic ideal-gas
-        # thermochemistry -- and a bare nucleus (e.g. the H+ fragment BDE's
-        # charge-state enumeration produces) has no electrons for ORCA's SCF to
-        # solve at all, so it is skipped entirely with zero energy
+        # single-atom guards: an atom has no internal coordinates to optimize
+        # and no vibrational modes to compute, so opt degenerates to a single
+        # point and freq to analytic ideal-gas thermochemistry -- and a bare
+        # nucleus (e.g. the H+ fragment BDE's charge-state enumeration
+        # produces) has no electrons for ORCA's SCF to solve at all, so it is
+        # skipped entirely with zero energy
         single_atom = mol.num_sites == 1
         bare_nucleus = single_atom and (mol.species[0].Z - charge) <= 0
         if single_atom:
@@ -492,12 +490,11 @@ class ESP(FiretaskBase):
     """
     Compute ESP-fitted atomic partial charges for a molecule via ORCA's CHELPG
     scheme (grid-based ESP fitting -- ORCA's counterpart to the Merz-Singh-
-    Kollman fit the Gaussian backend uses and the RESP fit the psi4 backend
-    uses; all three fit atomic charges to the molecular electrostatic
-    potential, differing in grid construction/restraints). Always runs a
-    single-point calculation -- callers are expected to have already optimized
-    the molecule (e.g. via a preceding ``RunOrca`` Firework) and pass it in
-    through ``prev_calc_key``.
+    Kollman fit the Gaussian backend uses; both fit atomic charges to the
+    molecular electrostatic potential, differing in grid
+    construction/restraints). Always runs a single-point calculation --
+    callers are expected to have already optimized the molecule (e.g. via a
+    preceding ``RunOrca`` Firework) and pass it in through ``prev_calc_key``.
 
     Args:
         molecule (Molecule, optional): pymatgen Molecule to run the ESP

@@ -42,11 +42,10 @@ is an in-house package for analyzing MD output and trajectory files.
 
 * Support for multiple DFT engines behind the same workflow interface:
   the core molecular workflows (ESP, bond dissociation energy, binding
-  energy) can be run with `Gaussian <https://gaussian.com>`_ (commercial),
-  `ORCA <https://www.faccts.de/orca/>`_ (free for academic use), or
-  `Psi4 <https://psicode.org>`_ (open source), using the same input
-  dictionaries and producing database documents with the same schema --
-  so results from different engines are directly comparable
+  energy) can be run with `Gaussian <https://gaussian.com>`_ (commercial) or
+  `ORCA <https://www.faccts.de/orca/>`_ (free for academic use), using the
+  same input dictionaries and producing database documents with the same
+  schema -- so results from different engines are directly comparable
 
 * Derivation of many molecular ensemble properties such as radial
   distribution functions, diffusion coefficients, viscosity, and
@@ -75,7 +74,7 @@ is an in-house package for analyzing MD output and trajectory files.
    open-source software for MD simulations. As of version 0.0.5, the ESP,
    bond dissociation energy, and binding energy workflows can alternatively
    be run through `ORCA <https://www.faccts.de/orca/>`_ (free for academic
-   use, registration required) or `Psi4 <https://psicode.org>`_ (fully open
-   source) -- so these molecular-level DFT workflows no longer require a
-   Gaussian license. See :doc:`Workflow Tutorials <workflows/tutorials>`
-   for how to use each backend.
+   use, registration required) -- so these molecular-level DFT workflows no
+   longer require a Gaussian license. See
+   :doc:`Workflow Tutorials <workflows/tutorials>` for how to use this
+   backend.

@@ -38,8 +38,7 @@ def common_fw(
     """
     Define a list of Fireworks commonly used in ORCA workflows: optimize a
     molecule, then run a frequency analysis on the optimized structure. Mirrors
-    ``mispr.psi4.workflows.base.core.common_fw`` (and through it the Gaussian
-    original), swapping the engine Firework for ``OrcaFW``.
+    the Gaussian original, swapping the engine Firework for ``OrcaFW``.
 
     Args:
         mol (Molecule, optional): pymatgen Molecule to run the calculations on;

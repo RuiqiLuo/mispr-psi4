@@ -13,9 +13,9 @@ Mirrors ``mispr.gaussian.workflows.base.binding_energy.get_binding_energies``.
   reused unmodified from the Gaussian firetasks -- pure energy bookkeeping, not
   tied to any QM engine).
 
-Unlike the psi4 counterpart, no counterpoise (BSSE) correction option is offered
-yet: it needs ghost-atom support in the ORCA input writer (ORCA marks ghost
-atoms with a ":" suffix on the element symbol), which is left as follow-up work.
+No counterpoise (BSSE) correction option is offered yet: it needs ghost-atom
+support in the ORCA input writer (ORCA marks ghost atoms with a ":" suffix on
+the element symbol), which is left as follow-up work.
 """
 
 import os
@@ -37,8 +37,7 @@ def _to_orca_solvent(solvent_gaussian_inputs):
     """
     Translate the Gaussian-style solvent string (e.g. "(Solvent=Water)") into
     the dict RunOrca expects (e.g. {"solvent": "water"}); returns None for gas
-    phase. Same translation the psi4 backend does, so all three backends accept
-    the identical workflow-level argument.
+    phase.
     """
     if not solvent_gaussian_inputs:
         return None

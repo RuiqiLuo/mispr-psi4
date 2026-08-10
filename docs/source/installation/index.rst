@@ -16,10 +16,10 @@ Before installing MISPR, you need to follow the steps below in order:
    For the DFT engine (step 2), a Gaussian license is **not** the only
    option: the ESP, bond dissociation energy, and binding energy workflows
    can alternatively run through
-   `ORCA <https://www.faccts.de/orca/>`_ (free for academic use) or
-   `Psi4 <https://psicode.org>`_ (open source). See the corresponding
-   sections in :doc:`Prerequisites <dependencies>` for how to install each
-   backend, and :doc:`Workflow Tutorials <../workflows/tutorials>` for usage.
+   `ORCA <https://www.faccts.de/orca/>`_ (free for academic use). See the
+   corresponding section in :doc:`Prerequisites <dependencies>` for how to
+   install it, and :doc:`Workflow Tutorials <../workflows/tutorials>` for
+   usage.
 
 .. note::
    Throughout the installation instructions, it is assumed that you are
@@ -45,7 +45,7 @@ For most users, install directly from this repository:
 .. warning::
    Do not use ``pip install mispr`` (the PyPI package) with this
    documentation: the PyPI release is the upstream version and does **not**
-   include the ORCA and Psi4 backends described here.
+   include the ORCA backend described here.
 
 Installation Method 2: Development mode
 =======================================
@@ -74,7 +74,7 @@ The steps for installing the package in development mode are below.
 
     git clone https://github.com/RuiqiLuo/mispr-psi4.git
 
-   (This fork contains the ORCA and Psi4 backends documented here; the
+   (This fork contains the ORCA backend documented here; the
    upstream repository is `molmd/mispr <https://github.com/molmd/mispr>`_.)
    Now you should have the repository directory in your ``codes`` directory.
 
@@ -96,5 +96,5 @@ Post-installation
    URL, re-run
    ``pip install --force-reinstall --no-deps git+https://github.com/RuiqiLuo/mispr-psi4.git``.
    Do **not** use ``pip install --upgrade mispr`` -- that pulls the PyPI
-   release, which would replace this version with one lacking the ORCA/Psi4
-   backends.
+   release, which would replace this version with one lacking the ORCA
+   backend.

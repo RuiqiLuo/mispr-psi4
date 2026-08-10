@@ -7,8 +7,7 @@ chemistry engine is used downstream -- only the dynamically generated per-fragme
 optimization/frequency Fireworks are engine-specific. This module therefore
 subclasses the Gaussian ``BreakMolecule`` and overrides only the one method
 (``_workflow``) that decides which Fireworks to build for each fragment, pointing
-it at the ORCA ``common_fw`` instead of the Gaussian one -- the same pattern the
-psi4 backend uses (mispr.psi4.firetasks.geo_transformation).
+it at the ORCA ``common_fw`` instead of the Gaussian one.
 """
 
 import logging
@@ -28,9 +27,8 @@ __version__ = "0.0.5"
 
 logger = logging.getLogger(__name__)
 
-# engine-level RunOrca settings that must survive the kwargs filtering below and
-# reach the per-fragment Fireworks (the psi4 backend has no equivalent, since its
-# engine is a Python API with nothing to configure at the process level)
+# engine-level RunOrca settings that must survive the kwargs filtering below
+# and reach the per-fragment Fireworks
 ORCA_ENGINE_KWARGS = ("orca_cmd", "num_cores", "memory")
 
 

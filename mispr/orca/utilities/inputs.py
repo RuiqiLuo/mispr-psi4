@@ -1,9 +1,8 @@
 """Build ORCA input files from pymatgen Molecule objects.
 
-ORCA (unlike psi4, which is driven through a Python API) runs as an external
-process reading a text input file, so -- exactly as pymatgen.io.gaussian's
-GaussianInput does for Gaussian -- the pymatgen Molecule has to be serialized
-into ORCA's input format first:
+ORCA runs as an external process reading a text input file, so -- exactly as
+pymatgen.io.gaussian's GaussianInput does for Gaussian -- the pymatgen
+Molecule has to be serialized into ORCA's input format first:
 
     ! B3LYP 6-31G(d) Opt Freq        <- "keyword line": method, basis, job types
     %maxcore 4000                    <- memory per core, in MB

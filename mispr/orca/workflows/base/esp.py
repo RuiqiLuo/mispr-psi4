@@ -1,9 +1,9 @@
 """Define the electrostatic partial charge (ESP/CHELPG) workflow, using ORCA
 instead of Gaussian.
 
-Mirrors ``mispr.gaussian.workflows.base.esp.get_esp_charges`` (and the psi4
-counterpart): optimize + frequency the molecule, run a CHELPG ESP single-point
-on the optimized geometry, then save the result.
+Mirrors ``mispr.gaussian.workflows.base.esp.get_esp_charges``: optimize +
+frequency the molecule, run a CHELPG ESP single-point on the optimized
+geometry, then save the result.
 """
 
 import os

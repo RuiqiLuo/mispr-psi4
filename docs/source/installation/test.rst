@@ -9,8 +9,8 @@ we will show how to run more complex workflows.
 
 .. note::
    The test workflow below uses the Gaussian backend. If you are using MISPR
-   with ORCA or Psi4 instead (no Gaussian license), skip this page and run
-   the corresponding backend's complete example from
+   with ORCA instead (no Gaussian license), skip this page and run
+   the ORCA backend's complete example from
    :doc:`Workflow Tutorials <../workflows/tutorials>` as your test -- it
    exercises the same infrastructure (database connection, configuration
    files, FireWorks launching) end to end.

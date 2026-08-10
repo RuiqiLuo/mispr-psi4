@@ -26,17 +26,15 @@ The DFT workflows run with `Gaussian <https://gaussian.com>`_ by default. As
 of version 0.0.5, the ESP, bond dissociation energy, and binding energy
 workflows are additionally available with an
 `ORCA <https://www.faccts.de/orca/>`_ backend
-(``mispr/orca/workflows/base``) and a `Psi4 <https://psicode.org>`_ backend
-(``mispr/psi4/workflows/base``); the workflow functions keep the same names
-and arguments across all three engines, so switching engine is an import-path
+(``mispr/orca/workflows/base``); the workflow functions keep the same names
+and arguments across both engines, so switching engine is an import-path
 change, not a code change. See
 :doc:`Workflow Tutorials <tutorials>` for per-backend setup and examples.
 
 One can customize any of the above workflows or create their own by reusing
 the building blocks provided by MISPR. The preset workflows are in
 ``mispr/gaussian/workflows/base``, ``mispr/orca/workflows/base``,
-``mispr/psi4/workflows/base``, ``mispr/lammps/workflows/base``, and
-``mispr/hybrid/workflows``.
+``mispr/lammps/workflows/base``, and ``mispr/hybrid/workflows``.
 
 .. note::
     Other types of force field parameters can be provided as

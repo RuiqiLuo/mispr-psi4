@@ -226,12 +226,11 @@ Writing the Configuration Files
         * ``tcmd``: the command to run tleap
 
         .. note::
-            The ORCA and Psi4 backends do **not** read this file. Psi4 runs
-            through its Python API (nothing to configure here), and ORCA is
+            The ORCA backend does **not** read this file. ORCA is
             located through the ``orca_cmd`` workflow argument or the
             ``ORCA_CMD`` environment variable -- see
-            :doc:`Prerequisites <dependencies>`. If you only use those
-            backends, ``gcmd``/``formchkcmd`` can be left unset.
+            :doc:`Prerequisites <dependencies>`. If you only use that
+            backend, ``gcmd``/``formchkcmd`` can be left unset.
 
         .. note::
             Anything between two dollar signs ($ $) is a placeholder for

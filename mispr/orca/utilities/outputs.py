@@ -8,7 +8,7 @@ thermochemistry, CHELPG charges, dipole moment) from that text.
 
 All energies are returned in Hartree (ORCA's native output unit), coordinates in
 Angstrom, frequencies in cm**-1, dipole components in atomic units -- matching
-the conventions of the psi4/Gaussian backends so downstream analysis firetasks
+the conventions of the Gaussian backend so downstream analysis firetasks
 (BDEtoDB, ESPtoDB, BindingEnergytoDB) can consume the results unmodified.
 """
 
