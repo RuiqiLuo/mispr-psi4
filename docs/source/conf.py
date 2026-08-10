@@ -33,6 +33,7 @@ release = mispr.__version__  # read from mispr/__init__.py, so this never drifts
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
+    "sphinx.ext.githubpages",
     "sphinx.ext.napoleon",
     "sphinx.ext.autodoc",
     "sphinxcontrib.mermaid",
